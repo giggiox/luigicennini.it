@@ -15,17 +15,27 @@ mathjax: true
 
 # graphTheory-Visualizer
 
-Project made to visualize operations that can be done in a graph, such as BFS,DFS,Kruskal and Dijkstra.\
-The goal was to have a continuous display of the various operations, so that if the graph changes while the operation is in progress, the display changes too.
+Il progetto è stato fatto per visualizzare le operazioni che possono essere fatte su un grafo, come BFS, DFS, Kruskal e Dijkstra.
 
-You can access it here (works best on desktop): https://giggiox.github.io/graphTheory-Visualizer/  <br/><br/>
+L'obiettivo è quello di avere un update real time delle varie operazioni, in modo che se il grafo cambia mentre vi si sta svolgendo un' operazione, anche il risultato dell'operazione cambia.
 
-interface:
+
+Il progetto è attivo sulle GitHub pages e può essere accessibile una demo da questo link  (fruibile più semplicemente da desktop): https://giggiox.github.io/graphTheory-Visualizer/  <br/><br/>
+
+L'interfaccia grafica si presenta in questo modo:
 ![](/images/projects/graphtheoryvisualizer/interface.gif)
 
+e permette:
+- creare nuovo vertice (bottone a schermo `vertex`)
+- creare un arco tra due vertici (bottone a schermo `edge`) cliccando prima sul primo vertice e poi sul secondo
+- rimuovere un arco tra due vertici cliccandoci sopra
+- impostare il grafo come pesato e/o diretto (switch presenti a schermo)
+- vedere la lista di adiacenza come dropdown. Notare come se il grafo cambia per esempio se si elimina un arco, la lista cambia in tempo reale
+- visualizzare le operazioni possibili su un grafo. E' necessario scegliere l'operazione con il dropdown presente nella navbar e poi iniziare la visualizzazione. Notare come anche in questo caso, per esempio se si sceglie di visualizzare l'algoritmo Dijkstra e nel mentre cambiamo il grafico muovendo i vertici, allora anche l'output dell'algoritmo cambia in tempo reale. L'output di un algoritmo viene visualizzato sul grafo evidenziando vertici e archi di blu.
 
-other examples: <br/>
-depth-first search:
+
+## esempi
+depth-first search (DFS):
 ![](/images/projects/graphtheoryvisualizer/dfs.gif)
 
 
@@ -35,6 +45,6 @@ dijkstra shortest path between 2 vertices:
 kruskal minimum spanning tree:
 ![](/images/projects/graphtheoryvisualizer/kruskal.gif)
 
-&NewLine;
-Project made using [p5js](https://p5js.org/) and [TypeScript](https://www.typescriptlang.org/).
+
+Progetto fatto usando [p5js](https://p5js.org/) e [TypeScript](https://www.typescriptlang.org/).
 

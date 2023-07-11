@@ -7,7 +7,7 @@ tags:
   - Rich content
   - Sample
   - example
-image: /images/projects/forktelemetry/laydown.jpg
+image: /images/projects/forktelemetry/copertina.jpg
 description: ""
 toc: true
 mathjax: true
