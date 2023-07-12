@@ -231,20 +231,28 @@ void handleEncoderInterrupt(){
 
 
 # primi test e risultati
-Dopo aver attivato  lo switch per avviare la registrazione il codice crea un file di log all'interno della sua cartella che non è altro che il valore della posizione dell'encoder separato da virgole.
+Quando si attiva lo switch, il codice inizia a registrare la posizione dell’encoder e la salva in un file di log nella sua cartella. Il file di log contiene i valori della posizione dell’encoder separati da virgole.
 
-Ho scritto un sito web in javascript utilizzando la libreria [Plotly JS](https://plotly.com/javascript/) che serve per visualizzare questi dati ([Link GitHub al codice del sito](https://github.com/giggiox/fork-telemetry/tree/main/web)). 
-Quindi per esempio il video precedente produce un file di log che è poi possibile aprire nel sito e genera questo output:
+Ho creato un sito web in javascript che usa la libreria [Plotly JS](https://plotly.com/javascript/) per mostrare questi dati ([Link GitHub al codice del sito](https://github.com/giggiox/fork-telemetry/tree/main/web)). Ad esempio, il video che ho mostrato prima produce un file di log che può essere aperto nel sito e genera questo output:
+
+
 {{< rawhtml >}} 
 <center>
 <img src="/projects/forktelemetry/plot.png"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
-Inoltre vengono mostrati il numero di bottom out avuti (in questo caso zero), il valore più usato durante una registrazione e la percentuale di forca usata (in questo esempio più di 26 mm di una forca di 150mm quindi circa il 18%).
 
-Ho anche scritto uno script python ([Link GitHub allo script](https://github.com/giggiox/fork-telemetry/blob/main/videoEdit.ipynb)) che utilizza [Pillow](https://pypi.org/project/Pillow/) e [cv2](https://pypi.org/project/opencv-python/).
-Questo script serve per aggiungere la telemetria rilevata a un video, con risultato una cosa così:
+Nello scatter plot si vede il numero del campionamento sulle ascisse e la compressione della forca in millimetri sulle ordinate.
+
+Sotto il grafico ci sono anche dei dati in tabella che indicano il numero di bottom out registrati (qui nessuno), il valore più frequente di compressione della forca e la percentuale di forca utilizzata (qui oltre 26 mm su una forca di 150 mm, cioè circa il 18%).
+
+
+### visualizzazione telemetria a video
+
+Ho realizzato anche uno script python ([Link GitHub allo script](https://github.com/giggiox/fork-telemetry/blob/main/videoEdit.ipynb)) che si basa su [Pillow](https://pypi.org/project/Pillow/) e [cv2](https://pypi.org/project/opencv-python/). 
+Questo script permette di inserire la telemetria rilevata su un video, che per il video che ho mostrato prima, produce un effetto simile a questo:
+
 {{< rawhtml >}} 
 <center>
 <video width=30% controls>
@@ -255,12 +263,12 @@ Questo script serve per aggiungere la telemetria rilevata a un video, con risult
 {{< /rawhtml >}}
 
 
-Quello che fa è innanzitutto generare 101 immagini del rettangolo con dentro la percentuale (da 0% a 100%). Poi unisce queste immagini creando un video dove ogni immagine corrisponde a un dato rilevato dal sensore.
+Questo script crea prima 101 immagini del rettangolo con la percentuale scritta dentro (da 0% a 100%). Poi mette insieme queste immagini in un video dove ogni immagine rappresenta un valore misurato dal sensore.
 
 
 # test sul campo
-Provando a fare i primi test sul campo ovvero provando il sistema su una vera discesa da enduro sono sorti i primi problemi  e limitazioni dell'hardware usato (dell'arduino, in particolare).
-Infatti per impatti troppo veloci, il conto degli impulsi ricevuti dall'encoder inizia a "driftare" e diventare sempre più negativo.
+
+Quando ho testato il sistema su una discesa reale di enduro, ho incontrato le prime difficoltà e restrizioni dell’hardware che ho usato (soprattutto dell’arduino). Infatti se gli urti sono troppo veloci, il conteggio degli impulsi che arrivano dall’encoder comincia a "driftare" e diventare sempre più negativo.
 
 {{< rawhtml >}} 
 <center>
@@ -268,13 +276,14 @@ Infatti per impatti troppo veloci, il conto degli impulsi ricevuti dall'encoder 
 </center>
 {{< /rawhtml >}}
 
-Questo perchè la risposta dell'encoder ha una frequenza tra 0-20KHz. Questo significa che tra un fronte di salita e un altro c'è un tempo di almeno 50 microsecondi.
-Anche ammettendo di leggere solo i fronti di salita del segnale A (dunque riducendo la stima della precisione fatta in precedenza di 1/4) l'arduino non è in grado di svolgere in questo poco tempo tutte le operazioni richieste.
+Questo perchè la frequenza dell’encoder che va da 0 a 20KHz. 
+Questo implica che tra un’fronte di salita e un altro ci sono almeno 50 microsecondi di intervallo. 
+Supponendo di leggere solo i fronti di salita del segnale A (quindi abbassando la stima della precisione fatta prima di un quarto) l’arduino non riesce comunque a fare in questo breve tempo tutte le operazioni necessarie. 
 Infatti dovrebbe
 - fare una `digitalRead()` sul pin del segnale B
 - scrivere sull'SD la posizione
 
-Nelle 2 prossime provo ad analizzare il codice e capire perchè l'arduino non è il modo corretto di procedere. 
+Nelle 2 successive cerco di esaminare il codice e spiegare perchè l’arduino non è l'hardware corretto per procedere.
 
 ## digitalRead
 
@@ -291,7 +300,7 @@ void handleEncoderInterrupt(){
 e decompilarlo `C:\Users\luigi\AppData\Local\Temp\arduino_build_211859>"C:\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-objdump.exe" -S codice_test.ino.elf`
 
 ottenendo 
-```asm
+```assembly
 a8:   4a 9b           sbis    0x09, 2 ; 9
 aa:   0c c0           rjmp    .+24            ; 0xc4 <_Z22handleEncoderInterruptv+0x1c>
 ac:   80 91 04 01     lds     r24, 0x0104     ; 0x800104 <__data_end>
@@ -341,7 +350,7 @@ logFile.print(String(encoderPosition)+",");
 Serial.println(millis());
 ```
 
-E possiamo vedere che effettivamente il collo di bottiglia è  proprio in questa chiamata che può arrivare a prendere anche 200 millisecondi. 
+E possiamo vedere che effettivamente il collo di bottiglia è  proprio in questa chiamata che può arrivare a prendere anche 200 millisecondi. Ovviamente questo tempo dipende anche dall'SD utilizzata. 
 
 
 
@@ -349,12 +358,10 @@ E possiamo vedere che effettivamente il collo di bottiglia è  proprio in questa
 
 # sviluppi futuri
 
-In futuro 
-
-- usare un microcontrollore con più core, per esempio un esp32 dove un core viene dedicato alla lettura del segnale dell'encoder e un altro alla campionatura (che a questo punto è possibile fare in maniera costante per esempio 1000 volte al secondo) e scrittura sull'SD della posizione dell'encoder.
+- utilizzare un microcontrollore con più core, ad esempio un esp32 dove un core si occupa della lettura del segnale dell’encoder e un altro della campionatura (che così si può fare in modo costante per esempio 1000 volte al secondo) e scrittura della posizione dell’encoder sull’SD.
 - utilizzare un modulo bluetooth per comunicare i dati a un' applicazione android, anche in real time.
 - aggiungere un modulo GPS in modo da poter avere nel pannello di analisi non solo la posizione della forca metro per metro ma anche la posizione del rider lungo la discesa.
-- redesign del sensore. Il primo design fatto è stato fatto top-down (anche perchè era la prima volta che utilizzavo fusion360 e anche la prima che disegnavo davvero qualcosa di funzionale) e con forme a scatola (non strutturalmente solide) e può essere di gran lunga migliorato. Per esempio utilizzando una guida lineare è possibile ridurre la complessità del sensore (insieme al peso) ma anche i gradi di libertà del sistema.  Qui sotto il design di una possibile v2 del progetto utilizzando una guida lineare di 6mm.
+- redesign del sensore. Il primo design fatto è stato fatto top-down (anche perchè era la prima volta che usavo fusion360 e anche la prima che creavo davvero qualcosa di funzionale) e con forme a scatola (non strutturalmente resistenti) e si può migliorare molto. Per esempio usando una guida lineare si può diminuire la complessità del sensore (e anche il peso) ma anche i gradi di libertà del sistema. Qui sotto il design di una possibile v2 del progetto usando una guida lineare di 6mm.
 
 {{< rawhtml >}} 
 <center>

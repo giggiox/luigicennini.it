@@ -1,7 +1,7 @@
 baseURL: ""
-languageCode: "en-us"
 title: "luigi cennini"
 theme: hugo-profile
+defaultContentLanguage: it
 
 outputs:
   home:
@@ -86,7 +86,7 @@ params:
     
     
   contact:
-    enable: true
+    enable: false
     # title: "Custom Name"
     btnName: 
     email: luigi.cennini@libero.it
