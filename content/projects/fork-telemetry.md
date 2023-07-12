@@ -7,11 +7,14 @@ tags:
   - Rich content
   - Sample
   - example
-image: /images/projects/forktelemetry/copertina.jpg
+image: /projects/forktelemetry/copertina.jpg
 description: ""
 toc: true
 mathjax: true
 ---
+
+
+
 
 # Introduzione
 
@@ -60,7 +63,7 @@ Per la prototipazione del sensore della forcella, ho utilizzato il software [fus
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/forkSensor.jpg"  width="80%" >
+<img src="/projects/forktelemetry/forkSensor.jpg"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -75,7 +78,7 @@ Dove:
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/forktelemetry-schematics.png"  width="60%" >
+<img src="/projects/forktelemetry/forktelemetry-schematics.png"  width="60%" >
 </center>
 {{< /rawhtml >}}
 
@@ -83,13 +86,13 @@ Dove:
 A questo punto, ho progettato anche una scatola di acquisizione utilizzando Fusion 360.
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/box_fusion.PNG"  width="80%" >
+<img src="/projects/forktelemetry/box_fusion.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 La scatola, che è disegnata in modo da essere fissata con 2 fascette al tubo superiore della bici, contiene tutti i componenti (tranne l'encoder) e rende accessibile dall'esterno i 2 switch.
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/openbox_fusion.PNG"  width="80%" >
+<img src="/projects/forktelemetry/openbox_fusion.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -106,7 +109,7 @@ Una volta stampato (e assemblato) il sensore e la scatola di acquisizione saldan
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/collage.png"  width="80%" >
+<img src="/projects/forktelemetry/collage.png"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -116,7 +119,7 @@ il tutto si presenta in questo modo:
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/laydown.jpg"  width="80%" >
+<img src="/projects/forktelemetry/laydown.jpg"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -127,7 +130,7 @@ Il funzionamento una volta montati sulla MTB è il seguente:
 {{< rawhtml >}} 
 <center>
 <video width=30% controls>
-    <source src="/images/projects/forktelemetry/video.mp4" type="video/mp4" >
+    <source src="/projects/forktelemetry/video.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
 </center>
@@ -233,7 +236,7 @@ Ho scritto un sito web in javascript utilizzando la libreria [Plotly JS](https:/
 Quindi per esempio il video precedente produce un file di log che è poi possibile aprire nel sito e genera questo output:
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/plot.png"  width="80%" >
+<img src="/projects/forktelemetry/plot.png"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -260,7 +263,7 @@ Infatti per impatti troppo veloci, il conto degli impulsi ricevuti dall'encoder 
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/testSulCampo.PNG"  width="80%" >
+<img src="/projects/forktelemetry/testSulCampo.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -330,6 +333,7 @@ Da questa analisi è possibile dedurre che la digitalRead() non è il collo di b
 ## scrittura SD
 
 Guardiamo invece quanto tempo impiega una scrittura sull'SD, per avere un numero più o meno approssimativo possiamo per esempio stampare il numero di millisecondi prima e dopo l'esecuzione della scritura della posizione nella memoria.
+
 ```cpp
 Serial.println(millis());
 logFile.print(String(encoderPosition)+",");
@@ -353,7 +357,7 @@ In futuro
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/rev2.PNG"  width="80%" >
+<img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 

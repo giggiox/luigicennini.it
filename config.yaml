@@ -32,10 +32,10 @@ Menus:
     
 
 params:
-  title: "Hugo Profile"
+  title: "Luigi Cennini"
   description: Text about my cool site
   # staticPath: ""  # The path to serve the static files from
-  favicon: "/fav.png"
+  favicon: "https://avatars.githubusercontent.com/u/29329312?v=4"
 
   # Whether to serve bootstrap css and js files from CDN or not. Can be set to true, "css" or "js" to choose between
   # serving both, only the css, or only the js files through the CDN. Any other value will make so that CDN is not used.
@@ -88,12 +88,12 @@ params:
   # Hero
   hero:
     enable: true
-    intro: "Ciao! mi chiamo"
-    title: "Luigi."
-    content: "Mi piace la tecnologia per la possibilità che mi dà di creare qualsiasi cosa mi venga in mente."
-    image: /images/hero.png
+    intro: "Ciao! sono Luigi"
+    title: "mi piace fare cose!"
+    content: "Sono uno studente laureato in Informatica. Nel mio tempo libero mi piace scrivere dei miei progetti e ho messo qualcuno  dei migliori qui sotto."
+    image: ""
     bottomImage:
-      enable: true
+      enable: false
     # roundImage: true # Make hero image circular | default false
     button:
       enable: true

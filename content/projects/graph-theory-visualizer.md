@@ -7,7 +7,7 @@ tags:
   - Rich content
   - Sample
   - example
-image: /images/projects/graphtheoryvisualizer/graph.png
+image: /projects/graphtheoryvisualizer/graph.png
 description: ""
 toc: true
 mathjax: true
@@ -23,7 +23,7 @@ L'obiettivo è quello di avere un update real time delle varie operazioni, in mo
 Il progetto è attivo sulle GitHub pages e può essere accessibile una demo da questo link  (fruibile più semplicemente da desktop): https://giggiox.github.io/graphTheory-Visualizer/  <br/><br/>
 
 L'interfaccia grafica si presenta in questo modo:
-![](/images/projects/graphtheoryvisualizer/interface.gif)
+![](/projects/graphtheoryvisualizer/interface.gif)
 
 e permette:
 - creare nuovo vertice (bottone a schermo `vertex`)
@@ -36,14 +36,14 @@ e permette:
 
 ## esempi
 depth-first search (DFS):
-![](/images/projects/graphtheoryvisualizer/dfs.gif)
+![](/projects/graphtheoryvisualizer/dfs.gif)
 
 
 dijkstra shortest path between 2 vertices:
-![](/images/projects/graphtheoryvisualizer/dijkstra.gif)
+![](/projects/graphtheoryvisualizer/dijkstra.gif)
 
 kruskal minimum spanning tree:
-![](/images/projects/graphtheoryvisualizer/kruskal.gif)
+![](/projects/graphtheoryvisualizer/kruskal.gif)
 
 
 Progetto fatto usando [p5js](https://p5js.org/) e [TypeScript](https://www.typescriptlang.org/).
