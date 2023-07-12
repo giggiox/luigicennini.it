@@ -184,6 +184,13 @@ fork telemetry | luigi cennini
                     
 
                     
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/#contact"
+                            aria-label="contact">
+                            Contact
+                        </a>
+                    </li>
+                    
 
                     
                     		
@@ -263,7 +270,8 @@ fork telemetry | luigi cennini
 <p>$$ \frac{600 * 4}{\pi* 9.4} \approx 30 $$</p>
 <p>Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 12190 rilevazioni (questo valore sarà utilizzato nel codice).</p>
 <p>È importante notare che aumentando il diametro della puleggia accoppiata all&rsquo;encoder, si riduce la densità di rilevazioni per millimetro di movimento. Inoltre, bisogna considerare la velocità massima di risposta dell&rsquo;encoder, la quale determina la velocità lineare massima che la forcella può raggiungere. Nel caso dell&rsquo;LPD3806, la velocità massima è di:</p>
-<p>​$$ 2000 RPM = 2000/60 RPS = 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$</p>
+<p>​$$ 2000 RPM = 2000/60 RPS = $$
+$$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$</p>
 <p>Se si utilizza una puleggia con un diametro ridotto, si otterrà una velocità lineare massima superiore per la forcella.</p>
 <p>Con queste informazioni iniziali, ho dunque iniziato il processo di prototipazione.</p>
 <h1 id="prototipazione">prototipazione</h1>
@@ -427,7 +435,7 @@ Questo script serve per aggiungere la telemetria rilevata a un video, con risult
  
 <center>
 <video width=30% controls>
-    <source src="/images/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
+    <source src="/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
 </center>
@@ -486,7 +494,7 @@ Dal <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automot
 
  
 <center>
-<img src="/images/projects/forktelemetry/datasheet.PNG"  width="80%" >
+<img src="/projects/forktelemetry/datasheet.PNG"  width="80%" >
 </center>
 
 <p>Dunque essendo un microcontrollore a 16Mhz (1 ciclo di clock richiede 1/16.000.000 di secondo, cioè 62,5 nanosecondi), allora quelle 4 istruzioni richiedono 8 cicli  * 62,5 ns/ciclo = 500 ns.</p>

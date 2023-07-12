@@ -26,6 +26,17 @@
                         </a>
                         {{ end }}
                     </div>
+					
+					{{if .Site.Params.contact.email }}
+                    <div class="col-auto">
+                        <a href="mailto:{{ .Site.Params.contact.email }}" class="btn">
+                            {{ .Site.Params.contact.btnName }}
+							<i class="fa fa-envelope"></i>
+                        </a>
+                    </div>
+                    {{ end }}
+					
+					
                     <div class="col-auto px-0 h-100">
                         {{- partial "sections/hero/social.html" . -}}
                     </div>
