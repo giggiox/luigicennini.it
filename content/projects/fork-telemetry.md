@@ -47,7 +47,8 @@ Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 
 È importante notare che aumentando il diametro della puleggia accoppiata all'encoder, si riduce la densità di rilevazioni per millimetro di movimento. Inoltre, bisogna considerare la velocità massima di risposta dell'encoder, la quale determina la velocità lineare massima che la forcella può raggiungere. Nel caso dell'LPD3806, la velocità massima è di:
 
 
-​$$ 2000 RPM = 2000/60 RPS = 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$
+​$$ 2000 RPM = 2000/60 RPS = $$
+$$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$
  
 
 Se si utilizza una puleggia con un diametro ridotto, si otterrà una velocità lineare massima superiore per la forcella.
@@ -247,7 +248,7 @@ Questo script serve per aggiungere la telemetria rilevata a un video, con risult
 {{< rawhtml >}} 
 <center>
 <video width=30% controls>
-    <source src="/images/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
+    <source src="/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
 </center>
@@ -321,7 +322,7 @@ Dal [datasheet dell'ATmega328 (pagina 283)](https://ww1.microchip.com/downloads/
 
 {{< rawhtml >}} 
 <center>
-<img src="/images/projects/forktelemetry/datasheet.PNG"  width="80%" >
+<img src="/projects/forktelemetry/datasheet.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
