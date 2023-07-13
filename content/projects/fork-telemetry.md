@@ -68,6 +68,14 @@ Per la prototipazione del sensore della forcella, ho utilizzato il software [fus
 </center>
 {{< /rawhtml >}}
 
+
+{{< rawhtml >}} 
+<script type="module" src="/model-viewer.min.js"></script>
+<center>
+<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forkSensor3dv1.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
+</center>
+{{< /rawhtml >}}
+
 Per il design, mi sono ispirato al movimento degli assi di una stampante 3D e ho integrato un meccanismo di tensionamento della cinghia, tipico di questo tipo di stampanti.
 
 
@@ -368,9 +376,6 @@ E possiamo vedere che effettivamente il collo di bottiglia è  proprio in questa
 <img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
-
-
-
 
 
 
