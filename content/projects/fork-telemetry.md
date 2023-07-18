@@ -1,14 +1,14 @@
 ---
 title: "fork telemetry"
-date: 2023-04-03T19:53:33+05:30
+date: 2023-07-05T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
   - Rich content
   - Sample
   - example
-image: /projects/forktelemetry/copertina.jpg
-description: ""
+image: /projects/forktelemetry/renders/render.png
+description: "un nuovo modo per fare telemetria su mountain bike."
 toc: true
 mathjax: true
 ---
@@ -18,7 +18,7 @@ mathjax: true
 
 # Introduzione
 
-L'obiettivo di questo progetto è quello di sviluppare un'alternativa più economica ai sistemi di telemetria disponibili sul mercato per le mountain bike e le moto da cross.
+L'obiettivo di questo progetto è quello di sviluppare un'alternativa più economica ai sistemi di telemetria disponibili sul mercato per le mountain bike.
 
 I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell'ammortizzatore della bici durante la guida. Questi dati sono fondamentali per gli appassionati di sport off-road e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.
 
@@ -42,7 +42,7 @@ Calcolando il numero di osservazioni possibili per ogni millimetro di movimento 
 $$ \frac{600 * 4}{\pi* 9.4} \approx 30 $$
 
 
-Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 12190 rilevazioni (questo valore sarà utilizzato nel codice).
+Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 12190 rilevazioni (questo valore sarà utilizzato nel codice in seguito).
 
 È importante notare che aumentando il diametro della puleggia accoppiata all'encoder, si riduce la densità di rilevazioni per millimetro di movimento. Inoltre, bisogna considerare la velocità massima di risposta dell'encoder, la quale determina la velocità lineare massima che la forcella può raggiungere. Nel caso dell'LPD3806, la velocità massima è di:
 
@@ -51,7 +51,7 @@ Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 
 $$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$
  
 
-Se si utilizza una puleggia con un diametro ridotto, si otterrà una velocità lineare massima superiore per la forcella.
+Se si utilizza una puleggia con un diametro ridotto, si otterrà una velocità lineare massima rilevabile inferiore.
 
 Con queste informazioni iniziali, ho dunque iniziato il processo di prototipazione.
 
@@ -72,9 +72,20 @@ Per la prototipazione del sensore della forcella, ho utilizzato il software [fus
 {{< rawhtml >}} 
 <script type="module" src="/model-viewer.min.js"></script>
 <center>
-<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forkSensor3dv1.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
+<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
 </center>
 {{< /rawhtml >}}
+
+
+Utilizzando [blender](https://www.blender.org/) possiamo anche far vedere un concept di come funziona una volta montato su una forcella.
+
+{{< rawhtml >}} 
+<center>
+<model-viewer  style="width: 80; height: 80vh" camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" shadow-intensity="1" src="/projects/forktelemetry/forksensorAnimation.glb" alt="An animated 3D model of a robot"></model-viewer>
+</center>
+{{< /rawhtml >}}
+
+
 
 Per il design, mi sono ispirato al movimento degli assi di una stampante 3D e ho integrato un meccanismo di tensionamento della cinghia, tipico di questo tipo di stampanti.
 
@@ -95,13 +106,13 @@ Dove:
 A questo punto, ho progettato anche una scatola di acquisizione utilizzando Fusion 360.
 {{< rawhtml >}} 
 <center>
-<img src="/projects/forktelemetry/box_fusion.PNG"  width="80%" >
+<img src="/projects/forktelemetry/openbox_fusion.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 La scatola, che è disegnata in modo da essere fissata con 2 fascette al tubo superiore della bici, contiene tutti i componenti (tranne l'encoder) e rende accessibile dall'esterno i 2 switch.
 {{< rawhtml >}} 
 <center>
-<img src="/projects/forktelemetry/openbox_fusion.PNG"  width="80%" >
+<img src="/projects/forktelemetry/box_fusion.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
 
@@ -138,7 +149,7 @@ Il funzionamento una volta montati sulla MTB è il seguente:
 
 {{< rawhtml >}} 
 <center>
-<video width=30% controls>
+<video width=35% controls>
     <source src="/projects/forktelemetry/video.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
@@ -263,7 +274,7 @@ Questo script permette di inserire la telemetria rilevata su un video, che per i
 
 {{< rawhtml >}} 
 <center>
-<video width=30% controls>
+<video width=35% controls>
     <source src="/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
