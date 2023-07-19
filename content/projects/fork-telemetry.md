@@ -30,12 +30,61 @@ Dunque, dopo un'attenta valutazione, ho concluso che l'utilizzo di un encoder ro
 
 La ragione principale di questa scelta è che gli encoder rotativi sono meno costosi rispetto ai potenziometri lineari e offrono comunque una buona precisione nella misurazione della posizione. Inoltre, gli encoder rotativi sono generalmente più robusti e meno soggetti a danni rispetto agli encoder lineari, che possono essere più fragili e suscettibili a guasti in ambienti off-road.
 
+### come funziona un encoder rotativo
+
+Gli encoder possono percepire il movimento in entrambe le direzioni, rilevando fori o segni mentre si spostano attraverso 2 posizioni. Quando il disco blu nello schema sottostante ruota in senso orario, i cambiamenti vengono prima rilevati dal pin 1 e poi dal pin 2. Quando ruota in senso antiorario, il pin 2 è il primo a rilevare i cambiamenti. Questo schema è chiamato "codifica in quadratura" perché le forme d'onda rilevate dai 2 pin sono sfasate di 90 gradi.
+
+{{< rawhtml >}} 
+<center>
+<table class="d-flex justify-content-center">
+	<tr>
+		<td style="background: none !important; border: none !important">
+			<img src="/projects/forktelemetry/td_libs_Encoder_pos1.png" id="quad">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" style="background: none !important; border: none !important">
+			<form action="#">
+				<input type="submit" value="<- antiorario" onClick="rotate(-1); return false">
+				<input type="text" value="0" id="accum" size=6>
+				<input type="submit" value="orario ->" onClick="rotate(1); return false">
+			</form>
+		</td>
+	</tr>
+</table>
+</center>
+<script>
+var img = new Array();
+img[0] = new Image();
+img[1] = new Image();
+img[2] = new Image();
+img[3] = new Image();
+img[0].src = "/projects/forktelemetry/td_libs_Encoder_pos1.png";
+img[1].src = "/projects/forktelemetry/td_libs_Encoder_pos2.png";
+img[2].src = "/projects/forktelemetry/td_libs_Encoder_pos3.png";
+img[3].src = "/projects/forktelemetry/td_libs_Encoder_pos4.png";
+var position = 0;
+function rotate(n) {
+val = Number(document.getElementById('accum').value) + n;
+if (isNaN(val)) val = 0;
+document.getElementById('accum').value = val;
+position += n;
+if (position > 3) position = 0;
+if (position < 0) position = 3;
+document.getElementById('quad').src = img[position].src;
+}
+</script>
+{{< /rawhtml >}}
+
+(animazione presa da[https://www.pjrc.com/teensy/td_libs_Encoder.html](https://www.pjrc.com/teensy/td_libs_Encoder.html))
+
 
 # pre - prototipazione
 
 Prima di procedere con la prototipazione del sensore della forcella, ho eseguito un'analisi di fattibilità per valutare la possibilità di realizzare questo progetto.
 
 Come punto di partenza, ho selezionato un encoder rotativo affidabile: l'LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l'encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell'encoder, ovvero 24000 PPR (600 PPR * 4).
+
 
 Calcolando il numero di osservazioni possibili per ogni millimetro di movimento della forcella, otteniamo il seguente risultato:
 

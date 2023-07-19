@@ -30,7 +30,53 @@ Therefore, after careful evaluation, I have concluded that using a rotary encode
 
 The main reason for this choice is that rotary encoders are less expensive than linear potentiometers and still offer good position measurement accuracy. In addition, rotary encoders are generally more robust and less prone to damage than linear encoders, which can be more fragile and susceptible to failure in off-road environments.
 
+### how a rotative encoder works
 
+Encoders can sense movement in either direction, detecting holes or marks as they move through 2 positions. When the blue disc in the diagram below rotates clockwise, changes are first detected by pin 1 and then pin 2. When it rotates counterclockwise, pin 2 is the first to detect changes. This scheme is called 'quadrature coding' because the waveforms detected by the 2 pins are offset by 90 degrees.
+
+{{< rawhtml >}} 
+<center>
+<table class="d-flex justify-content-center">
+	<tr>
+		<td style="background: none !important; border: none !important">
+			<img src="/projects/forktelemetry/td_libs_Encoder_pos1.png" id="quad">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" style="background: none !important; border: none !important">
+			<form action="#">
+				<input type="submit" value="<- counterclockwise" onClick="rotate(-1); return false">
+				<input type="text" value="0" id="accum" size=6>
+				<input type="submit" value="clockwise ->" onClick="rotate(1); return false">
+			</form>
+		</td>
+	</tr>
+</table>
+</center>
+<script>
+var img = new Array();
+img[0] = new Image();
+img[1] = new Image();
+img[2] = new Image();
+img[3] = new Image();
+img[0].src = "/projects/forktelemetry/td_libs_Encoder_pos1.png";
+img[1].src = "/projects/forktelemetry/td_libs_Encoder_pos2.png";
+img[2].src = "/projects/forktelemetry/td_libs_Encoder_pos3.png";
+img[3].src = "/projects/forktelemetry/td_libs_Encoder_pos4.png";
+var position = 0;
+function rotate(n) {
+val = Number(document.getElementById('accum').value) + n;
+if (isNaN(val)) val = 0;
+document.getElementById('accum').value = val;
+position += n;
+if (position > 3) position = 0;
+if (position < 0) position = 3;
+document.getElementById('quad').src = img[position].src;
+}
+</script>
+{{< /rawhtml >}}
+
+(animation taken from [https://www.pjrc.com/teensy/td_libs_Encoder.html](https://www.pjrc.com/teensy/td_libs_Encoder.html))
 
 
 
@@ -39,6 +85,15 @@ The main reason for this choice is that rotary encoders are less expensive than 
 Before proceeding with the prototyping of the fork sensor, I carried out a feasibility analysis to assess the feasibility of this project.
 
 As a starting point, I selected a reliable rotary encoder: the LPD3806. This type of encoder offers a resolution of 600 PPR (pulses per revolution). Using a pulley with a diameter of 9.4 mm, a density of approximately 30 detections per millimetre of fork movement is achieved. This is because the encoder generates a quadrature signal that can be read on both the rising and falling edges. By exploiting both edges, we obtain a quadrupled resolution of the encoder, i.e. 24000 PPR (600 PPR * 4).
+
+
+
+
+
+
+
+
+
 
 Calculating the number of possible observations per millimetre of fork movement, we obtain the following result:
 
