@@ -76,7 +76,7 @@ document.getElementById('quad').src = img[position].src;
 </script>
 {{< /rawhtml >}}
 
-(animazione presa da[https://www.pjrc.com/teensy/td_libs_Encoder.html](https://www.pjrc.com/teensy/td_libs_Encoder.html))
+(animazione presa da [questo sito](https://www.pjrc.com/teensy/td_libs_Encoder.html))
 
 
 # pre - prototipazione
@@ -116,12 +116,16 @@ Per la prototipazione del sensore della forcella, ho utilizzato il software [fus
 <img src="/projects/forktelemetry/forkSensor.jpg"  width="80%" >
 </center>
 {{< /rawhtml >}}
-
+ 
 
 {{< rawhtml >}} 
 <script type="module" src="/model-viewer.min.js"></script>
 <center>
-<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 {{< /rawhtml >}}
 
@@ -130,7 +134,11 @@ Utilizzando [blender](https://www.blender.org/) possiamo anche far vedere un con
 
 {{< rawhtml >}} 
 <center>
-<model-viewer  style="width: 80; height: 80vh" camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" shadow-intensity="1" src="/projects/forktelemetry/forksensorAnimation.glb" alt="An animated 3D model of a robot"></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensorAnimation.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensorAnimationPoster.webp" shadow-intensity="1" autoplay camera-orbit="-216.6deg 65.99deg 1356m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 {{< /rawhtml >}}
 
@@ -345,7 +353,7 @@ Quando ho testato il sistema su una discesa reale di enduro, ho incontrato le pr
 {{< /rawhtml >}}
 
 Questo perchè la frequenza dell’encoder che va da 0 a 20KHz. 
-Questo implica che tra un’fronte di salita e un altro ci sono almeno 50 microsecondi di intervallo. 
+Questo implica che tra un fronte di salita e un altro ci sono almeno 50 microsecondi di intervallo. 
 Supponendo di leggere solo i fronti di salita del segnale A (quindi abbassando la stima della precisione fatta prima di un quarto) l’arduino non riesce comunque a fare in questo breve tempo tutte le operazioni necessarie. 
 Infatti dovrebbe
 - fare una `digitalRead()` sul pin del segnale B

@@ -306,7 +306,7 @@ document.getElementById('quad').src = img[position].src;
 }
 </script>
 
-<p>(animation taken from <a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">https://www.pjrc.com/teensy/td_libs_Encoder.html</a>)</p>
+<p>(animation taken from <a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">questo sito</a>)</p>
 <h1 id="pre---prototyping">pre - prototyping</h1>
 <p>Before proceeding with the prototyping of the fork sensor, I carried out a feasibility analysis to assess the feasibility of this project.</p>
 <p>As a starting point, I selected a reliable rotary encoder: the LPD3806. This type of encoder offers a resolution of 600 PPR (pulses per revolution). Using a pulley with a diameter of 9.4 mm, a density of approximately 30 detections per millimetre of fork movement is achieved. This is because the encoder generates a quadrature signal that can be read on both the rising and falling edges. By exploiting both edges, we obtain a quadrupled resolution of the encoder, i.e. 24000 PPR (600 PPR * 4).</p>
@@ -330,14 +330,22 @@ $$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$</p>
  
 <script type="module" src="/model-viewer.min.js"></script>
 <center>
-<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 
 <p>Using <a href="https://www.blender.org/">blender</a> we can also show a concept of how it works once mounted on a fork.</p>
 
  
 <center>
-<model-viewer  style="width: 80; height: 80vh" camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" shadow-intensity="1" src="/projects/forktelemetry/forksensorAnimation.glb" alt="An animated 3D model of a robot"></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensorAnimation.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensorAnimationPoster.webp" shadow-intensity="1" autoplay camera-orbit="-216.6deg 65.99deg 1356m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 
 <p>For the design, I was inspired by the movement of the axes of a 3D printer and integrated a belt tensioning mechanism, typical of this type of printer.</p>

@@ -76,7 +76,7 @@ document.getElementById('quad').src = img[position].src;
 </script>
 {{< /rawhtml >}}
 
-(animation taken from [https://www.pjrc.com/teensy/td_libs_Encoder.html](https://www.pjrc.com/teensy/td_libs_Encoder.html))
+(animation taken from [questo sito](https://www.pjrc.com/teensy/td_libs_Encoder.html))
 
 
 
@@ -130,7 +130,11 @@ For the prototyping of the fork sensor, I used the [fusion 360](https://www.auto
 {{< rawhtml >}} 
 <script type="module" src="/model-viewer.min.js"></script>
 <center>
-<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 {{< /rawhtml >}}
 
@@ -138,7 +142,11 @@ Using [blender](https://www.blender.org/) we can also show a concept of how it w
 
 {{< rawhtml >}} 
 <center>
-<model-viewer  style="width: 80; height: 80vh" camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" shadow-intensity="1" src="/projects/forktelemetry/forksensorAnimation.glb" alt="An animated 3D model of a robot"></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensorAnimation.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensorAnimationPoster.webp" shadow-intensity="1" autoplay camera-orbit="-216.6deg 65.99deg 1356m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 {{< /rawhtml >}}
 

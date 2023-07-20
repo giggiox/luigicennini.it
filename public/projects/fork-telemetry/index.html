@@ -302,7 +302,7 @@ document.getElementById('quad').src = img[position].src;
 }
 </script>
 
-<p>(animazione presa da<a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">https://www.pjrc.com/teensy/td_libs_Encoder.html</a>)</p>
+<p>(animazione presa da<a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">questo sito</a>)</p>
 <h1 id="pre---prototipazione">pre - prototipazione</h1>
 <p>Prima di procedere con la prototipazione del sensore della forcella, ho eseguito un&rsquo;analisi di fattibilità per valutare la possibilità di realizzare questo progetto.</p>
 <p>Come punto di partenza, ho selezionato un encoder rotativo affidabile: l&rsquo;LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l&rsquo;encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell&rsquo;encoder, ovvero 24000 PPR (600 PPR * 4).</p>
@@ -326,14 +326,22 @@ $$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$</p>
  
 <script type="module" src="/model-viewer.min.js"></script>
 <center>
-<model-viewer style="width: 80; height: 80vh"  alt="3D image" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" seamless-poster shadow-intensity="1" camera-controls auto-rotate></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 
 <p>Utilizzando <a href="https://www.blender.org/">blender</a> possiamo anche far vedere un concept di come funziona una volta montato su una forcella.</p>
 
  
 <center>
-<model-viewer  style="width: 80; height: 80vh" camera-controls touch-action="pan-y" autoplay ar ar-modes="webxr scene-viewer" shadow-intensity="1" src="/projects/forktelemetry/forksensorAnimation.glb" alt="An animated 3D model of a robot"></model-viewer>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensorAnimation.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensorAnimationPoster.webp" shadow-intensity="1" autoplay camera-orbit="-216.6deg 65.99deg 1356m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
 </center>
 
 <p>Per il design, mi sono ispirato al movimento degli assi di una stampante 3D e ho integrato un meccanismo di tensionamento della cinghia, tipico di questo tipo di stampanti.</p>
