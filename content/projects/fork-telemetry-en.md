@@ -138,6 +138,7 @@ For the prototyping of the fork sensor, I used the [fusion 360](https://www.auto
 </center>
 {{< /rawhtml >}}
 
+The fusion360 file is available on GitHub at [this link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v1).
 Using [blender](https://www.blender.org/) we can also show a concept of how it works once mounted on a fork.
 
 {{< rawhtml >}} 
@@ -449,6 +450,7 @@ And we can see that indeed the bottleneck is in this call, which can take up to 
 <img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
+The fusion360 file for this version is available on GitHub at [this link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v2) .
 
 
 

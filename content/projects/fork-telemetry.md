@@ -129,7 +129,7 @@ Per la prototipazione del sensore della forcella, ho utilizzato il software [fus
 </center>
 {{< /rawhtml >}}
 
-
+Il file fusion360 è disponibile su GitHub a [questo link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v1).
 Utilizzando [blender](https://www.blender.org/) possiamo anche far vedere un concept di come funziona una volta montato su una forcella.
 
 {{< rawhtml >}} 
@@ -444,7 +444,7 @@ E possiamo vedere che effettivamente il collo di bottiglia è  proprio in questa
 <img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
 </center>
 {{< /rawhtml >}}
-
+Il file fusion360 per questa versione è disponibile su GitHub a [questo link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v2) .
 
 
 

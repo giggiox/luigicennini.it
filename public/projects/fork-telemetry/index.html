@@ -302,7 +302,7 @@ document.getElementById('quad').src = img[position].src;
 }
 </script>
 
-<p>(animazione presa da<a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">questo sito</a>)</p>
+<p>(animazione presa da <a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">questo sito</a>)</p>
 <h1 id="pre---prototipazione">pre - prototipazione</h1>
 <p>Prima di procedere con la prototipazione del sensore della forcella, ho eseguito un&rsquo;analisi di fattibilità per valutare la possibilità di realizzare questo progetto.</p>
 <p>Come punto di partenza, ho selezionato un encoder rotativo affidabile: l&rsquo;LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l&rsquo;encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell&rsquo;encoder, ovvero 24000 PPR (600 PPR * 4).</p>
@@ -333,7 +333,8 @@ $$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$</p>
 </model-viewer>
 </center>
 
-<p>Utilizzando <a href="https://www.blender.org/">blender</a> possiamo anche far vedere un concept di come funziona una volta montato su una forcella.</p>
+<p>Il file fusion360 è disponibile su GitHub a <a href="https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v1">questo link</a>.
+Utilizzando <a href="https://www.blender.org/">blender</a> possiamo anche far vedere un concept di come funziona una volta montato su una forcella.</p>
 
  
 <center>
@@ -513,7 +514,7 @@ Questo script permette di inserire la telemetria rilevata su un video, che per i
 </center>
 
 <p>Questo perchè la frequenza dell’encoder che va da 0 a 20KHz.
-Questo implica che tra un’fronte di salita e un altro ci sono almeno 50 microsecondi di intervallo.
+Questo implica che tra un fronte di salita e un altro ci sono almeno 50 microsecondi di intervallo.
 Supponendo di leggere solo i fronti di salita del segnale A (quindi abbassando la stima della precisione fatta prima di un quarto) l’arduino non riesce comunque a fare in questo breve tempo tutte le operazioni necessarie.
 Infatti dovrebbe</p>
 <ul>
@@ -575,12 +576,13 @@ Dal <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automot
 <li>aggiungere un modulo GPS in modo da poter avere nel pannello di analisi non solo la posizione della forca metro per metro ma anche la posizione del rider lungo la discesa.</li>
 <li>redesign del sensore. Il primo design fatto è stato fatto top-down (anche perchè era la prima volta che usavo fusion360 e anche la prima che creavo davvero qualcosa di funzionale) e con forme a scatola (non strutturalmente resistenti) e si può migliorare molto. Per esempio usando una guida lineare si può diminuire la complessità del sensore (e anche il peso) ma anche i gradi di libertà del sistema. Qui sotto il design di una possibile v2 del progetto usando una guida lineare di 6mm.</li>
 </ul>
-
+<p>
  
 <center>
 <img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
 </center>
 
+Il file fusion360 per questa versione è disponibile su GitHub a <a href="https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v2">questo link</a> .</p>
 
           </article>
         </div>
