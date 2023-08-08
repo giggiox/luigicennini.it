@@ -99,6 +99,7 @@ params:
     title: "mi piace fare cose!"
     content: "Sono uno studente laureato in Informatica. Nel mio tempo libero mi piace scrivere dei miei progetti e ho messo qualcuno  dei migliori qui sotto."
     image: ""
+    imageEnable: false
     bottomImage:
       enable: false
     # roundImage: true # Make hero image circular | default false
