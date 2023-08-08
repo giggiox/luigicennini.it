@@ -1,0 +1,1 @@
+Personal website using [hugo](https://gohugo.io/) and a modified version of [hugoProfile](https://github.com/gurusabarish/hugo-profile) theme.
