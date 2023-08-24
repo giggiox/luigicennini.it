@@ -253,13 +253,14 @@ fork telemetry | luigi cennini
           <article class="page-content  p-2">
           <h1 id="introduzione">Introduzione</h1>
 <p>L&rsquo;obiettivo di questo progetto è quello di sviluppare un&rsquo;alternativa più economica ai sistemi di telemetria disponibili sul mercato per le mountain bike.</p>
-<p>I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell&rsquo;ammortizzatore della bici durante la guida. Questi dati sono fondamentali per gli appassionati di sport off-road e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.</p>
+<p>I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell&rsquo;ammortizzatore della bici durante la guida.</p>
+<p>Questi dati sono fondamentali per gli appassionati e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.</p>
 <p>Attualmente, molti sistemi di telemetria, come ad esempio <a href="https://www.bybtech.it/">byb telemetry</a>, utilizzano costosi potenziometri lineari per misurare con precisione la posizione della forcella e dell&rsquo;ammortizzatore.</p>
-<p>Altri utenti su internet hanno provato altri modi per ottenere un buon risultato, per esempio un <a href="https://www.vitalmtb.com/forums/The-Hub,2/DIY-mtb-telemetry-data,11126">sensore LiDar</a>, con dei risultati però non troppo incoraggianti in quanto troppo rumorosi.</p>
-<p>Dunque, dopo un&rsquo;attenta valutazione, ho concluso che l&rsquo;utilizzo di un encoder rotativo rappresenta un&rsquo;alternativa più vantaggiosa dal punto di vista economico.</p>
-<p>La ragione principale di questa scelta è che gli encoder rotativi sono meno costosi rispetto ai potenziometri lineari e offrono comunque una buona precisione nella misurazione della posizione. Inoltre, gli encoder rotativi sono generalmente più robusti e meno soggetti a danni rispetto agli encoder lineari, che possono essere più fragili e suscettibili a guasti in ambienti off-road.</p>
+<p>Altri utenti su internet hanno provato altri modi per ottenere un buon risultato, per esempio un <a href="https://www.vitalmtb.com/forums/The-Hub,2/DIY-mtb-telemetry-data,11126">sensore LiDar</a>, con dei risultati però non troppo incoraggianti, in quanto sensori troppo affetti da rumore indesiderato.</p>
+<p>Dunque ho concluso che l&rsquo;utilizzo di un encoder rotativo rappresenta un&rsquo;alternativa più vantaggiosa dal punto di vista economico.</p>
+<p>La ragione principale di questa scelta è che gli encoder rotativi sono meno costosi rispetto ai potenziometri lineari e offrono comunque una buona precisione nella misurazione della posizione. Inoltre, gli encoder rotativi sono generalmente più robusti e meno soggetti a danni rispetto agli encoder lineari, che possono essere più fragili e suscettibili a guasti.</p>
 <h3 id="come-funziona-un-encoder-rotativo">come funziona un encoder rotativo</h3>
-<p>Gli encoder possono percepire il movimento in entrambe le direzioni, rilevando fori o segni mentre si spostano attraverso 2 posizioni. Quando il disco blu nello schema sottostante ruota in senso orario, i cambiamenti vengono prima rilevati dal pin 1 e poi dal pin 2. Quando ruota in senso antiorario, il pin 2 è il primo a rilevare i cambiamenti. Questo schema è chiamato &ldquo;codifica in quadratura&rdquo; perché le forme d&rsquo;onda rilevate dai 2 pin sono sfasate di 90 gradi.</p>
+<p>Gli encoder possono rilevare il movimento in entrambe le direzioni, rilevando i fori o i segni che passano attraverso 2 posizioni. Quando il disco blu nel diagramma sottostante gira in senso orario, i cambiamenti vengono rilevati prima dal pin 1 e poi dal pin 2. Quando gira in senso antiorario, il pin 2 è il primo a rilevare i cambiamenti. Questo schema è chiamato &ldquo;codifica in quadratura&rdquo; perché le forme d&rsquo;onda rilevate dai due pin sono sfasate di 90 gradi.</p>
 
  
 <center>
@@ -304,8 +305,8 @@ document.getElementById('quad').src = img[position].src;
 
 <p>(animazione presa da <a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">questo sito</a>)</p>
 <h1 id="pre---prototipazione">pre - prototipazione</h1>
-<p>Prima di procedere con la prototipazione del sensore della forcella, ho eseguito un&rsquo;analisi di fattibilità per valutare la possibilità di realizzare questo progetto.</p>
-<p>Come punto di partenza, ho selezionato un encoder rotativo affidabile: l&rsquo;LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l&rsquo;encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell&rsquo;encoder, ovvero 24000 PPR (600 PPR * 4).</p>
+<p>Prima di procedere con la prototipazione del sensore della forcella ho eseguito un&rsquo;analisi di fattibilità per valutare la possibilità di realizzare questo progetto.</p>
+<p>Come punto di partenza ho selezionato un encoder rotativo: l&rsquo;LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l&rsquo;encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell&rsquo;encoder, ovvero 24000 PPR (600 PPR * 4).</p>
 <p>Calcolando il numero di osservazioni possibili per ogni millimetro di movimento della forcella, otteniamo il seguente risultato:</p>
 <p>$$ \frac{600 * 4}{\pi* 9.4} \approx 30 $$</p>
 <p>Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 12190 rilevazioni (questo valore sarà utilizzato nel codice in seguito).</p>

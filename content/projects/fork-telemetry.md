@@ -20,19 +20,21 @@ mathjax: true
 
 L'obiettivo di questo progetto è quello di sviluppare un'alternativa più economica ai sistemi di telemetria disponibili sul mercato per le mountain bike.
 
-I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell'ammortizzatore della bici durante la guida. Questi dati sono fondamentali per gli appassionati di sport off-road e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.
+I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell'ammortizzatore della bici durante la guida. 
+
+Questi dati sono fondamentali per gli appassionati e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.
 
 Attualmente, molti sistemi di telemetria, come ad esempio [byb telemetry](https://www.bybtech.it/), utilizzano costosi potenziometri lineari per misurare con precisione la posizione della forcella e dell'ammortizzatore.
 
-Altri utenti su internet hanno provato altri modi per ottenere un buon risultato, per esempio un [sensore LiDar](https://www.vitalmtb.com/forums/The-Hub,2/DIY-mtb-telemetry-data,11126), con dei risultati però non troppo incoraggianti in quanto troppo rumorosi.
+Altri utenti su internet hanno provato altri modi per ottenere un buon risultato, per esempio un [sensore LiDar](https://www.vitalmtb.com/forums/The-Hub,2/DIY-mtb-telemetry-data,11126), con dei risultati però non troppo incoraggianti, in quanto sensori troppo affetti da rumore indesiderato.
 
-Dunque, dopo un'attenta valutazione, ho concluso che l'utilizzo di un encoder rotativo rappresenta un'alternativa più vantaggiosa dal punto di vista economico.
+Dunque ho concluso che l'utilizzo di un encoder rotativo rappresenta un'alternativa più vantaggiosa dal punto di vista economico.
 
-La ragione principale di questa scelta è che gli encoder rotativi sono meno costosi rispetto ai potenziometri lineari e offrono comunque una buona precisione nella misurazione della posizione. Inoltre, gli encoder rotativi sono generalmente più robusti e meno soggetti a danni rispetto agli encoder lineari, che possono essere più fragili e suscettibili a guasti in ambienti off-road.
+La ragione principale di questa scelta è che gli encoder rotativi sono meno costosi rispetto ai potenziometri lineari e offrono comunque una buona precisione nella misurazione della posizione. Inoltre, gli encoder rotativi sono generalmente più robusti e meno soggetti a danni rispetto agli encoder lineari, che possono essere più fragili e suscettibili a guasti.
 
 ### come funziona un encoder rotativo
 
-Gli encoder possono percepire il movimento in entrambe le direzioni, rilevando fori o segni mentre si spostano attraverso 2 posizioni. Quando il disco blu nello schema sottostante ruota in senso orario, i cambiamenti vengono prima rilevati dal pin 1 e poi dal pin 2. Quando ruota in senso antiorario, il pin 2 è il primo a rilevare i cambiamenti. Questo schema è chiamato "codifica in quadratura" perché le forme d'onda rilevate dai 2 pin sono sfasate di 90 gradi.
+Gli encoder possono rilevare il movimento in entrambe le direzioni, rilevando i fori o i segni che passano attraverso 2 posizioni. Quando il disco blu nel diagramma sottostante gira in senso orario, i cambiamenti vengono rilevati prima dal pin 1 e poi dal pin 2. Quando gira in senso antiorario, il pin 2 è il primo a rilevare i cambiamenti. Questo schema è chiamato "codifica in quadratura" perché le forme d'onda rilevate dai due pin sono sfasate di 90 gradi.
 
 {{< rawhtml >}} 
 <center>
@@ -81,9 +83,9 @@ document.getElementById('quad').src = img[position].src;
 
 # pre - prototipazione
 
-Prima di procedere con la prototipazione del sensore della forcella, ho eseguito un'analisi di fattibilità per valutare la possibilità di realizzare questo progetto.
+Prima di procedere con la prototipazione del sensore della forcella ho eseguito un'analisi di fattibilità per valutare la possibilità di realizzare questo progetto.
 
-Come punto di partenza, ho selezionato un encoder rotativo affidabile: l'LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l'encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell'encoder, ovvero 24000 PPR (600 PPR * 4).
+Come punto di partenza ho selezionato un encoder rotativo: l'LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l'encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell'encoder, ovvero 24000 PPR (600 PPR * 4).
 
 
 Calcolando il numero di osservazioni possibili per ogni millimetro di movimento della forcella, otteniamo il seguente risultato:
