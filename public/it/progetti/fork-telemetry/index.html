@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html>
+
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+<link rel="icon" href=https://avatars.githubusercontent.com/u/29329312?v&#61;4 type="image/gif">
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+>
+<link rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      media="print" onload="this.media='all'" />
+<noscript>
+  <link
+          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+          rel="stylesheet">
+</noscript>
+
+
+<link rel="stylesheet" href="/css/font.css" media="all">
+
+
+
+<meta property="og:title" content="fork telemetry" />
+<meta property="og:description" content="un nuovo modo per fare telemetria su mountain bike." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/it/progetti/fork-telemetry/" /><meta property="article:section" content="progetti" />
+<meta property="article:published_time" content="2023-07-05T19:53:33+05:30" />
+<meta property="article:modified_time" content="2023-07-05T19:53:33+05:30" /><meta property="og:site_name" content="Luigi Cennini" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="fork telemetry"/>
+<meta name="twitter:description" content="un nuovo modo per fare telemetria su mountain bike."/>
+
+
+<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
+<link rel="stylesheet" href="/css/footer.css" media="all">
+
+
+<link rel="stylesheet" href="/css/theme.css" media="all">
+
+
+
+
+<style>
+    :root {
+        --text-color: #343a40;
+        --text-secondary-color: #6c757d;
+        --background-color: #eaedf0;
+        --secondary-background-color: #64ffda1a;
+        --primary-color: #007bff;
+        --secondary-color: #f8f9fa;
+
+         
+        --text-color-dark: #e4e6eb;
+        --text-secondary-color-dark: #b0b3b8;
+        --background-color-dark: #18191a;
+        --secondary-background-color-dark: #212529;
+        --primary-color-dark: #ffffff;
+        --secondary-color-dark: #212529;
+    }
+    body {
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+    }
+
+    html {
+        background-color: var(--background-color) !important;
+    }
+
+    body::-webkit-scrollbar {
+        width: .5em;
+        height: .5em;
+        background-color: var(--background-color);
+    }
+    
+    ::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 6px var(--background-color);
+        border-radius: 1rem;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        border-radius: 1rem;
+        background-color: var(--secondary-color);
+        outline: 1px solid var(--background-color);
+    }
+
+    #search-content::-webkit-scrollbar {
+        width: .5em;
+        height: .1em;
+        background-color: var(--background-color);
+    }
+</style>
+
+<meta name="description" content="un nuovo modo per fare telemetria su mountain bike.">
+<link rel="stylesheet" href="/css/single.css">
+
+
+<script defer src="/fontawesome-5/all-5.15.4.js"></script>
+
+  <title>
+fork telemetry | luigi cennini
+
+  </title>
+</head>
+
+<body class="light">
+  
+  
+<script>
+    let localStorageValue = localStorage.getItem("pref-theme");
+    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    switch (localStorageValue) {
+        case "dark":
+            document.body.classList.add('dark');
+            break;
+        case "light":
+            document.body.classList.remove('dark');
+            break;
+        default:
+            if (mediaQuery) {
+                document.body.classList.add('dark');
+            }
+            break;
+    }
+</script>
+
+
+
+<header>
+    <nav class="pt-3 navbar navbar-expand-lg animate">
+        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
+            
+			<a class="navbar-brand primary-font text-wrap" href="/it">
+                
+                <img src="https://avatars.githubusercontent.com/u/29329312?v=4" width="30" height="30" style="border-radius: 50%"
+                    class="d-inline-block align-top">
+                Luigi Cennini
+                
+            </a>
+			
+				
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
+                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
+                </svg>
+            </button>
+
+            
+            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
+                <ul class="navbar-nav ms-auto text-center">
+
+
+                    
+
+                    
+					
+					<li class="nav-item navbar-text">
+						<a class="nav-link" href="/en" aria-label="ita" style=""> 
+							eng
+						</a>
+					</li>
+					<li class="nav-item navbar-text">
+						<a class="nav-link" href="/it" aria-label="ita" style=" text-decoration: underline "> 
+							ita
+						</a>
+					</li>
+
+                    
+
+                    
+
+                    
+
+                    
+                    		
+                    
+                    <li class="nav-item navbar-text">
+                        <a class="nav-link" href="/it/progetti" title="progetti">
+                            
+                            progetti
+                        </a>
+                    </li>
+                    
+                    
+
+                    
+                    <li class="nav-item navbar-text">
+                        
+                        <div class="text-center">
+                            <button id="theme-toggle">
+                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                                </svg>
+                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="5"></circle>
+                                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                                </svg>
+                            </button>
+                        </div>
+                    </li>
+                    
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+<div id="content">
+<section id="single">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 col-md-12 col-lg-9">
+        <div class="pr-lg-4">
+          <div class="title mb-5">
+            <h1 class="text-center mb-4">fork telemetry</h1>
+            <div class="text-center">
+              Luigi 
+              <small>|</small>
+              Jul 5, 2023
+
+              
+              <span id="readingTime">
+                min read
+              </span>
+              
+            </div>
+          </div>
+          
+          <div class="featured-image">
+            <img class="img-fluid" src="/projects/forktelemetry/renders/render.png" alt="fork telemetry">
+          </div>
+          
+          <article class="page-content  p-2">
+          <h1 id="introduzione">Introduzione</h1>
+<p>L&rsquo;obiettivo di questo progetto è quello di sviluppare un&rsquo;alternativa più economica ai sistemi di telemetria disponibili sul mercato per le mountain bike.</p>
+<p>I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell&rsquo;ammortizzatore della bici durante la guida.</p>
+<p>Questi dati sono fondamentali per gli appassionati e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.</p>
+<p>Attualmente, molti sistemi di telemetria, come ad esempio <a href="https://www.bybtech.it/">byb telemetry</a>, utilizzano costosi potenziometri lineari per misurare con precisione la posizione della forcella e dell&rsquo;ammortizzatore.</p>
+<p>Altri utenti su internet hanno provato altri modi per ottenere un buon risultato, per esempio un <a href="https://www.vitalmtb.com/forums/The-Hub,2/DIY-mtb-telemetry-data,11126">sensore LiDar</a>, con dei risultati però non troppo incoraggianti, in quanto sensori troppo affetti da rumore indesiderato.</p>
+<p>Dunque ho concluso che l&rsquo;utilizzo di un encoder rotativo rappresenta un&rsquo;alternativa più vantaggiosa dal punto di vista economico.</p>
+<p>La ragione principale di questa scelta è che gli encoder rotativi sono meno costosi rispetto ai potenziometri lineari e offrono comunque una buona precisione nella misurazione della posizione. Inoltre, gli encoder rotativi sono generalmente più robusti e meno soggetti a danni rispetto agli encoder lineari, che possono essere più fragili e suscettibili a guasti.</p>
+<h3 id="come-funziona-un-encoder-rotativo">come funziona un encoder rotativo</h3>
+<p>Gli encoder possono rilevare il movimento in entrambe le direzioni, rilevando i fori o i segni che passano attraverso 2 posizioni. Quando il disco blu nel diagramma sottostante gira in senso orario, i cambiamenti vengono rilevati prima dal pin 1 e poi dal pin 2. Quando gira in senso antiorario, il pin 2 è il primo a rilevare i cambiamenti. Questo schema è chiamato &ldquo;codifica in quadratura&rdquo; perché le forme d&rsquo;onda rilevate dai due pin sono sfasate di 90 gradi.</p>
+
+ 
+<center>
+<table class="d-flex justify-content-center">
+	<tr>
+		<td style="background: none !important; border: none !important">
+			<img src="/projects/forktelemetry/td_libs_Encoder_pos1.png" id="quad">
+		</td>
+	</tr>
+	<tr>
+		<td align="center" style="background: none !important; border: none !important">
+			<form action="#">
+				<input type="submit" value="<- antiorario" onClick="rotate(-1); return false">
+				<input type="text" value="0" id="accum" size=6>
+				<input type="submit" value="orario ->" onClick="rotate(1); return false">
+			</form>
+		</td>
+	</tr>
+</table>
+</center>
+<script>
+var img = new Array();
+img[0] = new Image();
+img[1] = new Image();
+img[2] = new Image();
+img[3] = new Image();
+img[0].src = "/projects/forktelemetry/td_libs_Encoder_pos1.png";
+img[1].src = "/projects/forktelemetry/td_libs_Encoder_pos2.png";
+img[2].src = "/projects/forktelemetry/td_libs_Encoder_pos3.png";
+img[3].src = "/projects/forktelemetry/td_libs_Encoder_pos4.png";
+var position = 0;
+function rotate(n) {
+val = Number(document.getElementById('accum').value) + n;
+if (isNaN(val)) val = 0;
+document.getElementById('accum').value = val;
+position += n;
+if (position > 3) position = 0;
+if (position < 0) position = 3;
+document.getElementById('quad').src = img[position].src;
+}
+</script>
+
+<p>(animazione presa da <a href="https://www.pjrc.com/teensy/td_libs_Encoder.html">questo sito</a>)</p>
+<h1 id="pre---prototipazione">pre - prototipazione</h1>
+<p>Prima di procedere con la prototipazione del sensore della forcella ho eseguito un&rsquo;analisi di fattibilità per valutare la possibilità di realizzare questo progetto.</p>
+<p>Come punto di partenza ho selezionato un encoder rotativo: l&rsquo;LPD3806. Questo tipo di encoder offre una risoluzione di 600 PPR (pulses per revolution). Utilizzando una puleggia con un diametro di 9,4 mm, si ottiene una densità di circa 30 rilevazioni per millimetro di movimento della forcella. Questo perché l&rsquo;encoder genera un segnale di quadratura che può essere letto sia sul fronte di salita che su quello di discesa. Sfruttando entrambi i fronti, otteniamo una risoluzione quadruplicata dell&rsquo;encoder, ovvero 24000 PPR (600 PPR * 4).</p>
+<p>Calcolando il numero di osservazioni possibili per ogni millimetro di movimento della forcella, otteniamo il seguente risultato:</p>
+<p>$$ \frac{600 * 4}{\pi* 9.4} \approx 30 $$</p>
+<p>Ad esempio, considerando una forcella di 150 mm di escursione, si avranno circa 12190 rilevazioni (questo valore sarà utilizzato nel codice in seguito).</p>
+<p>È importante notare che aumentando il diametro della puleggia accoppiata all&rsquo;encoder, si riduce la densità di rilevazioni per millimetro di movimento. Inoltre, bisogna considerare la velocità massima di risposta dell&rsquo;encoder, la quale determina la velocità lineare massima che la forcella può raggiungere. Nel caso dell&rsquo;LPD3806, la velocità massima è di:</p>
+<p>​$$ 2000 RPM = 2000/60 RPS = $$
+$$ 2000* (\pi*9.4) /60 \frac{mm}{s} \approx 983 \frac{mm}{s} $$</p>
+<p>Se si utilizza una puleggia con un diametro ridotto, si otterrà una velocità lineare massima rilevabile inferiore.</p>
+<p>Con queste informazioni iniziali, ho dunque iniziato il processo di prototipazione.</p>
+<h1 id="prototipazione">prototipazione</h1>
+<p>Per la prototipazione del sensore della forcella, ho utilizzato il software <a href="https://www.autodesk.it/products/fusion-360/overview">fusion 360</a>. Dopo diverse iterazioni, sono giunto al seguente risultato:</p>
+
+ 
+<center>
+<img src="/projects/forktelemetry/forkSensor.jpg"  width="80%" >
+</center>
+
+
+ 
+<script type="module" src="/model-viewer.min.js"></script>
+<center>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
+</center>
+
+<p>Il file fusion360 è disponibile su GitHub a <a href="https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v1">questo link</a>.
+Utilizzando <a href="https://www.blender.org/">blender</a> possiamo anche far vedere un concept di come funziona una volta montato su una forcella.</p>
+
+ 
+<center>
+<model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensorAnimation.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensorAnimationPoster.webp" shadow-intensity="1" autoplay camera-orbit="-216.6deg 65.99deg 1356m" field-of-view="30deg">
+    <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+    </div>
+</model-viewer>
+</center>
+
+<p>Per il design, mi sono ispirato al movimento degli assi di una stampante 3D e ho integrato un meccanismo di tensionamento della cinghia, tipico di questo tipo di stampanti.</p>
+<p>Successivamente, ho utilizzato Arduino Nano per realizzare un Proof of Concept (POC) funzionante. Nel complesso, il sistema è composto da 2 switch, 1 modulo SD, 1 Arduino Nano, 1 batteria da 9 volt e l&rsquo;encoder LPD3806.
+Dove:</p>
+<ul>
+<li>uno switch serve per accendere il sistema</li>
+<li>l&rsquo;altro switch abilita la scrittura della posizione dell&rsquo;encoder con la codifica scelta ( [posizione_encoder,]) nella scheda SD. Questo switch dovrà essere attiviato prima dell&rsquo;inizio della discesa e spento subito dopo.</li>
+</ul>
+
+ 
+<center>
+<img src="/projects/forktelemetry/forktelemetry-schematics.png"  width="60%" >
+</center>
+
+<p>A questo punto, ho progettato anche una scatola di acquisizione utilizzando Fusion 360.
+
+ 
+<center>
+<img src="/projects/forktelemetry/openbox_fusion.PNG"  width="80%" >
+</center>
+
+La scatola, che è disegnata in modo da essere fissata con 2 fascette al tubo superiore della bici, contiene tutti i componenti (tranne l&rsquo;encoder) e rende accessibile dall&rsquo;esterno i 2 switch.
+
+ 
+<center>
+<img src="/projects/forktelemetry/box_fusion.PNG"  width="80%" >
+</center>
+</p>
+<h1 id="stampa-e-codice">stampa e codice</h1>
+<p>Una volta stampato (e assemblato) il sensore e la scatola di acquisizione saldando i componenti su una millefori</p>
+
+ 
+<center>
+<img src="/projects/forktelemetry/collage.png"  width="80%" >
+</center>
+
+<p>il tutto si presenta in questo modo:</p>
+
+ 
+<center>
+<img src="/projects/forktelemetry/laydown.jpg"  width="80%" >
+</center>
+
+<p>Il funzionamento una volta montati sulla MTB è il seguente:</p>
+
+ 
+<center>
+<video width=35% controls>
+    <source src="/projects/forktelemetry/video.mp4" type="video/mp4" >
+    Your browser does not support the video tag.  
+</video>
+</center>
+
+<p>Il codice invece è il seguente.
+Notare che per avere una massima velocità in lettura dell&rsquo;encoder si è utilizzata la tecnica della manipolazione delle porte.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;SPI.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;SD.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;String.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#define encoderPinA 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define encoderPinB 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define buttonPin 7
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define SD_PIN 10
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>File logFile;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> enableWriteToSD<span style="color:#f92672">=</span>false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> newDirectoryName<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> newFileName<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> startRecord;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">long</span> encoderPosition<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">volatile</span> <span style="color:#66d9ef">bool</span> aStatePrev,bStatePrev,aState,bState;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">setup</span>() {
+</span></span><span style="display:flex;"><span>  Serial.begin(<span style="color:#ae81ff">9600</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//setup rotary encoder
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  DDRD <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>((<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinA) <span style="color:#f92672">|</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinB));
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Abilita i pull-up interni
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  PORTD <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinA) <span style="color:#f92672">|</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinB);
+</span></span><span style="display:flex;"><span>  attachInterrupt(digitalPinToInterrupt(encoderPinA),handleEncoderInterrupt,CHANGE);
+</span></span><span style="display:flex;"><span>  attachInterrupt(digitalPinToInterrupt(encoderPinB),handleEncoderInterrupt,CHANGE);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//setup SD
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>SD.begin(SD_PIN)){ <span style="color:#66d9ef">while</span>(true); }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">while</span>(SD.exists(String(newDirectoryName))){ newDirectoryName<span style="color:#f92672">++</span>; }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (SD.mkdir(String(newDirectoryName))){
+</span></span><span style="display:flex;"><span>    Serial.print(<span style="color:#e6db74">&#34;Created new directory: &#34;</span>);
+</span></span><span style="display:flex;"><span>    Serial.println(newDirectoryName);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">//setup record button
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  DDRD <span style="color:#f92672">&amp;=</span> <span style="color:#f92672">~</span>(<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> buttonPin);
+</span></span><span style="display:flex;"><span>  PORTD <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> buttonPin);
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>  Serial.println(<span style="color:#e6db74">&#34;setup completed&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">loop</span>() {
+</span></span><span style="display:flex;"><span>  startRecord<span style="color:#f92672">=</span>PIND<span style="color:#f92672">&amp;</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">&lt;&lt;</span>buttonPin);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span>(startRecord <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>enableWriteToSD){
+</span></span><span style="display:flex;"><span>    logFile <span style="color:#f92672">=</span> SD.open(String(newDirectoryName) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span>  String(newFileName<span style="color:#f92672">++</span>) <span style="color:#f92672">+</span><span style="color:#e6db74">&#34;.txt&#34;</span>, FILE_WRITE);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (logFile) { Serial.println(<span style="color:#e6db74">&#34;Writing to &#34;</span><span style="color:#f92672">+</span> String(newFileName<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)); }
+</span></span><span style="display:flex;"><span>    enableWriteToSD<span style="color:#f92672">=</span>true;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(startRecord <span style="color:#f92672">&amp;&amp;</span> enableWriteToSD) {
+</span></span><span style="display:flex;"><span>     logFile.print(String(encoderPosition)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;,&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>startRecord <span style="color:#f92672">&amp;&amp;</span> enableWriteToSD){
+</span></span><span style="display:flex;"><span>    enableWriteToSD<span style="color:#f92672">=</span>false;
+</span></span><span style="display:flex;"><span>    logFile.close();
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleEncoderInterrupt</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Leggi lo stato corrente dei segnali A e B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  aState <span style="color:#f92672">=</span> PIND <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinA);
+</span></span><span style="display:flex;"><span>  bState <span style="color:#f92672">=</span> PIND <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinB);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Verifica se il fronte di salita è avvenuto sul segnale A
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (aState <span style="color:#f92672">!=</span> aStatePrev) {
+</span></span><span style="display:flex;"><span>    aStatePrev <span style="color:#f92672">=</span> aState;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Verifica il cambiamento di direzione dell&#39;encoder
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (aStatePrev <span style="color:#f92672">==</span> bStatePrev) {
+</span></span><span style="display:flex;"><span>      encoderPosition<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>      encoderPosition<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Memorizza lo stato corrente dei segnali A e B per il prossimo interrupt
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  bStatePrev <span style="color:#f92672">=</span> bState;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h1 id="primi-test-e-risultati">primi test e risultati</h1>
+<p>Quando si attiva lo switch, il codice inizia a registrare la posizione dell’encoder e la salva in un file di log nella sua cartella. Il file di log contiene i valori della posizione dell’encoder separati da virgole.</p>
+<p>Ho creato un sito web in javascript che usa la libreria <a href="https://plotly.com/javascript/">Plotly JS</a> per mostrare questi dati (<a href="https://github.com/giggiox/fork-telemetry/tree/main/web">Link GitHub al codice del sito</a>). Ad esempio, il video che ho mostrato prima produce un file di log che può essere aperto nel sito e genera questo output:</p>
+
+ 
+<center>
+<img src="/projects/forktelemetry/plot.png"  width="80%" >
+</center>
+
+<p>Nello scatter plot si vede il numero del campionamento sulle ascisse e la compressione della forca in millimetri sulle ordinate.</p>
+<p>Sotto il grafico ci sono anche dei dati in tabella che indicano il numero di bottom out registrati (qui nessuno), il valore più frequente di compressione della forca e la percentuale di forca utilizzata (qui oltre 26 mm su una forca di 150 mm, cioè circa il 18%).</p>
+<h3 id="visualizzazione-telemetria-a-video">visualizzazione telemetria a video</h3>
+<p>Ho realizzato anche uno script python (<a href="https://github.com/giggiox/fork-telemetry/blob/main/videoEdit.ipynb">Link GitHub allo script</a>) che si basa su <a href="https://pypi.org/project/Pillow/">Pillow</a> e <a href="https://pypi.org/project/opencv-python/">cv2</a>.
+Questo script permette di inserire la telemetria rilevata su un video, che per il video che ho mostrato prima, produce un effetto simile a questo:</p>
+
+ 
+<center>
+<video width=35% controls>
+    <source src="/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
+    Your browser does not support the video tag.  
+</video>
+</center>
+
+<p>Questo script crea prima 101 immagini del rettangolo con la percentuale scritta dentro (da 0% a 100%). Poi mette insieme queste immagini in un video dove ogni immagine rappresenta un valore misurato dal sensore.</p>
+<h1 id="test-sul-campo">test sul campo</h1>
+<p>Quando ho testato il sistema su una discesa reale di enduro, ho incontrato le prime difficoltà e restrizioni dell’hardware che ho usato (soprattutto dell’arduino). Infatti se gli urti sono troppo veloci, il conteggio degli impulsi che arrivano dall’encoder comincia a &ldquo;driftare&rdquo; e diventare sempre più negativo.</p>
+
+ 
+<center>
+<img src="/projects/forktelemetry/testSulCampo.PNG"  width="80%" >
+</center>
+
+<p>Questo perchè la frequenza dell’encoder che va da 0 a 20KHz.
+Questo implica che tra un fronte di salita e un altro ci sono almeno 50 microsecondi di intervallo.
+Supponendo di leggere solo i fronti di salita del segnale A (quindi abbassando la stima della precisione fatta prima di un quarto) l’arduino non riesce comunque a fare in questo breve tempo tutte le operazioni necessarie.
+Infatti dovrebbe</p>
+<ul>
+<li>fare una <code>digitalRead()</code> sul pin del segnale B</li>
+<li>scrivere sull&rsquo;SD la posizione</li>
+</ul>
+<p>Nelle 2 successive cerco di esaminare il codice e spiegare perchè l’arduino non è l&rsquo;hardware corretto per procedere.</p>
+<h2 id="digitalread">digitalRead</h2>
+<p>Per esempio guardiamo quanto tempo prende una digitalRead() usando la manipolazione delle porte.
+Possiamo per esempio prendere questo codice arduino che fa una digitalRead() dell&rsquo;encoderPinB e se risulta HIGH allora aggiunge 1 all&rsquo;encoderPosition, altrimenti diminusice di 1 la variabile.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">handleEncoderInterrupt</span>(){
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Leggi lo stato corrente del segnale B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  PIND <span style="color:#f92672">&amp;</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> encoderPinB) <span style="color:#f92672">?</span> encoderPosition <span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> encoderPosition <span style="color:#f92672">-=</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>e decompilarlo <code>C:\Users\luigi\AppData\Local\Temp\arduino_build_211859&gt;&quot;C:\Program Files (x86)\Arduino\hardware\tools\avr\bin\avr-objdump.exe&quot; -S codice_test.ino.elf</code></p>
+<p>ottenendo</p>
+<pre tabindex="0"><code class="language-assembly" data-lang="assembly">a8:   4a 9b           sbis    0x09, 2 ; 9
+aa:   0c c0           rjmp    .+24            ; 0xc4 &lt;_Z22handleEncoderInterruptv+0x1c&gt;
+ac:   80 91 04 01     lds     r24, 0x0104     ; 0x800104 &lt;__data_end&gt;
+b0:   90 91 05 01     lds     r25, 0x0105     ; 0x800105 &lt;__data_end+0x1&gt;
+b4:   a0 91 06 01x     lds     r26, 0x0106     ; 0x800106 &lt;__data_end+0x2&gt;
+b8:   b0 91 07 01     lds     r27, 0x0107     ; 0x800107 &lt;__data_end+0x3&gt;
+bc:   01 96           adiw    r24, 0x01       ; 1
+be:   a1 1d           adc     r26, r1
+c0:   b1 1d           adc     r27, r1
+c2:   0b c0           rjmp    .+22            ; 0xda &lt;_Z22handleEncoderInterruptv+0x32&gt;
+c4:   80 91 04 01     lds     r24, 0x0104     ; 0x800104 &lt;__data_end&gt;
+c8:   90 91 05 01     lds     r25, 0x0105     ; 0x800105 &lt;__data_end+0x1&gt;
+cc:   a0 91 06 01     lds     r26, 0x0106     ; 0x800106 &lt;__data_end+0x2&gt;
+d0:   b0 91 07 01     lds     r27, 0x0107     ; 0x800107 &lt;__data_end+0x3&gt;
+d4:   01 97           sbiw    r24, 0x01       ; 1
+d6:   a1 09           sbc     r26, r1
+d8:   b1 09           sbc     r27, r1
+da:   80 93 04 01     sts     0x0104, r24     ; 0x800104 &lt;__data_end&gt;
+de:   90 93 05 01     sts     0x0105, r25     ; 0x800105 &lt;__data_end+0x1&gt;
+e2:   a0 93 06 01     sts     0x0106, r26     ; 0x800106 &lt;__data_end+0x2&gt;
+e6:   b0 93 07 01     sts     0x0107, r27     ; 0x800107 &lt;__data_end+0x3&gt;
+ea:   08 95           ret
+</code></pre><p>In particolare le istruzioni che fanno la lettura digitale dell&rsquo;encoderPinB sono dalla 2a alla 6a, ovvero le 4 istruzioni che utilizzano <code>lds</code> (Load direct from SRAM).
+Dal <a href="https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf">datasheet dell&rsquo;ATmega328 (pagina 283)</a> possiamo vedere che queste istruzioni prendono esattamente 2 cicli di clock.</p>
+
+ 
+<center>
+<img src="/projects/forktelemetry/datasheet.PNG"  width="80%" >
+</center>
+
+<p>Dunque essendo un microcontrollore a 16Mhz (1 ciclo di clock richiede 1/16.000.000 di secondo, cioè 62,5 nanosecondi), allora quelle 4 istruzioni richiedono 8 cicli  * 62,5 ns/ciclo = 500 ns.</p>
+<p>Da questa analisi è possibile dedurre che la digitalRead() non è il collo di bottiglia nel codice.</p>
+<h2 id="scrittura-sd">scrittura SD</h2>
+<p>Guardiamo invece quanto tempo impiega una scrittura sull&rsquo;SD, per avere un numero più o meno approssimativo possiamo per esempio stampare il numero di millisecondi prima e dopo l&rsquo;esecuzione della scritura della posizione nella memoria.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Serial.println(millis());
+</span></span><span style="display:flex;"><span>logFile.print(String(encoderPosition)<span style="color:#f92672">+</span><span style="color:#e6db74">&#34;,&#34;</span>);
+</span></span><span style="display:flex;"><span>Serial.println(millis());
+</span></span></code></pre></div><p>E possiamo vedere che effettivamente il collo di bottiglia è  proprio in questa chiamata che può arrivare a prendere anche 200 millisecondi. Ovviamente questo tempo dipende anche dall&rsquo;SD utilizzata.</p>
+<h1 id="sviluppi-futuri">sviluppi futuri</h1>
+<ul>
+<li>utilizzare un microcontrollore con più core, ad esempio un esp32 dove un core si occupa della lettura del segnale dell’encoder e un altro della campionatura (che così si può fare in modo costante per esempio 1000 volte al secondo) e scrittura della posizione dell’encoder sull’SD.</li>
+<li>utilizzare un modulo bluetooth per comunicare i dati a un&rsquo; applicazione android, anche in real time.</li>
+<li>aggiungere un modulo GPS in modo da poter avere nel pannello di analisi non solo la posizione della forca metro per metro ma anche la posizione del rider lungo la discesa.</li>
+<li>redesign del sensore. Il primo design fatto è stato fatto top-down (anche perchè era la prima volta che usavo fusion360 e anche la prima che creavo davvero qualcosa di funzionale) e con forme a scatola (non strutturalmente resistenti) e si può migliorare molto. Per esempio usando una guida lineare si può diminuire la complessità del sensore (e anche il peso) ma anche i gradi di libertà del sistema. Qui sotto il design di una possibile v2 del progetto usando una guida lineare di 6mm.</li>
+</ul>
+<p>
+ 
+<center>
+<img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
+</center>
+
+Il file fusion360 per questa versione è disponibile su GitHub a <a href="https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v2">questo link</a> .</p>
+
+          </article>
+        </div>
+      </div>
+      
+	  
+	  
+	  
+	  
+    
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+    <div class="row">
+      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
+        
+      </div>
+    </div>
+  </div>
+  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
+    <i class="fas fa-angle-up"></i>
+  </button>
+</section>
+
+
+<div class="progress">
+  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+<Script src="/js/scrollProgressBar.js"></script>
+
+
+<script>
+  var topScroll = document.getElementById("topScroll");
+  window.onscroll = function() {scrollFunction()};
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      topScroll.style.display = "block";
+    } else {
+      topScroll.style.display = "none";
+    }
+  }
+
+  function topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
+  }
+</script>
+
+
+<script src="/js/readingTime.js"></script>
+
+
+
+  </div><footer>
+
+    <div class="container py-4">
+    <div class="row justify-content-center">
+        <div class="col-md-4 text-center">
+            
+            &copy; 2023  All rights reserved
+            <div class="text-secondary">
+                Made with
+                <span class="text-danger">
+                    &#10084;
+                </span>
+                and
+                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
+                    title="Designed and developed by gurusabarish">
+                    Hugo Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div></footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+</script>
+
+
+    <script src="/js/search.js"></script>
+
+
+
+
+
+<!-- MathJax -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha384-M5jmNxKC9EVnuqeMwRHvFuYUE8Hhp0TgBruj/GZRkYtiMrCRgH7yvv5KY+Owi7TW" crossorigin="anonymous"></script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['\\(','\\)']],
+        displayMath: [['$$','$$'], ['\[','\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+        TeX: { equationNumbers: { autoNumber: "AMS" },
+             extensions: ["AMSmath.js", "AMSsymbols.js"] }
+      }
+    });
+</script>
+
+
+
+
+
+  <section id="search-content" class="py-2">
+    <div class="container" id="search-results"></div>
+  </section>
+</body>
+
+</html>

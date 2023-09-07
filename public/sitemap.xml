@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  <url>
-    <loc>/tags/example/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/projects/fork-telemetry/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/projects/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/tags/rich-content/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/tags/sample/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/tags/</loc>
-    <lastmod>2023-07-05T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/projects/fork-telemetry-en/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/projects/graph-theory-visualizer/</loc>
-    <lastmod>2022-01-01T19:53:33+05:30</lastmod>
-  </url><url>
-    <loc>/categories/</loc>
-  </url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <sitemap>
+    <loc>it/sitemap.xml</loc>
+    
+      <lastmod>2023-07-05T19:53:33+05:30</lastmod>
+    
+  </sitemap>
+  
+  <sitemap>
+    <loc>en/sitemap.xml</loc>
+    
+      <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    
+  </sitemap>
+  
+</sitemapindex>

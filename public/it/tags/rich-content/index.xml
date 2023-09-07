@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rich content on luigi cennini</title>
+    <link>/it/tags/rich-content/</link>
+    <description>Recent content in Rich content on luigi cennini</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>it</language>
+    <lastBuildDate>Wed, 05 Jul 2023 19:53:33 +0530</lastBuildDate><atom:link href="/it/tags/rich-content/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>fork telemetry</title>
+      <link>/it/progetti/fork-telemetry/</link>
+      <pubDate>Wed, 05 Jul 2023 19:53:33 +0530</pubDate>
+      
+      <guid>/it/progetti/fork-telemetry/</guid>
+      <description>Introduzione L&amp;rsquo;obiettivo di questo progetto è quello di sviluppare un&amp;rsquo;alternativa più economica ai sistemi di telemetria disponibili sul mercato per le mountain bike.
+I sistemi di telemetria per le mountain bike consentono di monitorare e acquisire dati sulla posizione della forcella e dell&amp;rsquo;ammortizzatore della bici durante la guida.
+Questi dati sono fondamentali per gli appassionati e gli atleti professionisti, in quanto forniscono informazioni preziose per analizzare e migliorare le prestazioni.</description>
+    </item>
+    
+    <item>
+      <title>graph theory visualizer</title>
+      <link>/it/progetti/graph-theory-visualizer/</link>
+      <pubDate>Sat, 01 Jan 2022 19:53:33 +0530</pubDate>
+      
+      <guid>/it/progetti/graph-theory-visualizer/</guid>
+      <description>graphTheory-Visualizer Il progetto è stato fatto per visualizzare le operazioni che possono essere fatte su un grafo, come BFS, DFS, Kruskal e Dijkstra.
+L&amp;rsquo;obiettivo è quello di avere un update real time delle varie operazioni, in modo che se il grafo cambia mentre vi si sta svolgendo un&amp;rsquo; operazione, anche il risultato dell&amp;rsquo;operazione cambia.
+Il progetto è attivo sulle GitHub pages e può essere accessibile una demo da questo link (fruibile più semplicemente da desktop): https://giggiox.</description>
+    </item>
+    
+  </channel>
+</rss>

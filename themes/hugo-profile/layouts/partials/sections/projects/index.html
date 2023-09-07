@@ -9,7 +9,6 @@
     </div>
     <div class="row justify-content-center">
         {{ range $recentPosts }}
-		{{ if (.Params.italian | default true)}}
         <div class="col-lg-4 col-md-6 pt-2">
             <div class="card h-100">
                 {{ if and (not (.Site.Params.projects.recentPosts.disableFeaturedImage | default false)) (.Params.image) }}
@@ -33,7 +32,6 @@
                 </div>
             </div>
         </div>
-		{{ end }}
         {{ end }}
     </div>
     {{ end }}

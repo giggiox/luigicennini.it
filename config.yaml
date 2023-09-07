@@ -2,6 +2,41 @@ baseURL: ""
 title: "luigi cennini"
 theme: hugo-profile
 defaultContentLanguage: it
+defaultContentLanguageInSubdir: true
+
+languages:
+  it:
+    languageName: "Italian"
+    contentDir: content/it
+    weight: 1
+  en:
+    languageName: "English"
+    contentDir: content/en
+    
+    params:            
+      hero:
+        intro: "Hi! I'm Luigi"
+        title: "I like making stuff!"
+        content: "I am a graduate student in Computer Science. In my spare time I like to write about my projects and I have put some of the best ones below."
+    
+        
+      projects:
+        recentPosts:
+          path: projects
+          title: recent projects
+          
+          
+
+
+    Menus:
+      main:
+        - identifier: progetti
+          name: projects
+          title: projects
+          url: /en/projects
+          weight: 1
+    weight: 2
+  
 
 outputs:
   home:
@@ -27,7 +62,7 @@ Menus:
     - identifier: progetti
       name: progetti
       title: progetti
-      url: /projects
+      url: /it/progetti
       weight: 1
     
 
@@ -121,7 +156,7 @@ params:
   
   projects:
     recentPosts:
-      path: "projects"
+      path: progetti
       count: 3
       title: progetti recenti
       enable: true
