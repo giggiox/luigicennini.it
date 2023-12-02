@@ -6,7 +6,19 @@
     <description>Recent content in Rich content on luigi cennini</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>it</language>
-    <lastBuildDate>Wed, 05 Jul 2023 19:53:33 +0530</lastBuildDate><atom:link href="/it/tags/rich-content/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Oct 2023 19:53:33 +0530</lastBuildDate><atom:link href="/it/tags/rich-content/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bézier curves and patches - interactive visualization</title>
+      <link>/it/progetti/bezier/</link>
+      <pubDate>Sun, 01 Oct 2023 19:53:33 +0530</pubDate>
+      
+      <guid>/it/progetti/bezier/</guid>
+      <description>Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &amp;ldquo;punti di controllo&amp;rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &amp;lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di bezier ha la forma
+$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
+Dove, le funzioni
+$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&amp;hellip;,n$$</description>
+    </item>
+    
     <item>
       <title>fork telemetry</title>
       <link>/it/progetti/fork-telemetry/</link>

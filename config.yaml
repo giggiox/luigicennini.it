@@ -141,7 +141,7 @@ params:
     button:
       enable: true
       name: "CV"
-      url: "/cv.pdf"
+      url: "https://drive.google.com/file/d/1ND4i3p8ysdkQPaZt5h0IZB4sSRsO_PM6/view?usp=sharing"
       download: true
       newPage: false
     socialLinks:
