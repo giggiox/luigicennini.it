@@ -40,8 +40,15 @@ Istruzioni editor:
 
 
 {{< rawhtml >}} 
-<div id ="firstCanvas"></div>
 <script src="/p5.min.js"></script>
+<script src="/math.js"></script>
+{{< /rawhtml >}}
+
+
+
+{{< rawhtml >}} 
+<div id ="firstCanvas"></div>
+
 
 
 
@@ -126,7 +133,7 @@ function checkScroll() {
 			auto play
 			<br>
 			<div class="checkbox-wrapper-6" id="autoPlay3" style="display: inline-block;">
-			  <input class="tgl tgl-light" id="cb1-6" type="checkbox" checked />
+			  <input class="tgl tgl-light" id="cb1-6" type="checkbox" />
 			  <label class="tgl-btn" for="cb1-6">
 			</div>
 			
@@ -143,7 +150,7 @@ var secondSketch = function(sketch){
 
 	var bezierCurve;
 	var slider; var sliderMax = 100;
-	var checkBoxAutoPlay;  let checkedBoxAutoPlay = true;let addToSlider = 1;
+	var checkBoxAutoPlay;  let checkedBoxAutoPlay = false;let addToSlider = 1;
 	var checkBoxShowConstructLines;
 	var checkBoxShowControlPolygonLines;
 	var checkBoxShowCurveTrace;
@@ -169,7 +176,7 @@ var secondSketch = function(sketch){
 		slider = sketch.createSlider(0, sliderMax, 1);
 		slider.parent("sliderCol3");
 		slider.addClass("myslider");
-		slider.value(0);
+		slider.value(sliderMax);
 		
 		granularity = sketch.createSlider(10, 500, 400);
 		granularity.addClass("myslider");
@@ -641,7 +648,7 @@ Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimension
 			auto play
 			<br>
 			<div class="checkbox-wrapper-6" id="autoPlay" style="display: inline-block;">
-			  <input class="tgl tgl-light" id="cb1-6-3" type="checkbox" checked />
+			  <input class="tgl tgl-light" id="cb1-6-3" type="checkbox" />
 			  <label class="tgl-btn" for="cb1-6-3">
 			</div>
 		</div>
@@ -654,31 +661,28 @@ var fourthSketch = function(sketch){
 
 	var bezierCurve;
 	var slider; var sliderMax = 100;
-	var checkBoxAutoPlay;  let checkedBoxAutoPlay = true;let addToSlider = 1;
+	var checkBoxAutoPlay;  let checkedBoxAutoPlay = false;let addToSlider = 1;
 	var checkBoxShowConstructLines;
 	var checkBoxShowControlPolygonLines;
 	var chhckBoxShowCurveTrace;
 	var granularity,button,button1;
 	var canvasResizeFactor = 1.6;
 	
-	var boxSz = 150;
+	
+	let addedListener = true;
 
 
-	sketch.setup = function(){
-		/*bezierCurve = new BezierCurve([[sketch.windowWidth/canvasResizeFactor/2,sketch.windowHeight/canvasResizeFactor/30],
-										[sketch.windowWidth/canvasResizeFactor/1.5,sketch.windowHeight/canvasResizeFactor/2],
-										[sketch.windowWidth/canvasResizeFactor/4,sketch.windowHeight/canvasResizeFactor/1.1]]);*/
-										
+	sketch.setup = function(){		
 		bezierCurve = new BezierCurve([[130,130,-20],[-110,80,-100],[20,-90,-20],[20,45,105]]);
-		//bezierCurve1 = new BezierCurve([[80,130,120],[80,20,120],[10,80,100],[52,24,24]]);
 		
 		
 		sketch.frameRate(60); //change this for the slider autoplay velocity
 	
 		let width = document.getElementById("forWidth").offsetWidth;
 		var myCanvas = sketch.createCanvas(width, sketch.windowHeight/1.6,sketch.WEBGL);
-		/* check for double click since p5js does not offer a Canvas.mouseDoubleClick but only a canvas.mouseClick. Using the function doubleClicked of p5js does not work because it's global and with more than 1 canvas on a page it gets mad */
-		//document.getElementById("thirdCanvas").addEventListener('dblclick', doubleClick);
+		
+		cam2 = sketch.createCamera()
+		
 		
 		sketch.colorMode(sketch.HSB);
 		sketch.angleMode(sketch.DEGREES);
@@ -688,53 +692,67 @@ var fourthSketch = function(sketch){
 		slider = sketch.createSlider(0, sliderMax, 1);
 		slider.parent("sliderCol");
 		slider.addClass("myslider");
-		slider.value(0);
+		slider.value(sliderMax);
 		document.getElementById("autoPlay").addEventListener('change',myEventCheckBoxAutoPlay);
 		document.getElementById("fourthCanvas").addEventListener('contextmenu',leftClick);
 		document.getElementById("fourthCanvas").addEventListener('contextmenu',event => event.preventDefault()); //remove the window menu for right click
+		document.getElementById("fourthCanvas").addEventListener('dblclick', doubleClick);
 		
-		
-		/**
-		document.getElementById("showConstructLine").addEventListener('change',myEventCheckBoxShowConstructLines);
-		document.getElementById("showConstructPolygon").addEventListener('change',myEventCheckBoxShowControlPolygonLines);
-		document.getElementById("showCurve").addEventListener('change',myEventCheckBoxShowCurveTrace);
-		document.getElementById("showConstructPoints").addEventListener('change',myEventCheckBoxShowConstructPoints);
-		**/
 	}
 
 	sketch.draw = function() {
-		//sketch.clear();
-		//sketch.background(220, 10);
 		sketch.background(250);
 		
-		//console.log(sketch.mouseX)
-		document.getElementById("fourthCanvas").addEventListener('click',sketch.orbitControl(4,4));
-		//sketch.orbitControl(4,4);
-		
-		
-		//front
-		//sketch.line(-boxSz, -boxSz, boxSz, boxSz, -boxSz, boxSz);
-		//sketch.line(-boxSz, boxSz, boxSz, boxSz, boxSz, boxSz);
-		//sketch.line(-boxSz, -boxSz, boxSz, -boxSz, boxSz, boxSz);
-		//sketch.line(boxSz, -boxSz, boxSz, boxSz, boxSz, boxSz);
+		// Pan: Cam rotation about y-axis (Left Right)
+		let azimuth = -sketch.atan2(cam2.eyeZ - cam2.centerZ, cam2.eyeX - cam2.centerX);
+	  
+		// Tilt: Cam rotation about z-axis (Up Down)
+		let zenith = -sketch.atan2(cam2.eyeY - cam2.centerY, sketch.dist(cam2.eyeX, cam2.eyeZ, cam2.centerX, cam2.centerZ));
+	  
+		// f is a scaling factor (depends on canvas size and camera perspective settings)
+		let f = sketch.height * 4.3 / 5;
+		let x = [-1, (sketch.mouseY - sketch.height/2)/f, -(sketch.mouseX - sketch.width/2)/f]
+	  
+		let R = math.multiply(Rz(-zenith), Ry(azimuth))
+		x = math.multiply(x, R)
 
-		//back
-		//sketch.line(-boxSz, -boxSz, -boxSz, boxSz, -boxSz, -boxSz);
-		sketch.line(-boxSz, boxSz, -boxSz, boxSz, boxSz, -boxSz);
-		sketch.line(-boxSz, -boxSz, -boxSz, -boxSz, boxSz, -boxSz);
-		//sketch.line(boxSz, -boxSz, -boxSz, boxSz, boxSz, -boxSz);
-
-		//left top
-		//sketch.line(-boxSz, -boxSz, boxSz, -boxSz, -boxSz, -boxSz);
-		//left bottom
-		sketch.line(-boxSz, boxSz, -boxSz, -boxSz, boxSz, boxSz);
-		//right top
-		//sketch.line(boxSz, -boxSz, boxSz, boxSz, -boxSz, -boxSz);
-		//right bottom
-		//sketch.line(boxSz, boxSz, -boxSz, boxSz, boxSz, boxSz);
+		let xMag = sketch.dist(0, 0, 0, x._data[0], x._data[1], x._data[2])
+		
+		let objSelected = false;
+	  
+		for(let i = 0; i < bezierCurve.controlPoints.length; i++){
+			let dToObj = sketch.dist(cam2.eyeX, cam2.eyeY, cam2.eyeZ, bezierCurve.controlPoints[i].x, bezierCurve.controlPoints[i].y, bezierCurve.controlPoints[i].z);
+			if(sketch.dist(cam2.eyeX + x._data[0] * dToObj / xMag, 
+				cam2.eyeY + x._data[1] * dToObj / xMag, 
+				cam2.eyeZ + x._data[2] * dToObj / xMag, 
+				bezierCurve.controlPoints[i].x, bezierCurve.controlPoints[i].y, bezierCurve.controlPoints[i].z) < 20) {
+				if(sketch.mouseIsPressed){
+					objSelected = true;
+					bezierCurve.controlPoints[i].x = cam2.eyeX + x._data[0] * dToObj / xMag; 
+					bezierCurve.controlPointsX[i] = bezierCurve.controlPoints[i].x;
+					bezierCurve.controlPoints[i].y = cam2.eyeY + x._data[1] * dToObj / xMag; 
+					bezierCurve.controlPointsY[i] = bezierCurve.controlPoints[i].y;
+					bezierCurve.controlPoints[i].z = cam2.eyeZ + x._data[2] * dToObj / xMag;
+					bezierCurve.controlPointsZ[i] = bezierCurve.controlPoints[i].z; 
+				}else{
+					objSelected = false;
+				}
+			}
+		}
 		
 		
 		
+		/**if(!objSelected && !addedListener){
+			console.log("ciao");
+			document.getElementById("fourthCanvas").addEventListener('click',sketch.orbitControl(4,4));
+			addedListener = true;
+		}else{
+			document.getElementById("fourthCanvas").removeEventListener('click',sketch.orbitControl(4,4))
+			addedListener = false;
+		}**/
+		if(!objSelected){
+			sketch.orbitControl(4,4);
+		}
 		
 		
 		if(checkedBoxAutoPlay){
@@ -812,7 +830,7 @@ var fourthSketch = function(sketch){
 	  
 	  
 	  addControlPoint(x,y,z){
-		this.controlPoints.push(new ConstructPoint(x,y,z));
+		this.controlPoints.push(new ConstructPoint(x,y,z,true));
 		this.controlPointsX.push(x);
 		this.controlPointsY.push(y);
 		this.controlPointsZ.push(z);
@@ -969,18 +987,19 @@ var fourthSketch = function(sketch){
 		  }
 		}
 	  
-	  
+		sketch.stroke("blue");
 		sketch.beginShape();
 		for(let i = 0; i< mapSpace(slider.value(),0,100,0,this.granularity); i++){
+			
 		  let tmp = this.calcBezierPoint(this.t[i]);
 		  if(tmp != null &&  this.checkedShowCurveTrace){
 			sketch.strokeWeight(2);
-			sketch.stroke("blue");
+			
 			//se vuoi che la curva sia per esempio blu devi togliere quel scketch.POINTS, ma poi diventa tutto molto,molto più lento.
 			sketch.vertex(tmp[0],tmp[1],tmp[2]);
-			sketch.stroke(0)
 		  }
 		}
+		sketch.stroke(0)
 		sketch.endShape();
 	  }
 	}
@@ -988,18 +1007,25 @@ var fourthSketch = function(sketch){
 	
 	
 	class ConstructPoint{
-		constructor(x = null, y = null,  z = null, radius = 3) {
+		constructor(x = null, y = null,  z = null, isControlPoint = false, radius = 3) {
 			this.x = x;
 			this.y = y;
 			this.z = z;
 			this.radius = radius;
-			this.grabbableRadius = radius + 4;
+			this.isControlPoint = isControlPoint;
 		}
 		render() {
-			sketch.strokeWeight(5);
-			sketch.beginShape(sketch.POINTS);
-			sketch.vertex(this.x,this.y,this.z);
-			sketch.endShape();
+			if(this.isControlPoint){
+				sketch.push(); // enter local coordinate system
+				sketch.translate(this.x, this.y, this.z);
+				sketch.sphere(this.radius);
+				sketch.pop(); // exit local coordinate system (back to global coordinates)
+			}else{
+				sketch.strokeWeight(5);
+				sketch.beginShape(sketch.POINTS);
+				sketch.vertex(this.x,this.y,this.z);
+				sketch.endShape();
+			}
 		}  
 		
 		/**
@@ -1064,6 +1090,33 @@ var fourthSketch = function(sketch){
 	function myEventCheckBoxShowConstructPoints(){
 		bezierCurve.showConstructPoints();
 	}
+	
+	function doubleClick(){
+		bezierCurve.addControlPoint(0,0,0);
+	}
+	
+	// Rotation matrix for rotation about x-axis
+	function Rx(th) {
+		return math.matrix([[1, 0, 0],
+                 [0, sketch.cos(th), -sketch.sin(th)],
+                 [0, sketch.sin(th), sketch.cos(th)]
+                ]);
+	}
+
+	// Rotation matrix for rotation about y-axis
+	function Ry(th) {
+		return math.matrix([[sketch.cos(th), 0, -sketch.sin(th)],
+                 [0, 1, 0],
+                 [sketch.sin(th), 0, sketch.cos(th)]
+                ])
+	}
+  
+	// Rotation matrix for rotation about z-axis
+	function Rz(th) {
+		return math.matrix([[sketch.cos(th), sketch.sin(th), 0],
+                [-sketch.sin(th), sketch.cos(th), 0],
+                [0, 0, 1]])
+	}
 
 }
 new p5(fourthSketch,"fourthCanvas");
@@ -1100,8 +1153,9 @@ $$ \underline{x}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j
 
 
 
-**Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/Uo0KE4bKh). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/Uo0KE4bKh) per vedere e modificare il codice sorgente.
+**Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) per vedere e modificare il codice sorgente.
 {{< rawhtml >}}
+
 <div id ="sixthCanvas" ></div>
 
 
@@ -1123,13 +1177,15 @@ var sixthSketch = function(sketch){
 		let width = document.getElementById("forWidth").offsetWidth;
 		var myCanvas = sketch.createCanvas(width, sketch.windowHeight/1.6,sketch.WEBGL);
 		
-		cam1 = sketch.createCamera()
+		cam1 = sketch.createCamera();
+		cam1.lookAt(100,60,0);
 		/* check for double click since p5js does not offer a Canvas.mouseDoubleClick but only a canvas.mouseClick. Using the function doubleClicked of p5js does not work because it's global and with more than 1 canvas on a page it gets mad */
 		
 		//document.getElementById("fifthCanvas").addEventListener('dblclick', doubleClick);
 		
 		sketch.colorMode(sketch.HSB);
 		sketch.angleMode(sketch.DEGREES);
+		
 		
 		document.getElementById("sixthCanvas").addEventListener('contextmenu',leftClick);
 		document.getElementById("sixthCanvas").addEventListener('contextmenu',event => event.preventDefault()); //remove the window menu for right click
@@ -1139,8 +1195,58 @@ var sixthSketch = function(sketch){
 
 	sketch.draw = function() {
 		sketch.background(250);
+		
+		// Pan: Cam rotation about y-axis (Left Right)
+		let azimuth = -sketch.atan2(cam1.eyeZ - cam1.centerZ, cam1.eyeX - cam1.centerX);
+	  
+		// Tilt: Cam rotation about z-axis (Up Down)
+		let zenith = -sketch.atan2(cam1.eyeY - cam1.centerY, sketch.dist(cam1.eyeX, cam1.eyeZ, cam1.centerX, cam1.centerZ));
+	  
+		// f is a scaling factor (depends on canvas size and camera perspective settings)
+		let f = sketch.height * 4.3 / 5;
+		let x = [-1, (sketch.mouseY - sketch.height/2)/f, -(sketch.mouseX - sketch.width/2)/f]
+	  
+		let R = math.multiply(Rz(-zenith), Ry(azimuth))
+		x = math.multiply(x, R)
+
+		let xMag = sketch.dist(0, 0, 0, x._data[0], x._data[1], x._data[2])
+		
+		let objSelected = false;
+		
+		
+		for(let i = 0; i < bezierSurface.controlPoints.length; i++){
+			let dToObj = sketch.dist(cam1.eyeX, cam1.eyeY, cam1.eyeZ, bezierSurface.controlPoints[i].x, bezierSurface.controlPoints[i].y, bezierSurface.controlPoints[i].z);
+			if(sketch.dist(cam1.eyeX + x._data[0] * dToObj / xMag, 
+				cam1.eyeY + x._data[1] * dToObj / xMag, 
+				cam1.eyeZ + x._data[2] * dToObj / xMag, 
+				bezierSurface.controlPoints[i].x, bezierSurface.controlPoints[i].y, bezierSurface.controlPoints[i].z) < 20) {
+				if(sketch.mouseIsPressed){
+					objSelected = true;
+					bezierSurface.controlPoints[i].x =cam1.eyeX + (x._data[0] * dToObj) / xMag;
+					bezierSurface.controlPoints[i].y =cam1.eyeY + (x._data[1] * dToObj) / xMag;
+					bezierSurface.controlPoints[i].z =cam1.eyeZ + (x._data[2] * dToObj) / xMag;
+				
+					let idx = math.floor(i/4);
+				   
+					bezierSurface.bezierCurvesV[idx].controlPoints[i%4].x =bezierSurface.controlPoints[i].x;
+					bezierSurface.bezierCurvesV[idx].controlPointsX[i%4] =bezierSurface.controlPoints[i].x;
+					bezierSurface.bezierCurvesV[idx].controlPoints[i%4].y =bezierSurface.controlPoints[i].y;
+					bezierSurface.bezierCurvesV[idx].controlPointsY[i%4] =bezierSurface.controlPoints[i].y;
+					bezierSurface.bezierCurvesV[idx].controlPoints[i%4].z =bezierSurface.controlPoints[i].z;
+					bezierSurface.bezierCurvesV[idx].controlPointsZ[i%4] =bezierSurface.controlPoints[i].z;
+				}else{
+					objSelected = false;
+				}
+			}
+		}
+		
+		
+		
+		
+		if (!objSelected) {
+			sketch.orbitControl(1,1);
+		}
 		bezierSurface.render();
-		sketch.orbitControl(1,1);
 	}
 	
 	
@@ -1181,8 +1287,8 @@ var sixthSketch = function(sketch){
 		constructor(points = []){
 			this.showNet = true;
 			this.controlPoints = [];
-			this.u = 30;
-			this.v = 30;
+			this.u = 50;
+			this.v = 50;
 			this.bezierCurvesV = [];
 			this.bezierCurvesU = [];
 			if(points.length != 0){
@@ -1215,6 +1321,7 @@ var sixthSketch = function(sketch){
 		render(){
 			for(let i = 0; i < this.controlPoints.length; i++){
 				this.controlPoints[i].render();
+				sketch.strokeWeight(1)
 				let coloumnsNumber = this.bezierCurvesV.length;
 				if(i%coloumnsNumber != 0 && this.showNet){ 
 					sketch.line(this.controlPoints[i].x,this.controlPoints[i].y,this.controlPoints[i].z,this.controlPoints[i-1].x,this.controlPoints[i-1].y,this.controlPoints[i-1].z)
@@ -1229,11 +1336,12 @@ var sixthSketch = function(sketch){
     
     
 			for(let j=0;j<this.v;j++){
-				if(this.bezierCurvesU[j].controlPoints.length == 0){
-					for(let k=0;k<this.bezierCurvesV[0].controlPoints.length;k++){
-						this.bezierCurvesU[j].addControlPoint(this.bezierCurvesV[k].points[j][0],this.bezierCurvesV[k].points[j][1],this.bezierCurvesV[k].points[j][2]);
-					}
+				let cpoints = [];
+				for (let k = 0; k < this.bezierCurvesV[0].controlPoints.length; k++) {
+					cpoints.push([this.bezierCurvesV[k].points[j][0],this.bezierCurvesV[k].points[j][1],this.bezierCurvesV[k].points[j][2]]);
 				}
+				this.bezierCurvesU[j] = new BezierCurve(cpoints)
+				this.bezierCurvesU[j].changeGranularity(this.u);
 				this.bezierCurvesU[j].render();
 			}
 		}
@@ -1266,7 +1374,7 @@ var sixthSketch = function(sketch){
 			
 			if(points.length != 0){
 			  for(let i = 0;i<points.length; i++){
-				this.addControlPoint(points[i][0],points[i][1],points[i][2])
+				this.addControlPoint(points[i][0],points[i][1],points[i][2]);
 			  }
 			}
 		}
@@ -1308,34 +1416,27 @@ var sixthSketch = function(sketch){
 		}
   
   
-		render(){
-			if(this.rendered && this.showCurve){
+		render(){	
+			if (this.showCurve) {
 				sketch.beginShape(sketch.POINTS);
-				for(let i=0;i<this.points.length;i++){
-					sketch.vertex(this.points[i][0],this.points[i][1],this.points[i][2])
-				}
-				sketch.endShape();
-			}
-			if(this.showCurve){
-				sketch.beginShape(sketch.POINTS);    
-				for(let i = 0; i< this.t.length; i++){
-				let tmp = this.calcBezierPoint(this.t[i]);
-					if(tmp != null){
-						sketch.strokeWeight(2);
-						sketch.vertex(tmp[0],tmp[1],tmp[2]);
-						this.points[i] = [tmp[0],tmp[1],tmp[2]];
-					}
-				}
-				sketch.endShape();
-				this.rendered = true;
-			}else if(!this.rendered){
-				for(let i = 0; i< this.t.length; i++){
+				sketch.strokeWeight(2);
+				sketch.stroke("blue");
+				for (let i = 0; i < this.t.length; i++) {
 					let tmp = this.calcBezierPoint(this.t[i]);
-					if(tmp != null){
-						this.points[i] = [tmp[0],tmp[1],tmp[2]];
+					if (tmp != null) {
+						sketch.vertex(tmp[0], tmp[1], tmp[2]);
+						this.points[i] = [tmp[0], tmp[1], tmp[2]];
 					}
 				}
-				this.rendered = true;
+				sketch.stroke(0)
+				sketch.endShape();
+			}else{
+				for (let i = 0; i < this.t.length; i++) {
+					let tmp = this.calcBezierPoint(this.t[i]);
+					if (tmp != null) {
+						this.points[i] = [tmp[0], tmp[1], tmp[2]];
+					}
+				}
 			}
 		}
 	}
@@ -1349,8 +1450,31 @@ var sixthSketch = function(sketch){
 	}
 	
 	
+	// Rotation matrix for rotation about x-axis
+	function Rx(th) {
+		return math.matrix([[1, 0, 0],
+                 [0, sketch.cos(th), -sketch.sin(th)],
+                 [0, sketch.sin(th), sketch.cos(th)]]);
+	}
+
+	// Rotation matrix for rotation about y-axis
+	function Ry(th) {
+		return math.matrix([[sketch.cos(th), 0, -sketch.sin(th)],
+                 [0, 1, 0],
+                 [sketch.sin(th), 0, sketch.cos(th)]]);
+	}
+  
+	// Rotation matrix for rotation about z-axis
+	function Rz(th) {
+		return math.matrix([[sketch.cos(th), sketch.sin(th), 0],
+                [-sketch.sin(th), sketch.cos(th), 0],
+                [0, 0, 1]]);
+	}
+	
+	
 
 }
+
 
 
 
@@ -1511,6 +1635,47 @@ canvas {
 
 
 # Note sull'implementazione in p5js 
+
+Il codice è scritto con la libreria [p5js](https://p5js.org/es/) ed è stato scritto con metodologia OOP.
+In generale tutte le versioni 2d-3d e anche Bézier patch si compongono delle seguenti classi e metodi:
+
+```js
+class BezierCurve{
+	function constructor(points: Array[Array[float]]){}
+	function addControlPoint(x: float, y: float){}
+	function deCastelJau(t: float){}
+	function render(){
+		//ConstructPoints.render() for all ConstructPoints
+		//ConstructLines.render() for all ConstructLines
+	}
+}
+
+class ConstructPoint{
+	function constructor(x: float, y: float) {}
+	function render() {}  
+	function hasInside(x: float, y: float) {}
+}
+
+class ConstructLine{  
+	function constructor(p1: ConstructPoint,p2: ConstructPoint) {}
+	function render(){}
+}
+
+```
+
+Per creare dunque una curva di Bézier è necessario istanziare una `var bezierCurve = BezierCurve(points)`, poi sul metodo `draw()` di p5js richiamare il metodo render della curva in questo modo: `bezierCurve.render()`.
+
+
+Per le Bézier patch invece è stata creata una classe aggiuntiva che istanzia più classi BezierCurve.
+
+```js
+class BezierPatch{
+	function constructor(points: Array[Array[float]]){}
+	function addControlPoint(x: float, y: float){}
+	function render(){}
+}
+
+```
 
 
 
