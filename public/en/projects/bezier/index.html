@@ -29,21 +29,23 @@
 
 
 <meta property="og:title" content="Bézier curves and patches - interactive visualization" />
-<meta property="og:description" content="Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di Bézier ha la forma
+<meta property="og:description" content="Bézier Curves Bézier curves are a fundamental concept in computer graphics and vector drawing. They are used to describe curves by controlling points called &lsquo;control points&rsquo;. These curves were introduced by Pierre Bézier in the 1960s as a method of representing curves on computer screens. A Bézier curve has the form
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
-Dove,
-$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$" />
+Where,
+$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$
+are the n&#43;1 basic Bernstein polynomials." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/it/progetti/bezier/" /><meta property="article:section" content="progetti" />
+<meta property="og:url" content="/en/projects/bezier/" /><meta property="article:section" content="projects" />
 <meta property="article:published_time" content="2023-10-01T19:53:33+05:30" />
 <meta property="article:modified_time" content="2023-10-01T19:53:33+05:30" /><meta property="og:site_name" content="Luigi Cennini" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Bézier curves and patches - interactive visualization"/>
-<meta name="twitter:description" content="Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di Bézier ha la forma
+<meta name="twitter:description" content="Bézier Curves Bézier curves are a fundamental concept in computer graphics and vector drawing. They are used to describe curves by controlling points called &lsquo;control points&rsquo;. These curves were introduced by Pierre Bézier in the 1960s as a method of representing curves on computer screens. A Bézier curve has the form
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
-Dove,
-$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$"/>
+Where,
+$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$
+are the n&#43;1 basic Bernstein polynomials."/>
 
 
 <link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
@@ -147,7 +149,7 @@ Bézier curves and patches - interactive visualization | luigi cennini
     <nav class="pt-3 navbar navbar-expand-lg animate">
         <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
             
-			<a class="navbar-brand primary-font text-wrap" href="/it">
+			<a class="navbar-brand primary-font text-wrap" href="/en">
                 
                 <img src="https://avatars.githubusercontent.com/u/29329312?v=4" width="30" height="30" style="border-radius: 50%"
                     class="d-inline-block align-top">
@@ -174,12 +176,12 @@ Bézier curves and patches - interactive visualization | luigi cennini
                     
 					
 					<li class="nav-item navbar-text">
-						<a class="nav-link" href="/en" aria-label="ita" style=""> 
+						<a class="nav-link" href="/en" aria-label="ita" style=" text-decoration: underline "> 
 							eng
 						</a>
 					</li>
 					<li class="nav-item navbar-text">
-						<a class="nav-link" href="/it" aria-label="ita" style=" text-decoration: underline "> 
+						<a class="nav-link" href="/it" aria-label="ita" style=""> 
 							ita
 						</a>
 					</li>
@@ -194,9 +196,9 @@ Bézier curves and patches - interactive visualization | luigi cennini
                     		
                     
                     <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/it/progetti" title="progetti">
+                        <a class="nav-link" href="/en/projects" title="projects">
                             
-                            progetti
+                            projects
                         </a>
                     </li>
                     
@@ -258,21 +260,21 @@ Bézier curves and patches - interactive visualization | luigi cennini
           </div>
           
           <article class="page-content  p-2">
-          <h1 id="curve-bézier">Curve Bézier</h1>
-<p>Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;.
-Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer.
-Una curva di Bézier ha la forma</p>
+          <h1 id="bézier-curves">Bézier Curves</h1>
+<p>Bézier curves are a fundamental concept in computer graphics and vector drawing. They are used to describe curves by controlling points called &lsquo;control points&rsquo;.
+These curves were introduced by Pierre Bézier in the 1960s as a method of representing curves on computer screens.
+A Bézier curve has the form</p>
 <p>$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$</p>
-<p>Dove,</p>
+<p>Where,</p>
 <p>$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$</p>
-<p>sono gli n+1 polinomi di base di Bernstein.</p>
-<p>Nell&rsquo;editor sottostante ho implementato una versione interattiva di queste curve.
-Gli algoritmi che ho implementato sono l&rsquo;algoritmo per la computazione della curva ovvero l&rsquo; <strong>algoritmo di de Casteljau</strong> e l&rsquo;algoritmo di degree elevation.</p>
-<p>Istruzioni editor:</p>
+<p>are the n+1 basic Bernstein polynomials.</p>
+<p>NIn the editor below, I have implemented an interactive version of these curves.
+The algorithms I have implemented are the curve computation algorithm or the <strong>de Casteljau algorithm</strong> and the degree elevation algorithm.</p>
+<p>Editor instructions:</p>
 <ul>
-<li>2 click con tasto sinistro per aggiungere un nuovo punto di controllo</li>
-<li>muovi i punti di controllo trascinandoli tenendo premuto il tasto sinistro</li>
-<li>tasto destro ripetutamente per togliere poligono di controllo e lo schema di interpolazione</li>
+<li>2 left-clicks to add a new control point</li>
+<li>move control points by dragging while holding down the left mouse button</li>
+<li>right-click repeatedly to remove control polygon and interpolation scheme</li>
 </ul>
 
  
@@ -315,7 +317,7 @@ function checkScroll() {
 </script>
 
 
-<p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/nyiLHZ80x">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/nyiLHZ80x">questo link</a> per vedere e modificare il codice sorgente.</p>
+<p><strong>Warning</strong>: If you are not correctly seeing (or not seeing) the sketch below correctly, visit <a href="https://editor.p5js.org/giggiox/full/nyiLHZ80x">this link</a>. Or <a href="https://editor.p5js.org/giggiox/sketches/nyiLHZ80x">this link</a> to see and edit the source code.</p>
 
  
 
@@ -793,26 +795,26 @@ canvas {
 
 <br />
 <br />
-<h2 id="algoritmo-di-de-casteljau">Algoritmo di de Casteljau</h2>
-<p>L&rsquo;algoritmo di De Casteljau è un metodo iterativo stabile per calcolare i punti su una curva di Bézier.
-L&rsquo;algoritmo funziona in questo modo:
+<h2 id="de-casteljau-algorithm">De Casteljau Algorithm</h2>
+<p>De Casteljau&rsquo;s algorithm is a stable iterative method for calculating points on a Bézier curve.
+The algorithm works like this:
 $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
 $$k=i+1;r=1,&hellip;,n; i=0,&hellip;,n-r$$</p>
-<p>Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro t.</p>
-<h2 id="algoritmo-di-degree-elevation">Algoritmo di degree elevation</h2>
-<p>L&rsquo;algoritmo di degree elevation trasforma una curva di Bézier di grado n in una curva di Bézier di grado n+1:</p>
+<p>Where $$\underline{b}_0^n(t) = \underline{x}(t)$$ is the point on the Bézier curve associated with the value of the parameter t.</p>
+<h2 id="degree-elevation-algorithm">Degree elevation Algorithm</h2>
+<p>The degree elevation algorithm transforms a Bézier curve of degree n into a Bézier curve of degree n+1:</p>
 <p>$$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$</p>
 <p>$$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$</p>
-<p>in questo modo:</p>
+<p>in this way:</p>
 <p>$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,&hellip;,n$$</p>
 <p>$$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$</p>
-<h1 id="curve-bézier-3-dimensionali">Curve Bézier 3-dimensionali</h1>
-<p>Nell&rsquo;editor sopra i punti di controllo della curva di bezier sono punti di controllo in 2 dimensioni.
-Ovvero,
+<h1 id="3-dimensional-bézier-curve">3-dimensional Bézier curve</h1>
+<p>In the editor above, the control points of the bezier curve are control points in 2 dimensions.
+Namely,
 $$\underline{b}_i = { b_x \choose b_y}$$</p>
-<p>Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente z. Tutti gli algoritmi restano dunque invariati,</p>
-<p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/-UfZh9jUd">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/-UfZh9jUd">questo link</a> per vedere e modificare il codice sorgente.</p>
+<p>However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a z component. All the algorithms therefore remain unchanged,</p>
+<p><strong>Warning</strong>: If you are not correctly seeing (or not seeing) the sketch below correctly, visit <a href="https://editor.p5js.org/giggiox/full/-UfZh9jUd">this link</a>. Or <a href="https://editor.p5js.org/giggiox/sketches/-UfZh9jUd">this link</a> to see and edit the source code.</p>
 
  
 <div id ="fourthCanvas" ></div>
@@ -1312,9 +1314,9 @@ new p5(fourthSketch,"fourthCanvas");
 
 
 <h1 id="patch-di-bézier">Patch di Bézier</h1>
-<p>Una patch di Bézier è definita come</p>
+<p>A Bézier patch is defined as</p>
 <p>$$ \underline{x}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$</p>
-<p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/ePuLYaR4t">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/ePuLYaR4t">questo link</a> per vedere e modificare il codice sorgente.
+<p><strong>Warning</strong>: If you are not correctly seeing (or not seeing) the sketch below correctly, visit <a href="https://editor.p5js.org/giggiox/full/ePuLYaR4t">this link</a>. Or <a href="https://editor.p5js.org/giggiox/sketches/ePuLYaR4t">this link</a> to see and edit the source code.
 
 
 
@@ -1806,9 +1808,9 @@ canvas {
 </style>
 
 
-<h1 id="note-sullimplementazione-in-p5js">Note sull&rsquo;implementazione in p5js</h1>
-<p>Il codice è scritto con la libreria <a href="https://p5js.org/es/">p5js</a> ed è stato scritto con metodologia OOP.
-In generale tutte le versioni 2d-3d e anche Bézier patch si compongono delle seguenti classi e metodi:</p>
+<h1 id="p5js-implementation-notes">p5js Implementation Notes</h1>
+<p>The code is written with the <a href="https://p5js.org/es/">p5js</a> library and was written using OOP methodology.
+In general, all 2d-3d versions and also Bézier patches consist of the following classes and methods:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BezierCurve</span>{
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">points</span><span style="color:#f92672">:</span> Array[Array[<span style="color:#66d9ef">float</span>]]){}
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addControlPoint</span>(<span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>){}
@@ -1829,8 +1831,8 @@ In generale tutte le versioni 2d-3d e anche Bézier patch si compongono delle se
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">p1</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ConstructPoint</span>,<span style="color:#a6e22e">p2</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ConstructPoint</span>) {}
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">render</span>(){}
 </span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Per creare dunque una curva di Bézier è necessario istanziare una <code>var bezierCurve = BezierCurve(points)</code>, poi sul metodo <code>draw()</code> di p5js richiamare il metodo render della curva in questo modo: <code>bezierCurve.render()</code>.</p>
-<p>Per le Bézier patch invece è stata creata una classe aggiuntiva che istanzia più classi BezierCurve.</p>
+</span></span></code></pre></div><p>So to create a Bézier curve you need to instantiate a <code>var bezierCurve = BezierCurve(points)</code>, then on the p5js <code>draw()</code> method call the curve&rsquo;s render method like this: <code>bezierCurve.render()</code>.</p>
+<p>For the Bézier patches, however, an additional class has been created which instantiates multiple BezierCurve classes.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BezierPatch</span>{
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">points</span><span style="color:#f92672">:</span> Array[Array[<span style="color:#66d9ef">float</span>]]){}
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addControlPoint</span>(<span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>){}

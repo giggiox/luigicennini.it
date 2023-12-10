@@ -7,7 +7,7 @@ tags:
   - Rich content
   - Sample
   - example
-image: /projects/bezier/copertina7.png
+image: /projects/bezier/copertina8.png
 description: ""
 toc: true
 mathjax: true
@@ -18,15 +18,15 @@ mathjax: true
 
 Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati "punti di controllo". 
 Queste curve sono state introdotte da Pierre Bézier negli anni '60 come metodo per rappresentare curve su schermi di computer.
-Una curva di bezier ha la forma
+Una curva di Bézier ha la forma
 
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
 
-Dove, le funzioni 
+Dove,
 
 $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,...,n$$
 
-sono le funzioni di base di Bézier.
+sono gli n+1 polinomi di base di Bernstein.
 
 
 Nell'editor sottostante ho implementato una versione interattiva di queste curve.
@@ -598,9 +598,8 @@ $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
 $$k=i+1;r=1,...,n; i=0,...,n-r$$
 
-Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro t
+Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro t.
 
-L'algoritmo definisce il seguente schema triangolare:
 
 
 ## Algoritmo di degree elevation
@@ -630,7 +629,7 @@ Nell'editor sopra i punti di controllo della curva di bezier sono punti di contr
 Ovvero, 
 $$\underline{b}_i = { b_x \choose b_y}$$
 
-Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque un asse z. Tutti gli algoritmi restano dunque invariati,
+Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente z. Tutti gli algoritmi restano dunque invariati,
 
 
 **Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) per vedere e modificare il codice sorgente.
@@ -722,12 +721,16 @@ var fourthSketch = function(sketch){
 	  
 		for(let i = 0; i < bezierCurve.controlPoints.length; i++){
 			let dToObj = sketch.dist(cam2.eyeX, cam2.eyeY, cam2.eyeZ, bezierCurve.controlPoints[i].x, bezierCurve.controlPoints[i].y, bezierCurve.controlPoints[i].z);
-			if(sketch.dist(cam2.eyeX + x._data[0] * dToObj / xMag, 
-				cam2.eyeY + x._data[1] * dToObj / xMag, 
-				cam2.eyeZ + x._data[2] * dToObj / xMag, 
-				bezierCurve.controlPoints[i].x, bezierCurve.controlPoints[i].y, bezierCurve.controlPoints[i].z) < 20) {
-				if(sketch.mouseIsPressed){
+			if(sketch.dist(cam2.eyeX + x._data[0] * dToObj / xMag, cam2.eyeY + x._data[1] * dToObj / xMag, cam2.eyeZ + x._data[2] * dToObj / xMag, bezierCurve.controlPoints[i].x, bezierCurve.controlPoints[i].y, bezierCurve.controlPoints[i].z) < 20) {
+				let canMove =  true;
+				for(let j=0;j<bezierCurve.controlPoints.length;j++){
+					if(i!=j && bezierCurve.controlPoints[j].selected) canMove = false;
+				}
+ 
+				if(sketch.mouseIsPressed  && canMove){
 					objSelected = true;
+					bezierCurve.controlPoints[i].selected = true;
+					
 					bezierCurve.controlPoints[i].x = cam2.eyeX + x._data[0] * dToObj / xMag; 
 					bezierCurve.controlPointsX[i] = bezierCurve.controlPoints[i].x;
 					bezierCurve.controlPoints[i].y = cam2.eyeY + x._data[1] * dToObj / xMag; 
@@ -735,6 +738,7 @@ var fourthSketch = function(sketch){
 					bezierCurve.controlPoints[i].z = cam2.eyeZ + x._data[2] * dToObj / xMag;
 					bezierCurve.controlPointsZ[i] = bezierCurve.controlPoints[i].z; 
 				}else{
+					bezierCurve.controlPoints[i].selected = false;
 					objSelected = false;
 				}
 			}
@@ -1012,6 +1016,7 @@ var fourthSketch = function(sketch){
 			this.y = y;
 			this.z = z;
 			this.radius = radius;
+			this.selected = false; //used for moving points around
 			this.isControlPoint = isControlPoint;
 		}
 		render() {
@@ -1220,8 +1225,15 @@ var sixthSketch = function(sketch){
 				cam1.eyeY + x._data[1] * dToObj / xMag, 
 				cam1.eyeZ + x._data[2] * dToObj / xMag, 
 				bezierSurface.controlPoints[i].x, bezierSurface.controlPoints[i].y, bezierSurface.controlPoints[i].z) < 20) {
-				if(sketch.mouseIsPressed){
+				let canMove =  true;
+				for(let j=0;j<bezierSurface.controlPoints.length;j++){
+					if(i!=j && bezierSurface.controlPoints[j].selected) canMove = false;
+				}
+				
+				if(sketch.mouseIsPressed && canMove){
 					objSelected = true;
+					bezierSurface.controlPoints[i].selected = true;
+					
 					bezierSurface.controlPoints[i].x =cam1.eyeX + (x._data[0] * dToObj) / xMag;
 					bezierSurface.controlPoints[i].y =cam1.eyeY + (x._data[1] * dToObj) / xMag;
 					bezierSurface.controlPoints[i].z =cam1.eyeZ + (x._data[2] * dToObj) / xMag;
@@ -1235,6 +1247,7 @@ var sixthSketch = function(sketch){
 					bezierSurface.bezierCurvesV[idx].controlPoints[i%4].z =bezierSurface.controlPoints[i].z;
 					bezierSurface.bezierCurvesV[idx].controlPointsZ[i%4] =bezierSurface.controlPoints[i].z;
 				}else{
+					bezierSurface.controlPoints[i].selected = false;
 					objSelected = false;
 				}
 			}
@@ -1266,6 +1279,7 @@ var sixthSketch = function(sketch){
 			this.x = x
 			this.y = y
 			this.z = z;
+			this.selected = false; //used for moving point around
 			this.isControlPoint = isControlPoint;
 		}
 		render() {
@@ -1286,11 +1300,13 @@ var sixthSketch = function(sketch){
 	class BezierSurface{
 		constructor(points = []){
 			this.showNet = true;
+			this.showingNetPoints = true;
 			this.controlPoints = [];
 			this.u = 50;
 			this.v = 50;
 			this.bezierCurvesV = [];
 			this.bezierCurvesU = [];
+			
 			if(points.length != 0){
 				for(let i = 0;i<points.length; i++){
 					for(let j = 0;j<points[0].length;j++){
@@ -1310,6 +1326,10 @@ var sixthSketch = function(sketch){
 				}
 			}
 		}
+		showNetPoints(){
+			this.showingNetPoints = !this.showingNetPoints;
+		}
+		
 		showNetEvent(){
 			this.showNet = !this.showNet;
 		}
@@ -1320,7 +1340,9 @@ var sixthSketch = function(sketch){
  
 		render(){
 			for(let i = 0; i < this.controlPoints.length; i++){
-				this.controlPoints[i].render();
+				if(this.showingNetPoints){
+					this.controlPoints[i].render();
+				}
 				sketch.strokeWeight(1)
 				let coloumnsNumber = this.bezierCurvesV.length;
 				if(i%coloumnsNumber != 0 && this.showNet){ 
@@ -1445,8 +1467,17 @@ var sixthSketch = function(sketch){
 		sketch.resizeCanvas(width,sketch.widowHeight/1.6);
 	}
 	
+	let clickNum = 0;
 	function leftClick(){
-		bezierSurface.showNetEvent();
+		clickNum += 1;
+		if(clickNum == 1){
+			bezierSurface.showNetEvent();
+		}
+		if(clickNum == 2){
+			bezierSurface.showNetPoints();
+			clickNum = 0;
+		}
+		
 	}
 	
 	

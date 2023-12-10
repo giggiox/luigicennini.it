@@ -1,286 +1,53 @@
-<!DOCTYPE html>
-<html>
+---
+title: "Bézier curves and patches - interactive visualization"
+date: 2023-10-01T19:53:33+05:30
+draft: false
+author: "Luigi"
+tags:
+  - Rich content
+  - Sample
+  - example
+image: /projects/bezier/copertina8.png
+description: ""
+toc: true
+mathjax: true
+---
 
-<head><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
-<link rel="icon" href=https://avatars.githubusercontent.com/u/29329312?v&#61;4 type="image/gif">
-
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload"
-      as="style"
-      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
->
-<link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-      media="print" onload="this.media='all'" />
-<noscript>
-  <link
-          href="https://fonts.googleapis.com/css2?family=Alata&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-          rel="stylesheet">
-</noscript>
+# Bézier Curves
 
 
-<link rel="stylesheet" href="/css/font.css" media="all">
+Bézier curves are a fundamental concept in computer graphics and vector drawing. They are used to describe curves by controlling points called 'control points'. 
+These curves were introduced by Pierre Bézier in the 1960s as a method of representing curves on computer screens.
+A Bézier curve has the form
 
 
-
-<meta property="og:title" content="Bézier curves and patches - interactive visualization" />
-<meta property="og:description" content="Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di Bézier ha la forma
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
-Dove,
-$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="/it/progetti/bezier/" /><meta property="article:section" content="progetti" />
-<meta property="article:published_time" content="2023-10-01T19:53:33+05:30" />
-<meta property="article:modified_time" content="2023-10-01T19:53:33+05:30" /><meta property="og:site_name" content="Luigi Cennini" />
 
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Bézier curves and patches - interactive visualization"/>
-<meta name="twitter:description" content="Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di Bézier ha la forma
-$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
-Dove,
-$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$"/>
+Where,
+
+$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,...,n$$
+
+are the n+1 basic Bernstein polynomials.
 
 
-<link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
-<link rel="stylesheet" href="/css/footer.css" media="all">
+NIn the editor below, I have implemented an interactive version of these curves.
+The algorithms I have implemented are the curve computation algorithm or the **de Casteljau algorithm** and the degree elevation algorithm.
 
 
-<link rel="stylesheet" href="/css/theme.css" media="all">
+Editor instructions:
+- 2 left-clicks to add a new control point
+- move control points by dragging while holding down the left mouse button
+- right-click repeatedly to remove control polygon and interpolation scheme
 
 
-
-
-<style>
-    :root {
-        --text-color: #343a40;
-        --text-secondary-color: #6c757d;
-        --background-color: #eaedf0;
-        --secondary-background-color: #64ffda1a;
-        --primary-color: #007bff;
-        --secondary-color: #f8f9fa;
-
-         
-        --text-color-dark: #e4e6eb;
-        --text-secondary-color-dark: #b0b3b8;
-        --background-color-dark: #18191a;
-        --secondary-background-color-dark: #212529;
-        --primary-color-dark: #ffffff;
-        --secondary-color-dark: #212529;
-    }
-    body {
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.5;
-        text-align: left;
-    }
-
-    html {
-        background-color: var(--background-color) !important;
-    }
-
-    body::-webkit-scrollbar {
-        width: .5em;
-        height: .5em;
-        background-color: var(--background-color);
-    }
-    
-    ::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px var(--background-color);
-        border-radius: 1rem;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-        border-radius: 1rem;
-        background-color: var(--secondary-color);
-        outline: 1px solid var(--background-color);
-    }
-
-    #search-content::-webkit-scrollbar {
-        width: .5em;
-        height: .1em;
-        background-color: var(--background-color);
-    }
-</style>
-
-<meta name="description" content="">
-<link rel="stylesheet" href="/css/single.css">
-
-
-<script defer src="/fontawesome-5/all-5.15.4.js"></script>
-
-  <title>
-Bézier curves and patches - interactive visualization | luigi cennini
-
-  </title>
-</head>
-
-<body class="light">
-  
-  
-<script>
-    let localStorageValue = localStorage.getItem("pref-theme");
-    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    switch (localStorageValue) {
-        case "dark":
-            document.body.classList.add('dark');
-            break;
-        case "light":
-            document.body.classList.remove('dark');
-            break;
-        default:
-            if (mediaQuery) {
-                document.body.classList.add('dark');
-            }
-            break;
-    }
-</script>
-
-
-
-<header>
-    <nav class="pt-3 navbar navbar-expand-lg animate">
-        <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
-            
-			<a class="navbar-brand primary-font text-wrap" href="/it">
-                
-                <img src="https://avatars.githubusercontent.com/u/29329312?v=4" width="30" height="30" style="border-radius: 50%"
-                    class="d-inline-block align-top">
-                Luigi Cennini
-                
-            </a>
-			
-				
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-                aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                <svg aria-hidden="true" height="24" viewBox="0 0 16 16" version="1.1" width="24" data-view-component="true">
-                    <path fill-rule="evenodd" d="M1 2.75A.75.75 0 011.75 2h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 2.75zm0 5A.75.75 0 011.75 7h12.5a.75.75 0 110 1.5H1.75A.75.75 0 011 7.75zM1.75 12a.75.75 0 100 1.5h12.5a.75.75 0 100-1.5H1.75z"></path>
-                </svg>
-            </button>
-
-            
-            <div class="collapse navbar-collapse text-wrap primary-font" id="navbarContent">
-                <ul class="navbar-nav ms-auto text-center">
-
-
-                    
-
-                    
-					
-					<li class="nav-item navbar-text">
-						<a class="nav-link" href="/en" aria-label="ita" style=""> 
-							eng
-						</a>
-					</li>
-					<li class="nav-item navbar-text">
-						<a class="nav-link" href="/it" aria-label="ita" style=" text-decoration: underline "> 
-							ita
-						</a>
-					</li>
-
-                    
-
-                    
-
-                    
-
-                    
-                    		
-                    
-                    <li class="nav-item navbar-text">
-                        <a class="nav-link" href="/it/progetti" title="progetti">
-                            
-                            progetti
-                        </a>
-                    </li>
-                    
-                    
-
-                    
-                    <li class="nav-item navbar-text">
-                        
-                        <div class="text-center">
-                            <button id="theme-toggle">
-                                <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                                </svg>
-                                <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <circle cx="12" cy="12" r="5"></circle>
-                                    <line x1="12" y1="1" x2="12" y2="3"></line>
-                                    <line x1="12" y1="21" x2="12" y2="23"></line>
-                                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                                    <line x1="1" y1="12" x2="3" y2="12"></line>
-                                    <line x1="21" y1="12" x2="23" y2="12"></line>
-                                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </li>
-                    
-
-                </ul>
-
-            </div>
-        </div>
-    </nav>
-</header>
-<div id="content">
-<section id="single">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-sm-12 col-md-12 col-lg-9">
-        <div class="pr-lg-4">
-          <div class="title mb-5">
-            <h1 class="text-center mb-4">Bézier curves and patches - interactive visualization</h1>
-            <div class="text-center">
-              Luigi 
-              <small>|</small>
-              Oct 1, 2023
-
-              
-              <span id="readingTime">
-                min read
-              </span>
-              
-            </div>
-          </div>
-          
-          <div class="featured-image">
-            <img class="img-fluid" src="/projects/bezier/copertina8.png" alt="Bézier curves and patches - interactive visualization">
-          </div>
-          
-          <article class="page-content  p-2">
-          <h1 id="curve-bézier">Curve Bézier</h1>
-<p>Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;.
-Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer.
-Una curva di Bézier ha la forma</p>
-<p>$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$</p>
-<p>Dove,</p>
-<p>$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$</p>
-<p>sono gli n+1 polinomi di base di Bernstein.</p>
-<p>Nell&rsquo;editor sottostante ho implementato una versione interattiva di queste curve.
-Gli algoritmi che ho implementato sono l&rsquo;algoritmo per la computazione della curva ovvero l&rsquo; <strong>algoritmo di de Casteljau</strong> e l&rsquo;algoritmo di degree elevation.</p>
-<p>Istruzioni editor:</p>
-<ul>
-<li>2 click con tasto sinistro per aggiungere un nuovo punto di controllo</li>
-<li>muovi i punti di controllo trascinandoli tenendo premuto il tasto sinistro</li>
-<li>tasto destro ripetutamente per togliere poligono di controllo e lo schema di interpolazione</li>
-</ul>
-
- 
+{{< rawhtml >}} 
 <script src="/p5.min.js"></script>
 <script src="/math.js"></script>
+{{< /rawhtml >}}
 
 
- 
+
+{{< rawhtml >}} 
 <div id ="firstCanvas"></div>
 
 
@@ -314,10 +81,33 @@ function checkScroll() {
 
 </script>
 
+{{< /rawhtml >}}
 
-<p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/nyiLHZ80x">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/nyiLHZ80x">questo link</a> per vedere e modificare il codice sorgente.</p>
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/nyiLHZ80x). Or [this link](https://editor.p5js.org/giggiox/sketches/nyiLHZ80x) to see and edit the source code.
+
+{{< rawhtml >}} 
 
 
 
@@ -790,31 +580,62 @@ canvas {
 }
 </style>
 
+{{< /rawhtml >}}
+
+
+
+
+
+
+
 
 <br />
 <br />
-<h2 id="algoritmo-di-de-casteljau">Algoritmo di de Casteljau</h2>
-<p>L&rsquo;algoritmo di De Casteljau è un metodo iterativo stabile per calcolare i punti su una curva di Bézier.
-L&rsquo;algoritmo funziona in questo modo:
+	
+##  De Casteljau Algorithm
+De Casteljau's algorithm is a stable iterative method for calculating points on a Bézier curve.
+The algorithm works like this:
 $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
-$$k=i+1;r=1,&hellip;,n; i=0,&hellip;,n-r$$</p>
-<p>Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro t.</p>
-<h2 id="algoritmo-di-degree-elevation">Algoritmo di degree elevation</h2>
-<p>L&rsquo;algoritmo di degree elevation trasforma una curva di Bézier di grado n in una curva di Bézier di grado n+1:</p>
-<p>$$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$</p>
-<p>$$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$</p>
-<p>in questo modo:</p>
-<p>$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,&hellip;,n$$</p>
-<p>$$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$</p>
-<h1 id="curve-bézier-3-dimensionali">Curve Bézier 3-dimensionali</h1>
-<p>Nell&rsquo;editor sopra i punti di controllo della curva di bezier sono punti di controllo in 2 dimensioni.
-Ovvero,
-$$\underline{b}_i = { b_x \choose b_y}$$</p>
-<p>Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente z. Tutti gli algoritmi restano dunque invariati,</p>
-<p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/-UfZh9jUd">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/-UfZh9jUd">questo link</a> per vedere e modificare il codice sorgente.</p>
+$$k=i+1;r=1,...,n; i=0,...,n-r$$
 
- 
+Where $$\underline{b}_0^n(t) = \underline{x}(t)$$ is the point on the Bézier curve associated with the value of the parameter t.
+
+
+
+## Degree elevation Algorithm
+The degree elevation algorithm transforms a Bézier curve of degree n into a Bézier curve of degree n+1:
+
+$$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$
+
+$$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$
+
+in this way:
+
+$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,...,n$$
+
+
+$$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$
+
+
+
+
+
+
+
+
+# 3-dimensional Bézier curve
+
+In the editor above, the control points of the bezier curve are control points in 2 dimensions.
+Namely, 
+$$\underline{b}_i = { b_x \choose b_y}$$
+
+However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a z component. All the algorithms therefore remain unchanged,
+
+
+**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Or [this link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) to see and edit the source code.
+
+{{< rawhtml >}} 
 <div id ="fourthCanvas" ></div>
 
 <div class="container text-center">
@@ -1310,13 +1131,36 @@ new p5(fourthSketch,"fourthCanvas");
 </script>
 
 
-
-<h1 id="patch-di-bézier">Patch di Bézier</h1>
-<p>Una patch di Bézier è definita come</p>
-<p>$$ \underline{x}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$</p>
-<p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/ePuLYaR4t">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/ePuLYaR4t">questo link</a> per vedere e modificare il codice sorgente.
+{{< /rawhtml >}}
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Patch di Bézier 
+
+A Bézier patch is defined as
+
+$$ \underline{x}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
+
+
+
+
+
+
+
+**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Or [this link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) to see and edit the source code.
+{{< rawhtml >}}
 
 <div id ="sixthCanvas" ></div>
 
@@ -1672,9 +1516,22 @@ new p5(sixthSketch,"sixthCanvas");
 
 
 </script>
-</p>
+{{< /rawhtml >}} 
 
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{< rawhtml >}} 
 
 
 <style>
@@ -1805,179 +1662,49 @@ canvas {
 
 </style>
 
-
-<h1 id="note-sullimplementazione-in-p5js">Note sull&rsquo;implementazione in p5js</h1>
-<p>Il codice è scritto con la libreria <a href="https://p5js.org/es/">p5js</a> ed è stato scritto con metodologia OOP.
-In generale tutte le versioni 2d-3d e anche Bézier patch si compongono delle seguenti classi e metodi:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BezierCurve</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">points</span><span style="color:#f92672">:</span> Array[Array[<span style="color:#66d9ef">float</span>]]){}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addControlPoint</span>(<span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>){}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">deCastelJau</span>(<span style="color:#a6e22e">t</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>){}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">render</span>(){
-</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//ConstructPoints.render() for all ConstructPoints
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>		<span style="color:#75715e">//ConstructLines.render() for all ConstructLines
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	}
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConstructPoint</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>) {}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">render</span>() {}  
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasInside</span>(<span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>) {}
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ConstructLine</span>{  
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">p1</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ConstructPoint</span>,<span style="color:#a6e22e">p2</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">ConstructPoint</span>) {}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">render</span>(){}
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>Per creare dunque una curva di Bézier è necessario istanziare una <code>var bezierCurve = BezierCurve(points)</code>, poi sul metodo <code>draw()</code> di p5js richiamare il metodo render della curva in questo modo: <code>bezierCurve.render()</code>.</p>
-<p>Per le Bézier patch invece è stata creata una classe aggiuntiva che istanzia più classi BezierCurve.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-js" data-lang="js"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BezierPatch</span>{
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">constructor</span>(<span style="color:#a6e22e">points</span><span style="color:#f92672">:</span> Array[Array[<span style="color:#66d9ef">float</span>]]){}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">addControlPoint</span>(<span style="color:#a6e22e">x</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>, <span style="color:#a6e22e">y</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">float</span>){}
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">render</span>(){}
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div>
-          </article>
-        </div>
-      </div>
-      
-	  
-	  
-	  
-	  
-    
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</div>
-    <div class="row">
-      <div class="col-sm-12 col-md-12 col-lg-9 p-4">
-        
-      </div>
-    </div>
-  </div>
-  <button class="p-2 px-3" onclick="topFunction()" id="topScroll">
-    <i class="fas fa-angle-up"></i>
-  </button>
-</section>
-
-
-<div class="progress">
-  <div id="scroll-progress-bar" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-</div>
-<Script src="/js/scrollProgressBar.js"></script>
-
-
-<script>
-  var topScroll = document.getElementById("topScroll");
-  window.onscroll = function() {scrollFunction()};
-
-  function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-      topScroll.style.display = "block";
-    } else {
-      topScroll.style.display = "none";
-    }
-  }
-
-  function topFunction() {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-  }
-</script>
-
-
-<script src="/js/readingTime.js"></script>
+{{< /rawhtml >}}
 
 
 
-  </div><footer>
+# p5js Implementation Notes
 
-    <div class="container py-4">
-    <div class="row justify-content-center">
-        <div class="col-md-4 text-center">
-            
-            &copy; 2023  All rights reserved
-            <div class="text-secondary">
-                Made with
-                <span class="text-danger">
-                    &#10084;
-                </span>
-                and
-                <a href="https://github.com/gurusabarish/hugo-profile" target="_blank"
-                    title="Designed and developed by gurusabarish">
-                    Hugo Profile
-                </a>
-            </div>
-        </div>
-    </div>
-</div></footer><script src="/bootstrap-5/js/bootstrap.bundle.min.js"></script>
-<script>
-    if (localStorage.getItem("pref-theme") === "dark") {
-        document.body.classList.add('dark');
-    } else if (localStorage.getItem("pref-theme") === "light") {
-        document.body.classList.remove('dark')
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        document.body.classList.add('dark');
-    }
+The code is written with the [p5js](https://p5js.org/es/) library and was written using OOP methodology.
+In general, all 2d-3d versions and also Bézier patches consist of the following classes and methods:
 
-</script>
-<script>
-    document.getElementById("theme-toggle").addEventListener("click", () => {
-        if (document.body.className.includes("dark")) {
-            document.body.classList.remove('dark');
-            localStorage.setItem("pref-theme", 'light');
-        } else {
-            document.body.classList.add('dark');
-            localStorage.setItem("pref-theme", 'dark');
-        }
-    })
+```js
+class BezierCurve{
+	function constructor(points: Array[Array[float]]){}
+	function addControlPoint(x: float, y: float){}
+	function deCastelJau(t: float){}
+	function render(){
+		//ConstructPoints.render() for all ConstructPoints
+		//ConstructLines.render() for all ConstructLines
+	}
+}
 
-    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-        return new bootstrap.Tooltip(tooltipTriggerEl)
-    })
+class ConstructPoint{
+	function constructor(x: float, y: float) {}
+	function render() {}  
+	function hasInside(x: float, y: float) {}
+}
 
-</script>
+class ConstructLine{  
+	function constructor(p1: ConstructPoint,p2: ConstructPoint) {}
+	function render(){}
+}
+
+```
+
+So to create a Bézier curve you need to instantiate a `var bezierCurve = BezierCurve(points)`, then on the p5js `draw()` method call the curve's render method like this: `bezierCurve.render()`.
 
 
-    <script src="/js/search.js"></script>
+For the Bézier patches, however, an additional class has been created which instantiates multiple BezierCurve classes.
 
+```js
+class BezierPatch{
+	function constructor(points: Array[Array[float]]){}
+	function addControlPoint(x: float, y: float){}
+	function render(){}
+}
 
-
-
-
-<!-- MathJax -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" integrity="sha384-M5jmNxKC9EVnuqeMwRHvFuYUE8Hhp0TgBruj/GZRkYtiMrCRgH7yvv5KY+Owi7TW" crossorigin="anonymous"></script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['\\(','\\)']],
-        displayMath: [['$$','$$'], ['\[','\]']],
-        processEscapes: true,
-        processEnvironments: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
-        TeX: { equationNumbers: { autoNumber: "AMS" },
-             extensions: ["AMSmath.js", "AMSsymbols.js"] }
-      }
-    });
-</script>
-
-
-
-
-
-  <section id="search-content" class="py-2">
-    <div class="container" id="search-results"></div>
-  </section>
-</body>
-
-</html>
+```

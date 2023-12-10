@@ -13,9 +13,9 @@
       <pubDate>Sun, 01 Oct 2023 19:53:33 +0530</pubDate>
       
       <guid>/it/progetti/bezier/</guid>
-      <description>Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &amp;ldquo;punti di controllo&amp;rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &amp;lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di bezier ha la forma
+      <description>Curve Bézier Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &amp;ldquo;punti di controllo&amp;rdquo;. Queste curve sono state introdotte da Pierre Bézier negli anni &amp;lsquo;60 come metodo per rappresentare curve su schermi di computer. Una curva di Bézier ha la forma
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
-Dove, le funzioni
+Dove,
 $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&amp;hellip;,n$$</description>
     </item>
     

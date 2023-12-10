@@ -2,8 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>/en/projects/bezier/</loc>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
+  </url><url>
     <loc>/en/tags/example/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
@@ -15,11 +18,8 @@
                 href="/en/tags/example/"
                 />
   </url><url>
-    <loc>/en/projects/fork-telemetry/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
-  </url><url>
     <loc>/en/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
@@ -32,10 +32,10 @@
                 />
   </url><url>
     <loc>/en/projects/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
   </url><url>
     <loc>/en/tags/rich-content/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
@@ -48,7 +48,7 @@
                 />
   </url><url>
     <loc>/en/tags/sample/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
@@ -61,7 +61,7 @@
                 />
   </url><url>
     <loc>/en/tags/</loc>
-    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
+    <lastmod>2023-10-01T19:53:33+05:30</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="it"
@@ -72,6 +72,9 @@
                 hreflang="en"
                 href="/en/tags/"
                 />
+  </url><url>
+    <loc>/en/projects/fork-telemetry/</loc>
+    <lastmod>2023-04-03T19:53:33+05:30</lastmod>
   </url><url>
     <loc>/en/projects/graph-theory-visualizer/</loc>
     <lastmod>2022-01-01T19:53:33+05:30</lastmod>

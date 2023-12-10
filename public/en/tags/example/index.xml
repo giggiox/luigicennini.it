@@ -6,7 +6,20 @@
     <description>Recent content in example on luigi cennini</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Mon, 03 Apr 2023 19:53:33 +0530</lastBuildDate><atom:link href="/en/tags/example/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 01 Oct 2023 19:53:33 +0530</lastBuildDate><atom:link href="/en/tags/example/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bézier curves and patches - interactive visualization</title>
+      <link>/en/projects/bezier/</link>
+      <pubDate>Sun, 01 Oct 2023 19:53:33 +0530</pubDate>
+      
+      <guid>/en/projects/bezier/</guid>
+      <description>Bézier Curves Bézier curves are a fundamental concept in computer graphics and vector drawing. They are used to describe curves by controlling points called &amp;lsquo;control points&amp;rsquo;. These curves were introduced by Pierre Bézier in the 1960s as a method of representing curves on computer screens. A Bézier curve has the form
+$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
+Where,
+$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&amp;hellip;,n$$
+are the n+1 basic Bernstein polynomials.</description>
+    </item>
+    
     <item>
       <title>fork telemetry</title>
       <link>/en/projects/fork-telemetry/</link>
