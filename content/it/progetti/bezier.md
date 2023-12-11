@@ -7,7 +7,7 @@ tags:
   - Rich content
   - Sample
   - example
-image: /projects/bezier/copertina8.png
+image: /projects/bezier/copertina9.png
 description: ""
 toc: true
 mathjax: true
@@ -1153,10 +1153,7 @@ Una patch di Bézier è definita come
 $$ \underline{x}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
 
 
-
-
-
-
+Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero con m=n=3.
 
 **Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) per vedere e modificare il codice sorgente.
 {{< rawhtml >}}
@@ -1302,8 +1299,8 @@ var sixthSketch = function(sketch){
 			this.showNet = true;
 			this.showingNetPoints = true;
 			this.controlPoints = [];
-			this.u = 50;
-			this.v = 50;
+			this.u = 10;
+			this.v = 10;
 			this.bezierCurvesV = [];
 			this.bezierCurvesU = [];
 			
@@ -1364,7 +1361,19 @@ var sixthSketch = function(sketch){
 				}
 				this.bezierCurvesU[j] = new BezierCurve(cpoints)
 				this.bezierCurvesU[j].changeGranularity(this.u);
+				this.bezierCurvesU[j].showCurve = false;
 				this.bezierCurvesU[j].render();
+			}
+			
+			for(let j=0;j<this.v-1;j++){
+				for(let i=0;i<this.bezierCurvesU[j].points.length-1;i++){
+					sketch.beginShape(sketch.QUAD_STRIP);
+					sketch.vertex(this.bezierCurvesU[j].points[i][0],this.bezierCurvesU[j].points[i][1],this.bezierCurvesU[j].points[i][2]);
+					sketch.vertex(this.bezierCurvesU[j+1].points[i][0],this.bezierCurvesU[j+1].points[i][1],this.bezierCurvesU[j+1].points[i][2]);
+					sketch.vertex(this.bezierCurvesU[j].points[i+1][0],this.bezierCurvesU[j].points[i+1][1],this.bezierCurvesU[j].points[i+1][2]);
+					sketch.vertex(this.bezierCurvesU[j+1].points[i+1][0],this.bezierCurvesU[j+1].points[i+1][1],this.bezierCurvesU[j+1].points[i+1][2])
+					sketch.endShape();
+				}				
 			}
 		}
   
