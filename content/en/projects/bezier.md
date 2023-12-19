@@ -37,82 +37,16 @@ The algorithms I have implemented are the curve computation algorithm or the **d
 Editor instructions:
 - 2 left-clicks to add a new control point
 - move control points by dragging while holding down the left mouse button
-- right-click repeatedly to remove control polygon and interpolation scheme
 
+
+**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/nyiLHZ80x). Or [this link](https://editor.p5js.org/giggiox/sketches/nyiLHZ80x) to see and edit the source code.
 
 {{< rawhtml >}} 
 <script src="/p5.min.js"></script>
 <script src="/math.js"></script>
 {{< /rawhtml >}}
 
-
-
 {{< rawhtml >}} 
-<div id ="firstCanvas"></div>
-
-
-
-
-<script>
-//TODO TUTTO QUESTO E DA RIGUARDARE SERVE PER FARE IL LOAD E L'UNLOAD DEI CANVAS, PER AVERE PERFORMANCE MIGLIORI
-/**let sketchLoaded = false;
-window.addEventListener('scroll', checkScroll);
-
-function checkScroll() {
-      let scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-
-      let triggerY = document.getElementById("secondCanvas").offsetTop - screen.height;
-
-      // Se lo scroll supera la coordinata triggerY e lo sketch non è ancora stato caricato, caricalo
-      if (scrollY > triggerY && !sketchLoaded) {
-		console.log("arrivato")
-        
-		//new p5(secondSketch,"secondCanvas");
-		sketchLoaded = true;
-        // Chiamare la funzione che inizializza il tuo sketch p5.js
-        
-      } else if (scrollY <= triggerY && sketchLoaded) {
-        // Altrimenti, se lo scroll è prima della coordinata triggerY e lo sketch è caricato, esegui il "unload"
-        //unloadSketch();
-		sketchLoaded = false;
-      }
-}
-**/
-
-</script>
-
-{{< /rawhtml >}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/nyiLHZ80x). Or [this link](https://editor.p5js.org/giggiox/sketches/nyiLHZ80x) to see and edit the source code.
-
-{{< rawhtml >}} 
-
-
-
-
-
 <div id ="thirdCanvas" ></div>
 
 <div class="container text-center" id="forWidth">
@@ -139,6 +73,25 @@ function checkScroll() {
 			</div>
 			
 		</div>
+		<div class="col-sm-5 col-md-6">
+			show control polygon
+			<br>
+			<div class="checkbox-wrapper-6" id="controlPolygon1" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-8" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-8">
+			</div>			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-5 col-md-6">
+			show construct lines
+			<br>
+			<div class="checkbox-wrapper-6" id="constructLines1" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-7" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-7">
+			</div>			
+		</div>
+		
 		<div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
 			<button class="button button2" id="degreeElevation3">degree elevation</button>
 		</div>
@@ -163,7 +116,7 @@ var secondSketch = function(sketch){
 	sketch.setup = function(){
 		bezierCurve = new BezierCurve([[sketch.windowWidth/canvasResizeFactor/1.5,sketch.windowHeight/canvasResizeFactor/3],
 										[sketch.windowWidth/canvasResizeFactor/4,sketch.windowHeight/canvasResizeFactor/1.1]]);
-		sketch.frameRate(160); //change this for the slider autoplay velocity
+		sketch.frameRate(40); //change this for the slider autoplay velocity
 	
 	
 		let width = document.getElementById("forWidth").offsetWidth;
@@ -171,7 +124,7 @@ var secondSketch = function(sketch){
 		/* check for double click since p5js does not offer a Canvas.mouseDoubleClick but only a canvas.mouseClick. Using the function doubleClicked of p5js does not work because it's global and with more than 1 canvas on a page it gets mad */
 		document.getElementById("thirdCanvas").addEventListener('dblclick', doubleClick);
 		
-		document.getElementById("thirdCanvas").addEventListener('contextmenu',leftClick);
+		//document.getElementById("thirdCanvas").addEventListener('contextmenu',leftClick);
 		document.getElementById('thirdCanvas').addEventListener('contextmenu',event => event.preventDefault()); //remove the window menu for right click
 		
 		slider = sketch.createSlider(0, sliderMax, 1);
@@ -186,6 +139,9 @@ var secondSketch = function(sketch){
 		
 		document.getElementById("autoPlay3").addEventListener('change',myEventCheckBoxAutoPlay);
 		document.getElementById("degreeElevation3").addEventListener('click',myEventDegreeElevation);
+		
+		document.getElementById("constructLines1").addEventListener('change',myEventShowConstructLines);
+		document.getElementById("controlPolygon1").addEventListener('change',myEventShowControlPolygon);
 
 	}
 
@@ -526,14 +482,6 @@ var secondSketch = function(sketch){
 	function myEventCheckBoxAutoPlay(){
 	  checkedBoxAutoPlay = !checkedBoxAutoPlay;
 	}
-	
-	function myEventCheckBoxShowControlPolygonLines(){
-	  bezierCurve.showControlPolygon();
-	}
-	
-	function myEventCheckBoxShowConstructLines(){
-	  bezierCurve.showConstructLines();
-	}
 
 	function myEventCheckBoxShowCurveTrace(){
 	  bezierCurve.showCurveTrace();
@@ -546,23 +494,17 @@ var secondSketch = function(sketch){
 	function myEventChangeGranularity(){
 	  bezierCurve.changeGranularity(granularity.value());
 	}
-	function myEventCheckBoxShowConstructPoints(){
-		bezierCurve.showConstructPoints();
+	
+	function myEventShowConstructLines(){
+		bezierCurve.showConstructLines();
+		bezierCurve.showConstructPoints()
 	}
 	
-	
-	var clickNum = 0;
-	function leftClick(){
-		clickNum += 1;
-		if(clickNum == 1){
-			bezierCurve.showConstructLines();
-			bezierCurve.showConstructPoints()
-		}
-		if(clickNum == 2){
-			bezierCurve.showControlPolygon();
-			clickNum = 0;
-		}
+	function myEventShowControlPolygon(){
+		console.log("ciao");
+		bezierCurve.showControlPolygon();
 	}
+	
 
 }
 new p5(secondSketch,"thirdCanvas");
@@ -643,7 +585,6 @@ However, all the algorithms seen above also work for three-dimensional curves, w
 		<div class="col-sm-5 col-md-6" id ="sliderCol">
 		t
 		</div>
-		
 		<div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
 			auto play
 			<br>
@@ -651,6 +592,24 @@ However, all the algorithms seen above also work for three-dimensional curves, w
 			  <input class="tgl tgl-light" id="cb1-6-3" type="checkbox" />
 			  <label class="tgl-btn" for="cb1-6-3">
 			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-5 col-md-6">
+			show construct lines
+			<br>
+			<div class="checkbox-wrapper-6" id="constructLines2" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-9" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-9">
+			</div>			
+		</div>
+		<div class="col-sm-5 col-md-6">
+			show control polygon
+			<br>
+			<div class="checkbox-wrapper-6" id="controlPolygon2" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-20" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-20">
+			</div>			
 		</div>
 	</div>
 </div>
@@ -676,7 +635,7 @@ var fourthSketch = function(sketch){
 		bezierCurve = new BezierCurve([[130,130,-20],[-110,80,-100],[20,-90,-20],[20,45,105]]);
 		
 		
-		sketch.frameRate(60); //change this for the slider autoplay velocity
+		sketch.frameRate(40); //change this for the slider autoplay velocity
 	
 		let width = document.getElementById("forWidth").offsetWidth;
 		var myCanvas = sketch.createCanvas(width, sketch.windowHeight/1.6,sketch.WEBGL);
@@ -694,9 +653,12 @@ var fourthSketch = function(sketch){
 		slider.addClass("myslider");
 		slider.value(sliderMax);
 		document.getElementById("autoPlay").addEventListener('change',myEventCheckBoxAutoPlay);
-		document.getElementById("fourthCanvas").addEventListener('contextmenu',leftClick);
+		//document.getElementById("fourthCanvas").addEventListener('contextmenu',leftClick);
 		document.getElementById("fourthCanvas").addEventListener('contextmenu',event => event.preventDefault()); //remove the window menu for right click
 		document.getElementById("fourthCanvas").addEventListener('dblclick', doubleClick);
+		
+		document.getElementById("constructLines2").addEventListener('change',myEventShowConstructLines);
+		document.getElementById("controlPolygon2").addEventListener('change',myEventShowControlPolygon);
 		
 	}
 
@@ -813,7 +775,7 @@ var fourthSketch = function(sketch){
 		this.controlPointsY = [];
 		this.controlPointsZ = [];
 		
-		this.granularity = 1000;
+		this.granularity = 500;
 		this.t = linspace(0,1,this.granularity);
 		
 		this.constructLines = [];
@@ -998,14 +960,16 @@ var fourthSketch = function(sketch){
 			
 		  let tmp = this.calcBezierPoint(this.t[i]);
 		  if(tmp != null &&  this.checkedShowCurveTrace){
-			sketch.strokeWeight(2);
+			sketch.strokeWeight(1);
 			
 			//se vuoi che la curva sia per esempio blu devi togliere quel scketch.POINTS, ma poi diventa tutto molto,molto più lento.
 			sketch.vertex(tmp[0],tmp[1],tmp[2]);
+			
 		  }
 		}
-		sketch.stroke(0)
 		sketch.endShape();
+		sketch.stroke(0)
+		
 	  }
 	}
 	
@@ -1067,36 +1031,16 @@ var fourthSketch = function(sketch){
 	  checkedBoxAutoPlay = !checkedBoxAutoPlay;
 	}
 	
-	function myEventCheckBoxShowControlPolygonLines(){
-	  bezierCurve.showControlPolygon();
+	function myEventShowConstructLines(){
+		bezierCurve.showConstructLines();
+		bezierCurve.showConstructPoints()
 	}
 	
-	function myEventCheckBoxShowConstructLines(){
-	  bezierCurve.showConstructLines();
+	function myEventShowControlPolygon(){
+		console.log("ciao");
+		bezierCurve.showControlPolygon();
 	}
 
-	function myEventCheckBoxShowCurveTrace(){
-	  bezierCurve.showCurveTrace();
-	}
-
-	var clickNum = 0;
-	function leftClick(){
-		clickNum += 1;
-		if(clickNum == 1){
-			bezierCurve.showConstructLines();
-			bezierCurve.showConstructPoints()
-		}
-		if(clickNum == 2){
-			bezierCurve.showControlPolygon();
-			clickNum = 0;
-		}
-	}
-
-
-	function myEventCheckBoxShowConstructPoints(){
-		bezierCurve.showConstructPoints();
-	}
-	
 	function doubleClick(){
 		bezierCurve.addControlPoint(0,0,0);
 	}
@@ -1151,7 +1095,7 @@ new p5(fourthSketch,"fourthCanvas");
 
 A Bézier patch is defined as
 
-$$ \underline{x}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
+$$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
 
 
 The skatch below shows a bicubic Bézier patch, i.e. with m=n=3.
@@ -1161,6 +1105,27 @@ The skatch below shows a bicubic Bézier patch, i.e. with m=n=3.
 {{< rawhtml >}}
 
 <div id ="sixthCanvas" ></div>
+<div class="container text-center">
+	<div class="row">
+		<div class="col-sm-5 col-md-6">
+			show control points
+			<br>
+			<div class="checkbox-wrapper-6" id="controlPoints3" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-25" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-25">
+			</div>			
+		</div>
+		<div class="col-sm-5 col-md-6">
+			show control net
+			<br>
+			<div class="checkbox-wrapper-6" id="controlNet3" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-22" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-22">
+			</div>			
+		</div>
+	</div>
+</div>
+
 <script>
 var sixthSketch = function(sketch){
 
@@ -1175,7 +1140,7 @@ var sixthSketch = function(sketch){
 			[[0, 150, 0], [60, 150, -35], [90, 180, 60],  [200, 150, 45]]
 		];
 		bezierSurface = new BezierSurface(ctrl_pts);
-		sketch.frameRate(60); //change this for the slider autoplay velocity
+		sketch.frameRate(40); //change this for the slider autoplay velocity
 		let width = document.getElementById("forWidth").offsetWidth;
 		var myCanvas = sketch.createCanvas(width, sketch.windowHeight/1.6,sketch.WEBGL);
 		
@@ -1189,9 +1154,11 @@ var sixthSketch = function(sketch){
 		sketch.angleMode(sketch.DEGREES);
 		
 		
-		document.getElementById("sixthCanvas").addEventListener('contextmenu',leftClick);
+		//document.getElementById("sixthCanvas").addEventListener('contextmenu',leftClick);
 		document.getElementById("sixthCanvas").addEventListener('contextmenu',event => event.preventDefault()); //remove the window menu for right click
 		
+		document.getElementById("controlPoints3").addEventListener('change',myEventShowControlPoints);
+		document.getElementById("controlNet3").addEventListener('change',myEventShowControlNet);
 		
 	}
 
@@ -1476,17 +1443,12 @@ var sixthSketch = function(sketch){
 		sketch.resizeCanvas(width,sketch.widowHeight/1.6);
 	}
 	
-	let clickNum = 0;
-	function leftClick(){
-		clickNum += 1;
-		if(clickNum == 1){
-			bezierSurface.showNetEvent();
-		}
-		if(clickNum == 2){
-			bezierSurface.showNetPoints();
-			clickNum = 0;
-		}
-		
+	
+	function myEventShowControlPoints(){
+		bezierSurface.showNetPoints();
+	}
+	function myEventShowControlNet(){
+		bezierSurface.showNetEvent();
 	}
 	
 	
@@ -1521,8 +1483,6 @@ var sixthSketch = function(sketch){
 
 
 new p5(sixthSketch,"sixthCanvas");
-
-
 
 
 </script>
