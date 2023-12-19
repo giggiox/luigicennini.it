@@ -645,7 +645,7 @@ var fourthSketch = function(sketch){
 		cam2 = sketch.createCamera()
 		
 		
-		sketch.colorMode(sketch.HSB);
+		sketch.colorMode(sketch.HSL);
 		sketch.angleMode(sketch.DEGREES);
 		sketch.stroke(0,0,0);
 		sketch.strokeWeight(4);
@@ -961,7 +961,7 @@ var fourthSketch = function(sketch){
 		}
 		
 		sketch.stroke("blue");
-		sketch.beginShape();
+		sketch.beginShape(sketch.POINTS);
 		for(let i = 0; i< mapSpace(slider.value(),0,100,0,this.granularity); i++){
 			
 		  let tmp = this.calcBezierPoint(this.t[i]);

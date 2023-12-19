@@ -955,7 +955,7 @@ var fourthSketch = function(sketch){
 		}
 	  
 		sketch.stroke("blue");
-		sketch.beginShape();
+		sketch.beginShape(sketch.POINTS);
 		for(let i = 0; i< mapSpace(slider.value(),0,100,0,this.granularity); i++){
 			
 		  let tmp = this.calcBezierPoint(this.t[i]);
