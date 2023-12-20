@@ -7,7 +7,7 @@ tags:
   - Rich content
   - Sample
   - example
-image: /projects/bezier/copertina9.png
+image: /projects/bezier/copertina10.png
 description: ""
 toc: true
 mathjax: true
@@ -580,18 +580,38 @@ However, all the algorithms seen above also work for three-dimensional curves, w
 {{< rawhtml >}} 
 <div id ="fourthCanvas" ></div>
 
-<div class="container text-center">
+
+<div class="container text-center" id="forWidth">
 	<div class="row">
+			
 		<div class="col-sm-5 col-md-6" id ="sliderCol">
 		t
 		</div>
-		<div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+		
+		<div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0" id ="granularity">
+		granularity
+		</div>
+		
+	</div>
+</div>
+<div class="container text-center">
+	<div class="row">
+		<div class="col-sm-5 col-md-6">
 			auto play
 			<br>
 			<div class="checkbox-wrapper-6" id="autoPlay" style="display: inline-block;">
 			  <input class="tgl tgl-light" id="cb1-6-3" type="checkbox" />
 			  <label class="tgl-btn" for="cb1-6-3">
 			</div>
+			
+		</div>
+		<div class="col-sm-5 col-md-6">
+			show control polygon
+			<br>
+			<div class="checkbox-wrapper-6" id="controlPolygon2" style="display: inline-block;">
+			  <input class="tgl tgl-light" id="cb1-80" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-80">
+			</div>			
 		</div>
 	</div>
 	<div class="row">
@@ -599,17 +619,13 @@ However, all the algorithms seen above also work for three-dimensional curves, w
 			show construct lines
 			<br>
 			<div class="checkbox-wrapper-6" id="constructLines2" style="display: inline-block;">
-			  <input class="tgl tgl-light" id="cb1-9" type="checkbox" checked/>
-			  <label class="tgl-btn" for="cb1-9">
+			  <input class="tgl tgl-light" id="cb1-70" type="checkbox" checked/>
+			  <label class="tgl-btn" for="cb1-70">
 			</div>			
 		</div>
-		<div class="col-sm-5 col-md-6">
-			show control polygon
-			<br>
-			<div class="checkbox-wrapper-6" id="controlPolygon2" style="display: inline-block;">
-			  <input class="tgl tgl-light" id="cb1-20" type="checkbox" checked/>
-			  <label class="tgl-btn" for="cb1-20">
-			</div>			
+		
+		<div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
+			<button class="button button2" id="degreeElevation">degree elevation</button>
 		</div>
 	</div>
 </div>
@@ -627,9 +643,10 @@ var fourthSketch = function(sketch){
 	var granularity,button,button1;
 	var canvasResizeFactor = 1.6;
 	
-	
+	var granularity;
 	let addedListener = true;
 
+	var isOnDiv=false;
 
 	sketch.setup = function(){		
 		bezierCurve = new BezierCurve([[130,130,-20],[-110,80,-100],[20,-90,-20],[20,45,105]]);
@@ -643,7 +660,7 @@ var fourthSketch = function(sketch){
 		cam2 = sketch.createCamera()
 		
 		
-		sketch.colorMode(sketch.HSB);
+		sketch.colorMode(sketch.HSL);
 		sketch.angleMode(sketch.DEGREES);
 		sketch.stroke(0,0,0);
 		sketch.strokeWeight(4);
@@ -652,10 +669,21 @@ var fourthSketch = function(sketch){
 		slider.parent("sliderCol");
 		slider.addClass("myslider");
 		slider.value(sliderMax);
+		
+		
+		granularity = sketch.createSlider(10, 500, 400);
+		granularity.addClass("myslider");
+		granularity.parent("granularity");
+		
+		
 		document.getElementById("autoPlay").addEventListener('change',myEventCheckBoxAutoPlay);
 		//document.getElementById("fourthCanvas").addEventListener('contextmenu',leftClick);
 		document.getElementById("fourthCanvas").addEventListener('contextmenu',event => event.preventDefault()); //remove the window menu for right click
 		document.getElementById("fourthCanvas").addEventListener('dblclick', doubleClick);
+		document.getElementById("degreeElevation").addEventListener('click',myEventDegreeElevation);
+		
+		document.getElementById("fourthCanvas").addEventListener("mouseenter", function(  ) {isOnDiv=true;});
+		document.getElementById("fourthCanvas").addEventListener("mouseout", function(  ) {isOnDiv=false;});
 		
 		document.getElementById("constructLines2").addEventListener('change',myEventShowConstructLines);
 		document.getElementById("controlPolygon2").addEventListener('change',myEventShowControlPolygon);
@@ -664,6 +692,8 @@ var fourthSketch = function(sketch){
 
 	sketch.draw = function() {
 		sketch.background(250);
+		
+		bezierCurve.changeGranularity(granularity.value());
 		
 		// Pan: Cam rotation about y-axis (Left Right)
 		let azimuth = -sketch.atan2(cam2.eyeZ - cam2.centerZ, cam2.eyeX - cam2.centerX);
@@ -717,7 +747,7 @@ var fourthSketch = function(sketch){
 			document.getElementById("fourthCanvas").removeEventListener('click',sketch.orbitControl(4,4))
 			addedListener = false;
 		}**/
-		if(!objSelected){
+		if(!objSelected && isOnDiv){
 			sketch.orbitControl(4,4);
 		}
 		
@@ -919,6 +949,9 @@ var fourthSketch = function(sketch){
 	  
 	  
 	  render(){
+		
+	  
+	  
 		for(let i = 0; i < this.controlPoints.length; i++){
 		  this.controlPoints[i].render();
 		}
@@ -948,19 +981,20 @@ var fourthSketch = function(sketch){
 		  }
 		}
 		
+		
 		if(this.checkedShowControlPolygon){
 		  for(let i = 0; i< this.controlPolygonLines.length; i++){
 			this.controlPolygonLines[i].render();
 		  }
 		}
-	  
+		
 		sketch.stroke("blue");
 		sketch.beginShape(sketch.POINTS);
 		for(let i = 0; i< mapSpace(slider.value(),0,100,0,this.granularity); i++){
 			
 		  let tmp = this.calcBezierPoint(this.t[i]);
 		  if(tmp != null &&  this.checkedShowCurveTrace){
-			sketch.strokeWeight(1);
+			sketch.strokeWeight(2);
 			
 			//se vuoi che la curva sia per esempio blu devi togliere quel scketch.POINTS, ma poi diventa tutto molto,molto più lento.
 			sketch.vertex(tmp[0],tmp[1],tmp[2]);
@@ -969,7 +1003,37 @@ var fourthSketch = function(sketch){
 		}
 		sketch.endShape();
 		sketch.stroke(0)
+	  
 		
+		
+	  }
+	  
+	  degreeElevation(){
+		let lastX, lastY, lastZ, n;
+		n = this.controlPoints.length-1;
+		lastX = this.controlPoints[n].x;
+		lastY = this.controlPoints[n].y;
+		lastZ = this.controlPoints[n].z;
+    
+		//cant do in place because changing b_i in one iteration then the next cant retrive true b_i value
+		//using duplicate copys of coordinates (required extra loop) to do it easily
+		for(let i = 1; i <= n; i++){
+			this.controlPoints[i].x = i/(n+1) * this.controlPointsX[i-1] + (n-i+1)/(n+1)*this.controlPointsX[i];
+			this.controlPoints[i].y = i/(n+1) * this.controlPointsY[i-1] + (n-i+1)/(n+1)*this.controlPointsY[i];
+			this.controlPoints[i].z = i/(n+1) * this.controlPointsZ[i-1] + (n-i+1)/(n+1)*this.controlPointsZ[i];
+		}
+		for(let i=0;i<=n; i++){
+			this.controlPointsX[i] = this.controlPoints[i].x;
+			this.controlPointsY[i] = this.controlPoints[i].y;
+			this.controlPointsZ[i] = this.controlPoints[i].z;
+		}
+		this.addControlPoint(lastX,lastY,lastZ);
+	}
+	  
+	  
+	  changeGranularity(x){
+		this.granularity = x;
+		this.t = linspace(0,1,x);
 	  }
 	}
 	
@@ -1044,6 +1108,9 @@ var fourthSketch = function(sketch){
 	function doubleClick(){
 		bezierCurve.addControlPoint(0,0,0);
 	}
+	function myEventDegreeElevation(){
+		bezierCurve.degreeElevation();
+	}
 	
 	// Rotation matrix for rotation about x-axis
 	function Rx(th) {
@@ -1091,7 +1158,7 @@ new p5(fourthSketch,"fourthCanvas");
 
 
 
-# Patch di Bézier 
+# Bézier patch   
 
 A Bézier patch is defined as
 
@@ -1131,7 +1198,7 @@ var sixthSketch = function(sketch){
 
 	var bezierSurface;
 
-
+	var isOnDiv = false;
 	sketch.setup = function(){
 		let ctrl_pts = [
 			[[0, 0, 20],  [60, 0, -35],   [90, 0, 60],    [200, 0, 5]],
@@ -1160,6 +1227,9 @@ var sixthSketch = function(sketch){
 		document.getElementById("controlPoints3").addEventListener('change',myEventShowControlPoints);
 		document.getElementById("controlNet3").addEventListener('change',myEventShowControlNet);
 		
+		
+		document.getElementById("sixthCanvas").addEventListener("mouseenter", function() {isOnDiv=true;});
+		document.getElementById("sixthCanvas").addEventListener("mouseout", function() {isOnDiv=false;});
 	}
 
 	sketch.draw = function() {
@@ -1220,7 +1290,7 @@ var sixthSketch = function(sketch){
 		
 		
 		
-		if (!objSelected) {
+		if (!objSelected && isOnDiv) {
 			sketch.orbitControl(1,1);
 		}
 		bezierSurface.render();
@@ -1331,7 +1401,7 @@ var sixthSketch = function(sketch){
 				this.bezierCurvesU[j].showCurve = false;
 				this.bezierCurvesU[j].render();
 			}
-			
+			sketch.stroke("blue");
 			for(let j=0;j<this.v-1;j++){
 				for(let i=0;i<this.bezierCurvesU[j].points.length-1;i++){
 					sketch.beginShape(sketch.QUAD_STRIP);
@@ -1342,6 +1412,7 @@ var sixthSketch = function(sketch){
 					sketch.endShape();
 				}				
 			}
+			sketch.stroke(0);
 		}
   
 	}
@@ -1486,7 +1557,7 @@ new p5(sixthSketch,"sixthCanvas");
 
 
 </script>
-{{< /rawhtml >}} 
+{{< /rawhtml >}}  
 
 
 
