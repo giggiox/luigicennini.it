@@ -258,14 +258,25 @@ Bézier curves and patches - interactive visualization | luigi cennini
           </div>
           
           <article class="page-content  p-2">
-          <h1 id="curve-bézier">Curve Bézier</h1>
+          
+ 
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [["$", "$"]]
+        }
+    };
+</script>
+    
+
+<h1 id="curve-bézier">Curve Bézier</h1>
 <p>Le curve di Bézier sono un concetto fondamentale nella computer grafica e nel disegno vettoriale. Sono utilizzate per descrivere curve attraverso il controllo di punti chiamati &ldquo;punti di controllo&rdquo;.
 Queste curve sono state introdotte da Pierre Bézier negli anni &lsquo;60 come metodo per rappresentare curve su schermi di computer.
 Una curva di Bézier ha la forma</p>
 <p>$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$</p>
 <p>Dove,</p>
 <p>$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$</p>
-<p>sono gli n+1 polinomi di base di Bernstein.</p>
+<p>sono gli $n+1$ polinomi di base di Bernstein.</p>
 <p>Nell&rsquo;editor sottostante ho implementato una versione interattiva di queste curve.
 Gli algoritmi che ho implementato sono l&rsquo;algoritmo per la computazione della curva ovvero l&rsquo; <strong>algoritmo di de Casteljau</strong> e l&rsquo;algoritmo di degree elevation.</p>
 <p>Istruzioni editor:</p>
@@ -369,6 +380,10 @@ var secondSketch = function(sketch){
 		granularity = sketch.createSlider(10, 500, 400);
 		granularity.addClass("myslider");
 		granularity.parent("granularity3");
+		
+		reloadBtn = sketch.createButton('&#8635;');
+		reloadBtn.parent("thirdCanvas");
+		reloadBtn.position(width-50, -50, 'relative');
 		
 		
 		document.getElementById("autoPlay3").addEventListener('change',myEventCheckBoxAutoPlay);
@@ -765,19 +780,20 @@ L&rsquo;algoritmo funziona in questo modo:
 $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
 $$k=i+1;r=1,&hellip;,n; i=0,&hellip;,n-r$$</p>
-<p>Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro t.</p>
+<p>Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro $t$.</p>
 <h2 id="algoritmo-di-degree-elevation">Algoritmo di degree elevation</h2>
-<p>L&rsquo;algoritmo di degree elevation trasforma una curva di Bézier di grado n in una curva di Bézier di grado n+1:</p>
+<p>L&rsquo;algoritmo di degree elevation trasforma una curva di Bézier di grado n in una curva di Bézier di grado $n+1$:</p>
 <p>$$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$</p>
 <p>$$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$</p>
 <p>in questo modo:</p>
-<p>$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,&hellip;,n$$</p>
+<p>$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i$$
+$$k = i-1; i=1,&hellip;,n$$</p>
 <p>$$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$</p>
 <h1 id="curve-bézier-3-dimensionali">Curve Bézier 3-dimensionali</h1>
 <p>Nell&rsquo;editor sopra i punti di controllo della curva di bezier sono punti di controllo in 2 dimensioni.
 Ovvero,
 $$\underline{b}_i = { b_x \choose b_y}$$</p>
-<p>Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente z. Tutti gli algoritmi restano dunque invariati,</p>
+<p>Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente $z$. Tutti gli algoritmi restano dunque invariati,</p>
 <p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/-UfZh9jUd">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/-UfZh9jUd">questo link</a> per vedere e modificare il codice sorgente.</p>
 
  
@@ -1349,7 +1365,7 @@ new p5(fourthSketch,"fourthCanvas");
 <h1 id="patch-di-bézier">Patch di Bézier</h1>
 <p>Una patch di Bézier è definita come</p>
 <p>$$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$</p>
-<p>Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero con m=n=3.</p>
+<p>Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero con $m=n=3$.</p>
 <p><strong>Warning</strong>: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita <a href="https://editor.p5js.org/giggiox/full/ePuLYaR4t">questo link</a>. Oppure <a href="https://editor.p5js.org/giggiox/sketches/ePuLYaR4t">questo link</a> per vedere e modificare il codice sorgente.
 
 
@@ -1973,7 +1989,7 @@ In generale tutte le versioni 2d-3d e anche Bézier patch si compongono delle se
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
             
-            &copy; 2023  All rights reserved
+            &copy; 2024  All rights reserved
             <div class="text-secondary">
                 Made with
                 <span class="text-danger">

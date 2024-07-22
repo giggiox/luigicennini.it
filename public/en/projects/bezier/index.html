@@ -33,7 +33,7 @@
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
 Where,
 $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$
-are the n&#43;1 basic Bernstein polynomials." />
+are the $n&#43;1$ basic Bernstein polynomials." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/en/projects/bezier/" /><meta property="article:section" content="projects" />
 <meta property="article:published_time" content="2023-10-01T19:53:33+05:30" />
@@ -45,7 +45,7 @@ are the n&#43;1 basic Bernstein polynomials." />
 $$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$
 Where,
 $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$
-are the n&#43;1 basic Bernstein polynomials."/>
+are the $n&#43;1$ basic Bernstein polynomials."/>
 
 
 <link rel="stylesheet" href="/bootstrap-5/css/bootstrap.min.css" media="all"><link rel="stylesheet" href="/css/header.css" media="all">
@@ -260,14 +260,25 @@ Bézier curves and patches - interactive visualization | luigi cennini
           </div>
           
           <article class="page-content  p-2">
-          <h1 id="bézier-curves">Bézier Curves</h1>
+          
+ 
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [["$", "$"]]
+        }
+    };
+</script>
+    
+
+<h1 id="bézier-curves">Bézier Curves</h1>
 <p>Bézier curves are a fundamental concept in computer graphics and vector drawing. They are used to describe curves by controlling points called &lsquo;control points&rsquo;.
 These curves were introduced by Pierre Bézier in the 1960s as a method of representing curves on computer screens.
 A Bézier curve has the form</p>
 <p>$$\underline{x}(t) = \sum_{i=0}^n \underline{b}_i B_i^n(t), t\in[0,1]$$</p>
 <p>Where,</p>
 <p>$$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,&hellip;,n$$</p>
-<p>are the n+1 basic Bernstein polynomials.</p>
+<p>are the $n+1$ basic Bernstein polynomials.</p>
 <p>NIn the editor below, I have implemented an interactive version of these curves.
 The algorithms I have implemented are the curve computation algorithm or the <strong>de Casteljau algorithm</strong> and the degree elevation algorithm.</p>
 <p>Editor instructions:</p>
@@ -767,19 +778,20 @@ The algorithm works like this:
 $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
 $$k=i+1;r=1,&hellip;,n; i=0,&hellip;,n-r$$</p>
-<p>Where $$\underline{b}_0^n(t) = \underline{x}(t)$$ is the point on the Bézier curve associated with the value of the parameter t.</p>
+<p>Where $$\underline{b}_0^n(t) = \underline{x}(t)$$ is the point on the Bézier curve associated with the value of the parameter $t$.</p>
 <h2 id="degree-elevation-algorithm">Degree elevation Algorithm</h2>
-<p>The degree elevation algorithm transforms a Bézier curve of degree n into a Bézier curve of degree n+1:</p>
+<p>The degree elevation algorithm transforms a Bézier curve of degree $n$ into a Bézier curve of degree $n+1$:</p>
 <p>$$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$</p>
 <p>$$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$</p>
 <p>in this way:</p>
-<p>$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,&hellip;,n$$</p>
+<p>$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i$$
+$$k = i-1; i=1,&hellip;,n$$</p>
 <p>$$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$</p>
 <h1 id="3-dimensional-bézier-curve">3-dimensional Bézier curve</h1>
 <p>In the editor above, the control points of the bezier curve are control points in 2 dimensions.
 Namely,
 $$\underline{b}_i = { b_x \choose b_y}$$</p>
-<p>However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a z component. All the algorithms therefore remain unchanged,</p>
+<p>However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a $z$ component. All the algorithms therefore remain unchanged,</p>
 <p><strong>Warning</strong>: If you are not correctly seeing (or not seeing) the sketch below correctly, visit <a href="https://editor.p5js.org/giggiox/full/-UfZh9jUd">this link</a>. Or <a href="https://editor.p5js.org/giggiox/sketches/-UfZh9jUd">this link</a> to see and edit the source code.</p>
 
  
@@ -1351,7 +1363,7 @@ new p5(fourthSketch,"fourthCanvas");
 <h1 id="bézier-patch">Bézier patch</h1>
 <p>A Bézier patch is defined as</p>
 <p>$$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$</p>
-<p>The skatch below shows a bicubic Bézier patch, i.e. with m=n=3.</p>
+<p>The skatch below shows a bicubic Bézier patch, i.e. with $m=n=3$.</p>
 <p><strong>Warning</strong>: If you are not correctly seeing (or not seeing) the sketch below correctly, visit <a href="https://editor.p5js.org/giggiox/full/ePuLYaR4t">this link</a>. Or <a href="https://editor.p5js.org/giggiox/sketches/ePuLYaR4t">this link</a> to see and edit the source code.
 
 
@@ -1974,7 +1986,7 @@ In general, all 2d-3d versions and also Bézier patches consist of the following
     <div class="row justify-content-center">
         <div class="col-md-4 text-center">
             
-            &copy; 2023  All rights reserved
+            &copy; 2024  All rights reserved
             <div class="text-secondary">
                 Made with
                 <span class="text-danger">

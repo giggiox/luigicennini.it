@@ -13,6 +13,17 @@ toc: true
 mathjax: true
 ---
 
+{{< rawhtml >}} 
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [["$", "$"]]
+        }
+    };
+</script>
+    
+{{< /rawhtml >}}
+
 # Bézier Curves
 
 
@@ -27,7 +38,7 @@ Where,
 
 $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,...,n$$
 
-are the n+1 basic Bernstein polynomials.
+are the $n+1$ basic Bernstein polynomials.
 
 
 NIn the editor below, I have implemented an interactive version of these curves.
@@ -541,12 +552,12 @@ $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
 $$k=i+1;r=1,...,n; i=0,...,n-r$$
 
-Where $$\underline{b}_0^n(t) = \underline{x}(t)$$ is the point on the Bézier curve associated with the value of the parameter t.
+Where $$\underline{b}_0^n(t) = \underline{x}(t)$$ is the point on the Bézier curve associated with the value of the parameter $t$.
 
 
 
 ## Degree elevation Algorithm
-The degree elevation algorithm transforms a Bézier curve of degree n into a Bézier curve of degree n+1:
+The degree elevation algorithm transforms a Bézier curve of degree $n$ into a Bézier curve of degree $n+1$:
 
 $$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$
 
@@ -554,7 +565,8 @@ $$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$
 
 in this way:
 
-$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,...,n$$
+$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i$$
+$$k = i-1; i=1,...,n$$
 
 
 $$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$
@@ -572,7 +584,7 @@ In the editor above, the control points of the bezier curve are control points i
 Namely, 
 $$\underline{b}_i = { b_x \choose b_y}$$
 
-However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a z component. All the algorithms therefore remain unchanged,
+However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a $z$ component. All the algorithms therefore remain unchanged,
 
 
 **Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Or [this link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) to see and edit the source code.
@@ -1165,7 +1177,7 @@ A Bézier patch is defined as
 $$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
 
 
-The skatch below shows a bicubic Bézier patch, i.e. with m=n=3.
+The skatch below shows a bicubic Bézier patch, i.e. with $m=n=3$.
 
 
 **Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Or [this link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) to see and edit the source code.

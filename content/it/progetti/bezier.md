@@ -13,6 +13,17 @@ toc: true
 mathjax: true
 ---
 
+{{< rawhtml >}} 
+<script>
+    MathJax = {
+        tex: {
+            inlineMath: [["$", "$"]]
+        }
+    };
+</script>
+    
+{{< /rawhtml >}}
+
 # Curve Bézier
 
 
@@ -26,7 +37,7 @@ Dove,
 
 $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,...,n$$
 
-sono gli n+1 polinomi di base di Bernstein.
+sono gli $n+1$ polinomi di base di Bernstein.
 
 
 Nell'editor sottostante ho implementato una versione interattiva di queste curve.
@@ -140,6 +151,10 @@ var secondSketch = function(sketch){
 		granularity = sketch.createSlider(10, 500, 400);
 		granularity.addClass("myslider");
 		granularity.parent("granularity3");
+		
+		reloadBtn = sketch.createButton('&#8635;');
+		reloadBtn.parent("thirdCanvas");
+		reloadBtn.position(width-50, -50, 'relative');
 		
 		
 		document.getElementById("autoPlay3").addEventListener('change',myEventCheckBoxAutoPlay);
@@ -543,12 +558,12 @@ $$\underline{b}_i^0(t) = \underline{b}_i$$
 $$\underline{b}_i^r(t) = (1-t)\underline{b}_i^{r-1}(t)+t\underline{b}_k^{r-1}(t)$$
 $$k=i+1;r=1,...,n; i=0,...,n-r$$
 
-Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro t.
+Dove $$\underline{b}_0^n(t) = \underline{x}(t)$$ è il punto sulla curva di Bézier associato al valore del parametro $t$.
 
 
 
 ## Algoritmo di degree elevation
-L'algoritmo di degree elevation trasforma una curva di Bézier di grado n in una curva di Bézier di grado n+1:
+L'algoritmo di degree elevation trasforma una curva di Bézier di grado n in una curva di Bézier di grado $n+1$:
 
 $$\underline{x}(t)=\sum_{i=0}^n \underline{b}_i B_i^n(t)$$
 
@@ -556,7 +571,8 @@ $$= \sum_{i=0}^{n+1} \underline{c}_i B_i^{n+1}(t)$$
 
 in questo modo:
 
-$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i; k = i-1; i=1,...,n$$
+$$ \underline{c}_i= \frac{i}{n+1} \underline{b}_k + \frac{n-i+1}{n+1}\underline{b}_i$$ 
+$$k = i-1; i=1,...,n$$
 
 
 $$\underline{c}_0=\underline{b}_0,\underline{c}_m=\underline{b}_n; m = n+1$$
@@ -574,7 +590,7 @@ Nell'editor sopra i punti di controllo della curva di bezier sono punti di contr
 Ovvero, 
 $$\underline{b}_i = { b_x \choose b_y}$$
 
-Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente z. Tutti gli algoritmi restano dunque invariati,
+Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimensionali, dove i punti di controllo avranno dunuque una componente $z$. Tutti gli algoritmi restano dunque invariati,
 
 
 **Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) per vedere e modificare il codice sorgente.
@@ -1167,7 +1183,7 @@ Una patch di Bézier è definita come
 $$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
 
 
-Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero con m=n=3.
+Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero con $m=n=3$.
 
 **Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) per vedere e modificare il codice sorgente.
 {{< rawhtml >}}
