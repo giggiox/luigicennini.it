@@ -1180,7 +1180,8 @@ new p5(fourthSketch,"fourthCanvas");
 
 Una patch di Bézier è definita come
 
-$$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v), (u,v)\in[0,1]^2$$
+$$ \underline{X}(u,v) = \sum_{i=0}^n \sum_{j=0}^m \underline{c}_{ij} B_i^n(u)B_j^m(v)$$
+$$(u,v)\in[0,1]^2$$
 
 
 Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero con $m=n=3$.
