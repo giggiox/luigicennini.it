@@ -1,0 +1,3 @@
+{{ $filePath := .Get "path" }}
+{{ $content := readFile (printf "static/%s" $filePath) }}
+{{ $content | markdownify }}

@@ -1,0 +1,8 @@
+<details>
+    <summary>{{ .Get "title" }} 
+	{{ $link := .Get "link" }}
+    {{ if $link }}
+        (<a href="{{ $link }}">link</a>)
+    {{ end }}
+	</summary>
+    <div>

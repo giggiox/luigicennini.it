@@ -16,8 +16,8 @@ languages:
     params:            
       hero:
         intro: "Hi! I'm Luigi"
-        title: "I like making stuff!"
-        content: "I am a graduate student in Computer Science. In my spare time I like to write about my projects and I have put some of the best ones below."
+        title: "I love building stuff!"
+        content: "I am a graduate student in Computer Science & master student in Data Science. In my spare time I like to write about my projects and I have put some of the best ones below."
     
         
       projects:
@@ -131,8 +131,8 @@ params:
   hero:
     enable: true
     intro: "Ciao! sono Luigi"
-    title: "mi piace fare cose!"
-    content: "Sono uno studente laureato in Informatica. Nel mio tempo libero mi piace scrivere dei miei progetti e ho messo qualcuno  dei migliori qui sotto."
+    title: "Adoro costruire cose!"
+    content: "Sono uno studente laureato in Informatica.  Nel mio tempo libero mi piace scrivere dei miei progetti e ho messo qualcuno  dei migliori qui sotto."
     image: ""
     imageEnable: false
     bottomImage:
