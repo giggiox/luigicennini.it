@@ -4,5 +4,10 @@
     {{ if $link }}
         (<a href="{{ $link }}">link</a>)
     {{ end }}
+	
+	{{ $tag := .Get "tag" }}
+	{{ if $tag }}
+		<span class="badge badge-light">{{ $tag }}</span>
+	{{ end }}
 	</summary>
     <div>

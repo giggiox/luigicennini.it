@@ -120,9 +120,22 @@ My goals with this blog are:
 
 Not all solutions have visual aids just yet, but they will be added over time as I continue to build and refine this space.
 
+# General problems
+
+{{< include path="/projects/leetcode-solutions/general-problems/53/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/general-problems/287/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/general-problems/136/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/general-problems/1/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/general-problems/167/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/general-problems/15/solution.md" >}}
+
+# Prefix array 
+
+{{< include path="/projects/leetcode-solutions/prefix-array/238/solution.md" >}}
 
 
 # Binary Search
+
 {{< include path="/projects/leetcode-solutions/binary-search/704/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/binary-search/74/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/binary-search/153/solution.md" >}}
@@ -132,11 +145,14 @@ Not all solutions have visual aids just yet, but they will be added over time as
 # Linked list
 
 {{< include path="/projects/leetcode-solutions/linked-list/206/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/linked-list/21/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/linked-list/143/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/linked-list/19/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/linked-list/146/solution.md" >}}
+
 
 
 # Trees
-
 {{< include path="/projects/leetcode-solutions/trees/visits/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/trees/226/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/trees/104/solution.md" >}}
@@ -150,16 +166,25 @@ Not all solutions have visual aids just yet, but they will be added over time as
 {{< include path="/projects/leetcode-solutions/trees/617/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/trees/124/solution.md" >}}
 
-# Backtracking
-
+# Backtracking	
 {{< include path="/projects/leetcode-solutions/backtrack/78/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/backtrack/46/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/backtrack/39/solution.md" >}}
 
-
 # Dynamic Programming
-
 {{< include path="/projects/leetcode-solutions/dp/70/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/322/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/91/solution.md" >}}
 
+# Graphs
+{{< include path="/projects/leetcode-solutions/graphs/visits/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/topological-sort/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/detect-cycles/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/200/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/130/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/207/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/210/solution.md" >}}
+
+# Greedy
+{{< include path="/projects/leetcode-solutions/greedy/interval-schedule/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/greedy/435/solution.md" >}}
