@@ -94,8 +94,6 @@ details details details {
 
 
 
-
-
 </style>
 
 
@@ -120,6 +118,17 @@ My goals with this blog are:
 
 Not all solutions have visual aids just yet, but they will be added over time as I continue to build and refine this space.
 
+# Sorting
+{{< include path="/projects/leetcode-solutions/sorting/sorting/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/sorting/1636/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/sorting/347/solution.md" >}}
+
+# Heap
+{{< include path="/projects/leetcode-solutions/heap/heap/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/heap/1046/solution.md" >}}
+
+
+
 # General problems
 
 {{< include path="/projects/leetcode-solutions/general-problems/53/solution.md" >}}
@@ -133,7 +142,6 @@ Not all solutions have visual aids just yet, but they will be added over time as
 
 {{< include path="/projects/leetcode-solutions/prefix-array/238/solution.md" >}}
 
-
 # Binary Search
 
 {{< include path="/projects/leetcode-solutions/binary-search/704/solution.md" >}}
@@ -141,16 +149,12 @@ Not all solutions have visual aids just yet, but they will be added over time as
 {{< include path="/projects/leetcode-solutions/binary-search/153/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/binary-search/33/solution.md" >}}
 
-
 # Linked list
-
 {{< include path="/projects/leetcode-solutions/linked-list/206/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/linked-list/21/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/linked-list/143/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/linked-list/19/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/linked-list/146/solution.md" >}}
-
-
 
 # Trees
 {{< include path="/projects/leetcode-solutions/trees/visits/solution.md" >}}
@@ -170,11 +174,15 @@ Not all solutions have visual aids just yet, but they will be added over time as
 {{< include path="/projects/leetcode-solutions/backtrack/78/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/backtrack/46/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/backtrack/39/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/backtrack/90/solution.md" >}}
+
 
 # Dynamic Programming
 {{< include path="/projects/leetcode-solutions/dp/70/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/322/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/91/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/dp/55/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/dp/45/solution.md" >}}
 
 # Graphs
 {{< include path="/projects/leetcode-solutions/graphs/visits/solution.md" >}}
@@ -188,3 +196,4 @@ Not all solutions have visual aids just yet, but they will be added over time as
 # Greedy
 {{< include path="/projects/leetcode-solutions/greedy/interval-schedule/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/greedy/435/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/greedy/coin-change/solution.md" >}}
