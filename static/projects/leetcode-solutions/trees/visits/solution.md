@@ -47,4 +47,13 @@ remember to put the right part first in the stack.
 {{< endrawdetails >}}
 
 
+The time complexity of all visits is
+$$O(n)$$
+
+Because we can write the complexity of the visit like this $$T(n) = T(k) + T(n-k-1)  + 1$$ where k is the number of nodes on one side of the root and n-k-1 on the other side.
+Let's take in account 2 cases:
+- right skewed tree: we have $T(n) = T(0) + T(n-1) + 1$. The solution of this recursive relation is $$T(n) = O(n)$$
+- balanced tree (both left and right subtrees have an equal number of nodes): $T(n) = T(n/2) +T(n/2) + 1$. The solution of this recursive relation is $$T(n) = O(n)$$
+
+
 {{< endrawdetails >}}

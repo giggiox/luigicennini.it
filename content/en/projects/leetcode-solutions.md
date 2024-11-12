@@ -118,6 +118,7 @@ My goals with this blog are:
 
 Not all solutions have visual aids just yet, but they will be added over time as I continue to build and refine this space.
 
+
 # Sorting
 {{< include path="/projects/leetcode-solutions/sorting/sorting/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/sorting/1636/solution.md" >}}
@@ -127,23 +128,19 @@ Not all solutions have visual aids just yet, but they will be added over time as
 {{< include path="/projects/leetcode-solutions/heap/heap/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/heap/1046/solution.md" >}}
 
-
-
 # General problems
-
 {{< include path="/projects/leetcode-solutions/general-problems/53/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/general-problems/287/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/general-problems/136/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/general-problems/1/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/general-problems/167/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/general-problems/15/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/general-problems/150/solution.md" >}}
 
 # Prefix array 
-
 {{< include path="/projects/leetcode-solutions/prefix-array/238/solution.md" >}}
 
 # Binary Search
-
 {{< include path="/projects/leetcode-solutions/binary-search/704/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/binary-search/74/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/binary-search/153/solution.md" >}}
