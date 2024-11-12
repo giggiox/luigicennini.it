@@ -63,7 +63,7 @@ Istruzioni editor:
 {{< /rawhtml >}}
 
 {{< rawhtml >}} 
-<div id ="thirdCanvas" ></div>
+<div id ="thirdCanvas" class="canvas-container"  ></div>
 
 <div class="container text-center" id="forWidth">
 	<div class="row">
@@ -130,6 +130,8 @@ var secondSketch = function(sketch){
 	var canvasResizeFactor = 1.6;
 
 	sketch.setup = function(){
+		sketch.pixelDensity(1);
+
 		bezierCurve = new BezierCurve([[sketch.windowWidth/canvasResizeFactor/1.5,sketch.windowHeight/canvasResizeFactor/3],
 										[sketch.windowWidth/canvasResizeFactor/4,sketch.windowHeight/canvasResizeFactor/1.1]]);
 		sketch.frameRate(40); //change this for the slider autoplay velocity
@@ -527,7 +529,6 @@ var secondSketch = function(sketch){
 	
 
 }
-new p5(secondSketch,"thirdCanvas");
 
 
 </script>
@@ -596,7 +597,7 @@ Tuttavia tutti gli algoritmi visti sopra funzionano anche per curve tridimension
 **Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) per vedere e modificare il codice sorgente.
 
 {{< rawhtml >}} 
-<div id ="fourthCanvas" ></div>
+<div id ="fourthCanvas" class="canvas-container"></div>
 
 
 <div class="container text-center" id="forWidth">
@@ -667,6 +668,8 @@ var fourthSketch = function(sketch){
 	var isOnDiv=false;
 
 	sketch.setup = function(){		
+		sketch.pixelDensity(1);
+
 		bezierCurve = new BezierCurve([[130,130,-20],[-110,80,-100],[20,-90,-20],[20,45,105]]);
 		
 		
@@ -1154,8 +1157,6 @@ var fourthSketch = function(sketch){
 	}
 
 }
-new p5(fourthSketch,"fourthCanvas");
-
 
 </script>
 
@@ -1189,7 +1190,7 @@ Nello skatch sottostante è visualizzata un patch di Bézier bicubico, ovvero co
 **Warning**: se non stai vedendo correttamente (o non stai vedendo) lo sketch sottostante, visita [questo link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Oppure [questo link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) per vedere e modificare il codice sorgente.
 {{< rawhtml >}}
 
-<div id ="sixthCanvas" ></div>
+<div id ="sixthCanvas" class="canvas-container"></div>
 <div class="container text-center">
 	<div class="row">
 		<div class="col-sm-5 col-md-6">
@@ -1218,6 +1219,8 @@ var sixthSketch = function(sketch){
 
 	var isOnDiv = false;
 	sketch.setup = function(){
+		sketch.pixelDensity(1);
+
 		let ctrl_pts = [
 			[[0, 0, 20],  [60, 0, -35],   [90, 0, 60],    [200, 0, 5]],
 			[[0, 50, 30], [100, 60, -25], [120, 50, 120], [200, 50, 5]],
@@ -1567,13 +1570,6 @@ var sixthSketch = function(sketch){
 }
 
 
-
-
-
-
-new p5(sixthSketch,"sixthCanvas");
-
-
 </script>
 {{< /rawhtml >}} 
 
@@ -1591,6 +1587,50 @@ new p5(sixthSketch,"sixthCanvas");
 
 
 {{< rawhtml >}} 
+
+
+<script>
+const sketches = {
+    "thirdCanvas": secondSketch,
+    "fourthCanvas": fourthSketch,
+    "sixthCanvas": sixthSketch,
+};
+
+const loadedSketches = {
+	"thirdCanvas": null,
+    "fourthCanvas": null,
+    "sixthCanvas": null,
+}
+
+function loadSketch(canvasId) {
+	for(ls in loadedSketches){
+		if (loadedSketches[ls] != null){
+			loadedSketches[ls].remove();
+			loadedSketches[ls] = null;
+		}
+		document.getElementById(ls).removeAttribute("data-loaded");
+	}
+    if (!document.getElementById(canvasId).hasAttribute("data-loaded")) {
+        loadedSketches[canvasId] = new p5(sketches[canvasId], canvasId);
+        document.getElementById(canvasId).setAttribute("data-loaded", "true");
+    }
+}
+
+const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            loadSketch(entry.target.id);
+            //observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.canvas-container').forEach(canvas => {
+    observer.observe(canvas);
+});
+
+</script>
+
 
 
 <style>
