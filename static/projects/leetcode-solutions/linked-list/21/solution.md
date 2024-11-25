@@ -1,4 +1,5 @@
-{{< rawdetails title="21. Merge Two Sorted Lists" link="https://leetcode.com/problems/merge-two-sorted-lists/" >}}
+{{< rawdetails title="21. Merge Two Sorted Lists" link="https://leetcode.com/problems/merge-two-sorted-lists/" 
+	desc="projects/leetcode-solutions/linked-list/21/description.html" >}}
 
 ```python
 newList = ListNode()

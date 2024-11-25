@@ -1,4 +1,5 @@
-{{< rawdetails title="143. Reorder List" link="https://leetcode.com/problems/reorder-list/" >}}
+{{< rawdetails title="143. Reorder List" link="https://leetcode.com/problems/reorder-list/" 
+	desc="projects/leetcode-solutions/linked-list/143/description.html">}}
 
 ```python
 # find middle

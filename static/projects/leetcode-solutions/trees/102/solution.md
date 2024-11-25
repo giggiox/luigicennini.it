@@ -1,4 +1,5 @@
-{{< rawdetails title="102. Binary Tree Level Order Traversal" link="https://leetcode.com/problems/binary-tree-level-order-traversal/" >}}
+{{< rawdetails title="102. Binary Tree Level Order Traversal" link="https://leetcode.com/problems/binary-tree-level-order-traversal/"
+	desc="projects/leetcode-solutions/trees/102/description.html">}}
 ```python
 if not root:
     return []

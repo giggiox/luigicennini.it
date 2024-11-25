@@ -1,7 +1,7 @@
 baseURL: ""
 title: "luigi cennini"
 theme: hugo-profile
-defaultContentLanguage: it
+defaultContentLanguage: en
 defaultContentLanguageInSubdir: true
 
 languages:

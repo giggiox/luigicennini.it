@@ -1,4 +1,5 @@
-{{< rawdetails title="70. Climbing Stairs" link="https://leetcode.com/problems/climbing-stairs/" >}}
+{{< rawdetails title="70. Climbing Stairs" link="https://leetcode.com/problems/climbing-stairs/" 
+	desc="projects/leetcode-solutions/dp/70/description.html">}}
 
 {{< rawdetails title="Naive DFS approach (TLE)" >}}
 ```python
@@ -36,6 +37,23 @@ Or look at the tree with [this link](https://www.recursionvisualizer.com/?functi
 {{< endrawdetails >}}
 
 
+{{< rawdetails title="time and space complexity" >}}
+Time complexity:
+$$T(n) = 2T(n-1) + 1$$
+$$=2(2T(n-2) + 1) + 1$$
+$$=2(2(T(n-3) + 1) + 1) + 1$$
+$$\equiv 2^3T(n-3) + 3$$
+$$...$$
+$$=2^nT(0) + n = O(2^n)$$
+
+Space complexity: 
+$$S(n) = O(n)$$
+It is the depth of the recursion stack at max, which is $n$.
+
+{{< endrawdetails >}}
+
+
+
 {{< endrawdetails >}}
 
 
@@ -63,6 +81,18 @@ return dfs(n)
 Or look at the tree with [this link](https://www.recursionvisualizer.com/?function_definition=mem%20%3D%20%7B%7D%0Adef%20dfs%28step%29%3A%0A%20%20if%20step%20in%20mem%3A%0A%20%20%20%20return%20mem%5Bstep%5D%0A%20%20if%20step%20%3D%3D%200%3A%0A%20%20%20%20return%201%0A%20%20if%20step%20%3C%200%3A%0A%20%20%20%20return%200%0A%20%20l%20%3D%20dfs%28step%20-%201%29%0A%20%20r%20%3D%20dfs%28step%20-%202%29%0A%20%20mem%5Bstep%5D%20%3D%20l%20%2B%20r%0A%20%20return%20l%20%2B%20r&function_call=dfs%285%29)
 {{< endrawdetails >}}
 
+{{< rawdetails title="time and space complexity" >}}
+Time complexity:
+$$T(n) = O(n)$$
+In the memoized solution, the time complexity is always the maximum length of the cache. 
+
+Space complexity: 
+$$S(n) = O(n)$$
+It is the depth of the recursion stack at max, which is $n$.
+
+{{< endrawdetails >}}
+
+
 
 {{< endrawdetails >}}
 
@@ -85,6 +115,14 @@ return df[n]
 ```
 {{< rawdetails title="visualization" >}}
 	{{< carousel path="projects/leetcode-solutions/dp/70/bottom-up/" >}}
+{{< endrawdetails >}}
+
+{{< rawdetails title="time and space complexity" >}}
+Time complexity:
+$$T(n) = O(n)$$
+
+Space complexity: 
+$$S(n) = O(n)$$
 {{< endrawdetails >}}
 
 

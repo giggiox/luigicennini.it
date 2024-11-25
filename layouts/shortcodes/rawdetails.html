@@ -1,5 +1,12 @@
 <details>
     <summary>{{ .Get "title" }} 
+	
+	{{ $desc := .Get "desc" }}
+	{{ if $desc }}	
+		{{ $fileContent := readFile (printf "static/%s" $desc) }}
+		<span data-toggle="tooltip" data-placement="top" data-html="true" title="{{ $fileContent | markdownify}}">[desc]</span>
+	{{ end }}
+	
 	{{ $link := .Get "link" }}
     {{ if $link }}
         (<a href="{{ $link }}">link</a>)
@@ -9,5 +16,7 @@
 	{{ if $tag }}
 		<span class="badge badge-light">{{ $tag }}</span>
 	{{ end }}
+	
+	
 	</summary>
     <div>

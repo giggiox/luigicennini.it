@@ -1,4 +1,5 @@
-{{< rawdetails title="153. Find Minimum in Rotated Sorted Array" link="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" >}}
+{{< rawdetails title="153. Find Minimum in Rotated Sorted Array" link="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/" 
+	desc="projects/leetcode-solutions/binary-search/153/description.html">}}
 
 ```python
 l, r = 0,len(nums)-1

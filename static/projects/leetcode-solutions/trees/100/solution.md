@@ -1,4 +1,5 @@
-{{< rawdetails title="100. Same Tree" link="https://leetcode.com/problems/same-tree/" >}}
+{{< rawdetails title="100. Same Tree" link="https://leetcode.com/problems/same-tree/" 
+	desc="projects/leetcode-solutions/trees/100/description.html" >}}
 ```python
 def dfs(root1,root2):  
     if not root1 and not root2:

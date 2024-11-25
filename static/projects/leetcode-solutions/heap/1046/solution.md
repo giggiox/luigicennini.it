@@ -1,4 +1,5 @@
-{{< rawdetails title="1046. Last Stone Weight" link="https://leetcode.com/problems/last-stone-weight/">}}
+{{< rawdetails title="1046. Last Stone Weight" link="https://leetcode.com/problems/last-stone-weight/"
+	desc="projects/leetcode-solutions/heap/1046/description.html">}}
 
 ```python
 hp = []

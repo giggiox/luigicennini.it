@@ -1,4 +1,5 @@
-{{< rawdetails title="704. Binary Search" link="https://leetcode.com/problems/binary-search/" >}}
+{{< rawdetails title="704. Binary Search" link="https://leetcode.com/problems/binary-search/" 
+	desc="projects/leetcode-solutions/binary-search/704/description.html">}}
 
 ```python
 l,r = 0,len(nums)-1

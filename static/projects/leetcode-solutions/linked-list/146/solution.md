@@ -1,4 +1,5 @@
-{{< rawdetails title="146. LRU Cache" link="https://leetcode.com/problems/lru-cache/" >}}
+{{< rawdetails title="146. LRU Cache" link="https://leetcode.com/problems/lru-cache/" 
+	desc="projects/leetcode-solutions/linked-list/146/description.html">}}
 
 ```python
 class LRUCache:

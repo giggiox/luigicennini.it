@@ -1,4 +1,5 @@
-{{< rawdetails title="15. 3Sum" link="https://leetcode.com/problems/3sum/">}}
+{{< rawdetails title="15. 3Sum" link="https://leetcode.com/problems/3sum/"
+	desc="projects/leetcode-solutions/general-problems/15/description.html">}}
 
 ```python
 nums.sort()

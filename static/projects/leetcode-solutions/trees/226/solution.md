@@ -1,4 +1,5 @@
-{{< rawdetails title="226. Invert Binary Tree" link="https://leetcode.com/problems/invert-binary-tree/" >}}
+{{< rawdetails title="226. Invert Binary Tree" link="https://leetcode.com/problems/invert-binary-tree/" 
+	desc="projects/leetcode-solutions/trees/226/description.html">}}
 ```python
 def invertTree(self, root):
     if not root:

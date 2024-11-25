@@ -1,4 +1,5 @@
-{{< rawdetails title="110. Balanced Binary Tree" link="https://leetcode.com/problems/balanced-binary-tree/" >}}
+{{< rawdetails title="110. Balanced Binary Tree" link="https://leetcode.com/problems/balanced-binary-tree/" 
+	desc="projects/leetcode-solutions/trees/110/description.html">}}
 ```python
 def dfs(root):
     if not root:

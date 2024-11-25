@@ -1,4 +1,5 @@
-{{< rawdetails title="46. Permutations" link="https://leetcode.com/problems/permutations/" >}}
+{{< rawdetails title="46. Permutations" link="https://leetcode.com/problems/permutations/" 
+	desc="projects/leetcode-solutions/backtrack/46/description.html">}}
 
 ```python
 res = []

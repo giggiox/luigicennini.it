@@ -1,4 +1,5 @@
-{{< rawdetails title="90. Subsets II" link="https://leetcode.com/problems/subsets-ii/">}}
+{{< rawdetails title="90. Subsets II" link="https://leetcode.com/problems/subsets-ii/"
+	desc="projects/leetcode-solutions/backtrack/90/description.html">}}
 
 ```python
 res = []

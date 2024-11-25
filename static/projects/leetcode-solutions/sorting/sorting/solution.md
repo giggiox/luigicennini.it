@@ -15,10 +15,13 @@ def selection_sort(a):
 	{{< carousel path="projects/leetcode-solutions/sorting/sorting/images/selection/" >}}
 {{< endrawdetails >}}
 
+{{< rawdetails title="time complexity" >}}
 $$T(n) = O(n^2)$$
 
 Because for $i=0$ we have $n-1$ comparisons, for $i=1$ we have $n-2$ comparisons, ..., for $i=n-2$ we have $1$ comparison.
 The number of comparisons is then $ \sum_{i=0}^{n-1} i = \frac{n(n-1)}{2}$
+
+{{< endrawdetails >}}
 
 **Selection sort is NOT stable**.
 
@@ -61,11 +64,13 @@ def bubble_sort(a):
 	{{< carousel path="projects/leetcode-solutions/sorting/sorting/images/bubble/" >}}
 {{< endrawdetails >}}
 
-
+{{< rawdetails title="time complexity" >}}
 $$T(n) = O(n^2)$$
 
 Because for $i=n-1$ we have $n-1$ comparisons, for $i=n-2$ we have $n-2$ comparisons, ..., for $i=1$ we have $1$ comparison.
 The number of comparisons is then $ \sum_{i=0}^{n-1} i = \frac{n(n-1)}{2}$
+{{< endrawdetails >}}
+
 
 **Bubble sort IS stable**.
 
@@ -108,7 +113,10 @@ arr = [0.78, 0.17, 0.39, 0.26, 0.72, 0.94, 0.21, 0.12, 0.23, 0.68]
 
 You can use any stable algorithm to sort each bucket.
 
+{{< rawdetails title="time complexity" >}}
 $$T(n) = O(n^2)$$
+{{< endrawdetails >}}
+
 
 {{< endrawdetails >}}
 
@@ -124,8 +132,11 @@ def heap_sort(arr):
     return result
 ```
 
+{{< rawdetails title="time complexity" >}}
+
 Heapify complexity is $O(n)$, heappop complexity is $O(log_2n)$, hence:
 $$T(n) = O(nlog_2n)$$
+{{< endrawdetails >}}
 
 **Heap sort is NOT stable**
 
@@ -160,7 +171,7 @@ def quicksort(a, l, r):
 	{{< carousel path="projects/leetcode-solutions/sorting/sorting/images/quick/" >}}
 {{< endrawdetails >}}
 
-
+{{< rawdetails title="time complexity" >}}
 - On the best case scenario, every partition divide the array in half
 $$T(n) = 2T(\frac{n}{2}) + n$$
 $$\rightarrow T(n) = O(nlog_2n)$$
@@ -175,6 +186,7 @@ $$\rightarrow T(n) = O(nlog_2n)$$
 
 
 Because we have to sum every case a[0]|---k---| P |---(n-k-1)---|a[n-1] and get the average.
+{{< endrawdetails >}}
 
 
 **Quick sort is NOT stable**.
@@ -225,9 +237,11 @@ def mergesort(a, l, r):
 	{{< carousel path="projects/leetcode-solutions/sorting/sorting/images/merge/" >}}
 {{< endrawdetails >}}
 
+{{< rawdetails title="time complexity" >}}
 
 $$T(n) = 2T(\frac{n}{2}) + n$$
 $$\rightarrow T(n) = O(nlog_2n)$$
+{{< endrawdetails >}}
 
 **Merge sort IS stable**.
 

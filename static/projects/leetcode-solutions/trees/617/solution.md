@@ -1,4 +1,5 @@
-{{< rawdetails title="617. Merge Two Binary Trees" link="https://leetcode.com/problems/merge-two-binary-trees/" >}}
+{{< rawdetails title="617. Merge Two Binary Trees" link="https://leetcode.com/problems/merge-two-binary-trees/" 
+	desc="projects/leetcode-solutions/trees/617/description.html">}}
 ```python
 def dfs(root1, root2):
     if not root1:

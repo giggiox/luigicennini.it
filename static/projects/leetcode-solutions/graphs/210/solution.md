@@ -1,4 +1,5 @@
-{{< rawdetails title="210. Course Schedule II" link="https://leetcode.com/problems/course-schedule-ii/" tag="topological sort">}}
+{{< rawdetails title="210. Course Schedule II" link="https://leetcode.com/problems/course-schedule-ii/" tag="topological sort"
+	desc="projects/leetcode-solutions/graphs/210/description.html">}}
 
 ```python
 adj_list = defaultdict(list)

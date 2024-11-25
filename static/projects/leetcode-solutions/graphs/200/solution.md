@@ -1,4 +1,5 @@
-{{< rawdetails title="200. Number of Islands" link="https://leetcode.com/problems/number-of-islands/" >}}
+{{< rawdetails title="200. Number of Islands" link="https://leetcode.com/problems/number-of-islands/" 
+	desc="projects/leetcode-solutions/graphs/200/description.html">}}
 
 ```python
 def bfs(i,j):

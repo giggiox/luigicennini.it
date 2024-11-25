@@ -1,4 +1,5 @@
-{{< rawdetails title="167. Two Sum II - Input Array Is Sorted" link="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/" tag="2 pointers">}}
+{{< rawdetails title="167. Two Sum II - Input Array Is Sorted" link="https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/" tag="2 pointers"
+	desc="projects/leetcode-solutions/general-problems/167/description.html">}}
 
 ```python
 l, r = 0, len(numbers)-1

@@ -1,4 +1,5 @@
-{{< rawdetails title="199. Binary Tree Right Side View" link="https://leetcode.com/problems/binary-tree-right-side-view/" >}}
+{{< rawdetails title="199. Binary Tree Right Side View" link="https://leetcode.com/problems/binary-tree-right-side-view/" 
+	desc="projects/leetcode-solutions/trees/199/description.html">}}
 ```python
 if not root:
     return 

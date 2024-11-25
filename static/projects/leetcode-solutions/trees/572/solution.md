@@ -1,4 +1,5 @@
-{{< rawdetails title="572. Subtree of Another Tree" link="https://leetcode.com/problems/subtree-of-another-tree/" >}}
+{{< rawdetails title="572. Subtree of Another Tree" link="https://leetcode.com/problems/subtree-of-another-tree/" 
+	desc="projects/leetcode-solutions/trees/572/description.html">}}
 ```python
 def sameTree(root1,root2):
     if not root1 and not root2:

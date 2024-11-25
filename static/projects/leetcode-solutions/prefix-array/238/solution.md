@@ -1,4 +1,5 @@
-{{< rawdetails title="238. Product of Array Except Self" link="https://leetcode.com/problems/product-of-array-except-self/" >}}
+{{< rawdetails title="238. Product of Array Except Self" link="https://leetcode.com/problems/product-of-array-except-self/" 
+	desc="projects/leetcode-solutions/prefix-array/238/description.html">}}
 
 ```python
 n = len(nums)

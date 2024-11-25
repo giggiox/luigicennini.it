@@ -1,4 +1,5 @@
-{{< rawdetails title="124. Binary Tree Maximum Path Sum" link="https://leetcode.com/problems/binary-tree-maximum-path-sum/" >}}
+{{< rawdetails title="124. Binary Tree Maximum Path Sum" link="https://leetcode.com/problems/binary-tree-maximum-path-sum/" 
+	desc="projects/leetcode-solutions/trees/124/description.html">}}
 ```python
 res = [root.val]
 def dfs(root):

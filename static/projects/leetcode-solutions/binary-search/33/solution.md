@@ -1,4 +1,5 @@
-{{< rawdetails title="33. Search in Rotated Sorted Array" link="https://leetcode.com/problems/search-in-rotated-sorted-array/" >}}
+{{< rawdetails title="33. Search in Rotated Sorted Array" link="https://leetcode.com/problems/search-in-rotated-sorted-array/" 
+	desc="projects/leetcode-solutions/binary-search/33/description.html" >}}
 
 ```python
 l,r = 0,len(nums)-1

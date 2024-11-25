@@ -1,4 +1,5 @@
-{{< rawdetails title="1. Two Sum" link="https://leetcode.com/problems/two-sum/">}}
+{{< rawdetails title="1. Two Sum" link="https://leetcode.com/problems/two-sum/"
+	desc="projects/leetcode-solutions/general-problems/1/description.html">}}
 
 ```python
 d = {}

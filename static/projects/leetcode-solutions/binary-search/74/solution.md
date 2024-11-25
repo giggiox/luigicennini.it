@@ -1,4 +1,5 @@
-{{< rawdetails title="74. Search a 2D Matrix" link="https://leetcode.com/problems/search-a-2d-matrix/" >}}
+{{< rawdetails title="74. Search a 2D Matrix" link="https://leetcode.com/problems/search-a-2d-matrix/" 
+	desc="projects/leetcode-solutions/binary-search/74/description.html">}}
 
 ```python
 m = len(matrix)

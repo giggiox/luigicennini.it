@@ -15,7 +15,29 @@ mathjax: true
 
 
 {{< rawhtml >}}
+<script
+  src="https://code.jquery.com/jquery-3.7.1.slim.min.js"
+  integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8="
+  crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+
+
+<script>
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
+</script>
+
+
+
 <style>
+.tooltip-inner {
+	text-align: left;
+    white-space: pre-line;
+	max-width: 30em;
+}
+
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-color: black;
@@ -173,13 +195,16 @@ Not all solutions have visual aids just yet, but they will be added over time as
 {{< include path="/projects/leetcode-solutions/backtrack/39/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/backtrack/90/solution.md" >}}
 
-
 # Dynamic Programming
 {{< include path="/projects/leetcode-solutions/dp/70/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/322/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/91/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/55/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/dp/45/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/dp/300/solution.md" >}}
+
+# 2D Dynamic Programming
+{{< include path="/projects/leetcode-solutions/2ddp/1143/solution.md" >}}
 
 # Graphs
 {{< include path="/projects/leetcode-solutions/graphs/visits/solution.md" >}}

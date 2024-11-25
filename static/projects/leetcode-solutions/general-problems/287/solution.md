@@ -1,4 +1,5 @@
-{{< rawdetails title="287. Find the Duplicate Number" link="https://leetcode.com/problems/find-the-duplicate-number/" >}}
+{{< rawdetails title="287. Find the Duplicate Number" link="https://leetcode.com/problems/find-the-duplicate-number/" 
+	desc="projects/leetcode-solutions/general-problems/287/description.html">}}
 
 ```python
 slow,fast = 0,0

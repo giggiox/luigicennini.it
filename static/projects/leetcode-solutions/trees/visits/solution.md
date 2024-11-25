@@ -46,6 +46,7 @@ remember to put the right part first in the stack.
 {{< endrawdetails >}}
 {{< endrawdetails >}}
 
+{{< rawdetails title="time and space complexity" >}}
 
 The time complexity of all visits is
 $$O(n)$$
@@ -55,5 +56,10 @@ Let's take in account 2 cases:
 - right skewed tree: we have $T(n) = T(0) + T(n-1) + 1$. The solution of this recursive relation is $$T(n) = O(n)$$
 - balanced tree (both left and right subtrees have an equal number of nodes): $T(n) = T(n/2) +T(n/2) + 1$. The solution of this recursive relation is $$T(n) = O(n)$$
 
+
+The space complexity is the maximum length of the recursion stack (recursive) or the maximum length of the queue, which is $n$.
+
+$$S(n) = O(n)$$
+{{< endrawdetails >}}
 
 {{< endrawdetails >}}

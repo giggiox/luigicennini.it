@@ -1,4 +1,5 @@
-{{< rawdetails title="206. Reverse Linked List" link="https://leetcode.com/problems/reverse-linked-list/" >}}
+{{< rawdetails title="206. Reverse Linked List" link="https://leetcode.com/problems/reverse-linked-list/" 
+	desc="projects/leetcode-solutions/linked-list/206/description.html" >}}
 ```python
 newList = None
 while head:

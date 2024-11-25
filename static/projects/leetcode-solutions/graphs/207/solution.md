@@ -1,4 +1,5 @@
-{{< rawdetails title="207. Course Schedule" link="https://leetcode.com/problems/course-schedule/" tag="cycle detection or cycle detection with BFS topo sort">}}
+{{< rawdetails title="207. Course Schedule" link="https://leetcode.com/problems/course-schedule/" tag="cycle detection or cycle detection with BFS topo sort"
+	desc="projects/leetcode-solutions/graphs/207/description.html">}}
 
 ```python
 adjList = defaultdict(list)

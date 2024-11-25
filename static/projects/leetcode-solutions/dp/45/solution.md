@@ -1,4 +1,5 @@
-{{< rawdetails title="45. Jump Game II" >}}
+{{< rawdetails title="45. Jump Game II" link="https://leetcode.com/problems/jump-game-ii/description/"
+	desc="projects/leetcode-solutions/dp/45/description.html">}}
 
 
 {{< rawdetails title="DFS with memoization" >}}

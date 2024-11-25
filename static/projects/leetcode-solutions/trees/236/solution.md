@@ -1,4 +1,5 @@
-{{< rawdetails title="236. lowest-common-ancestor-of-a-binary-tree" link="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree" >}}
+{{< rawdetails title="236. lowest-common-ancestor-of-a-binary-tree" link="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree" 
+	desc="projects/leetcode-solutions/trees/236/description.html">}}
 ```python
 def dfs(root, v, path):      
 	if not root:

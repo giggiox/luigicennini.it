@@ -1,4 +1,5 @@
-{{< rawdetails title="130. Surrounded Regions" link="https://leetcode.com/problems/surrounded-regions/" >}}
+{{< rawdetails title="130. Surrounded Regions" link="https://leetcode.com/problems/surrounded-regions/" 
+	desc="projects/leetcode-solutions/graphs/130/description.html">}}
 
 ```python
 rows, cols= len(board), len(board[0])

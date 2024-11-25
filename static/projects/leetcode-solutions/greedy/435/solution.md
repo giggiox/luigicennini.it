@@ -1,4 +1,5 @@
-{{< rawdetails title="435. Non-overlapping Intervals" link="https://leetcode.com/problems/non-overlapping-intervals/">}}
+{{< rawdetails title="435. Non-overlapping Intervals" link="https://leetcode.com/problems/non-overlapping-intervals/"
+	desc="projects/leetcode-solutions/greedy/435/description.html">}}
 
 See the solution for interval-schedule, this algorithm is exactly that one but with a twist, here we don't ask to return the right intervals but the number of intervals that are left out.
 

@@ -1,4 +1,5 @@
-{{< rawdetails title="543. Diameter of Binary Tree" link="https://leetcode.com/problems/diameter-of-binary-tree/" >}}
+{{< rawdetails title="543. Diameter of Binary Tree" link="https://leetcode.com/problems/diameter-of-binary-tree/" 
+	desc="projects/leetcode-solutions/trees/543/description.html">}}
 ```python
 diameter = [0]
 def dfs(root):

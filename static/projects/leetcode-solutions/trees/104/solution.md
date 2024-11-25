@@ -1,4 +1,5 @@
-{{< rawdetails title="104. Maximum Depth of Binary Tree" link="https://leetcode.com/problems/maximum-depth-of-binary-tree/" >}}
+{{< rawdetails title="104. Maximum Depth of Binary Tree" link="https://leetcode.com/problems/maximum-depth-of-binary-tree/"
+	desc="projects/leetcode-solutions/trees/104/description.html">}}
 ```python
 def dfs(root):
 	if not root:

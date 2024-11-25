@@ -1,4 +1,5 @@
-{{< rawdetails title="53. Maximum Subarray (sum)" link="https://leetcode.com/problems/maximum-subarray/" tag="kadane's algorithm">}}
+{{< rawdetails title="53. Maximum Subarray (sum)" link="https://leetcode.com/problems/maximum-subarray/" tag="kadane's algorithm"
+	desc="projects/leetcode-solutions/general-problems/53/description.html">}}
 
 
 

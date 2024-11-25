@@ -1,4 +1,5 @@
-{{< rawdetails title="55. Jump Game" >}}
+{{< rawdetails title="55. Jump Game" link="https://leetcode.com/problems/jump-game/description/"
+	desc="projects/leetcode-solutions/dp/55/description.html">}}
 
 
 {{< rawdetails title="DFS with memoization" >}}
@@ -10,8 +11,8 @@ def dfs(i):
     if i == len(nums) - 1:
         return True
     tmp = False
-        for j in range(nums[i]):
-            tmp = tmp or dfs(j+1+i)
+    for j in range(nums[i]):
+        tmp = tmp or dfs(j+1+i)
     cache[i] = tmp
     return tmp
 return dfs(0)

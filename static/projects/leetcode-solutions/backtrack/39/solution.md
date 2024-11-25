@@ -1,4 +1,5 @@
-{{< rawdetails title="39. Combination Sum" link="https://leetcode.com/problems/combination-sum/" >}}
+{{< rawdetails title="39. Combination Sum" link="https://leetcode.com/problems/combination-sum/" 
+	desc="projects/leetcode-solutions/backtrack/39/description.html">}}
 
 ```python
 res = []

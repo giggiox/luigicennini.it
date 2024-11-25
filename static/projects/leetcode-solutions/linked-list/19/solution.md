@@ -1,4 +1,5 @@
-{{< rawdetails title="19. Remove Nth Node From End of List" link="https://leetcode.com/problems/remove-nth-node-from-end-of-list" >}}
+{{< rawdetails title="19. Remove Nth Node From End of List" link="https://leetcode.com/problems/remove-nth-node-from-end-of-list" 
+	desc="projects/leetcode-solutions/linked-list/19/description.html">}}
 
 ```python
 dummyNode = ListNode()

@@ -1,4 +1,5 @@
-{{< rawdetails title="322. Coin Change" link="https://leetcode.com/problems/coin-change/" >}}
+{{< rawdetails title="322. Coin Change" link="https://leetcode.com/problems/coin-change/" 
+	desc="projects/leetcode-solutions/dp/322/description.html">}}
 
 
 {{< rawdetails title="Naive" >}}
@@ -19,7 +20,22 @@ return result if result != math.inf else -1
 
 {{< rawdetails title="visualization" >}}
 	{{< carousel path="projects/leetcode-solutions/dp/322/naive/" >}}
-Or look at the tree with [this link]()
+{{< endrawdetails >}}
+
+
+{{< rawdetails title="time and space complexity" >}}
+Time complexity:
+$$T(n) = nT(t-1) + 1$$
+$$= n(nT(t-2)) + 1) + 1$$
+$$...$$
+$$= O(n^t)$$
+
+In the worst case we have in the available coins, a coin with value $1$. In this case the total amount is each time decreased by $1$.
+
+Space complexity: 
+$$S(n) = O(t)$$
+It is the depth of the recursion stack at max, which is $t$.
+
 {{< endrawdetails >}}
 
 {{< endrawdetails >}}
@@ -47,8 +63,19 @@ return result if result != math.inf else -1
 ```
 {{< rawdetails title="visualization" >}}
 	{{< carousel path="projects/leetcode-solutions/dp/322/top-down/" >}}	
-Or look at the tree with [this link]()
 {{< endrawdetails >}}
+
+{{< rawdetails title="time and space complexity" >}}
+Time complexity:
+$$T(n) = O(n*t)$$
+In the memoized solution, the time complexity is always the maximum length of the cache. 
+
+Space complexity: 
+$$S(n) = O(t)$$
+It is the depth of the recursion stack at max, which is $t$.
+
+{{< endrawdetails >}}
+
 {{< endrawdetails >}}
 
 
@@ -66,6 +93,18 @@ return dp[amount] if dp[amount] != amount + 1 else -1
 {{< rawdetails title="visualization" >}}
 	{{< carousel path="projects/leetcode-solutions/dp/322/bottom-up/" >}}	
 {{< endrawdetails >}}
+
+{{< rawdetails title="time and space complexity" >}}
+Time complexity:
+$$T(n) = O(n*t)$$
+
+Space complexity: 
+$$S(n) = O(t)$$
+
+{{< endrawdetails >}}
+
+
+
 {{< endrawdetails >}}
 
 

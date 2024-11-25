@@ -1,4 +1,5 @@
-{{< rawdetails title="91. Decode Ways" link="https://leetcode.com/problems/decode-ways" >}}
+{{< rawdetails title="91. Decode Ways" link="https://leetcode.com/problems/decode-ways" 
+	desc="projects/leetcode-solutions/dp/91/description.html">}}
 
 {{< rawdetails title="Top-Down (memoization)" >}}
 ```python
