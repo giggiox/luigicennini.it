@@ -1,12 +1,12 @@
 {{< rawdetails title="abstract factory">}}
 
-## Problem
+
+{{< rawdetails title="problem description">}}
 Provide an interface to create family of objects, without specifying directly the class.
+{{< endrawdetails >}}
 
-## Solution
 
-
-{{< rawdetails title="using abstract factory pattern">}}
+{{< rawdetails title="solution using abstract factory pattern">}}
 
 ```java
 VehicleFactory carFactory = new CarFactory();
@@ -60,15 +60,19 @@ class BikeFactory extends VehicleFactory {
 
 
 
-## Notes
+{{< rawdetails title="notes">}}
+
 {{< rawdetails title="example class diagram">}}
-![](/projects/design-patterns/abstractfactory/abstractfactory.png)
+{{< includeImage path="/projects/design-patterns/abstractfactory/abstractfactory.png" >}}
 {{< endrawdetails >}}
 
 
 {{< rawdetails title="textbook class diagram">}}
-![](/projects/design-patterns/abstractfactory/abstractfactory1.png)
+{{< includeImage path="/projects/design-patterns/abstractfactory/abstractfactory1.png" >}}
 {{< endrawdetails >}}
+
+{{< endrawdetails >}}
+
 
 
 {{< endrawdetails >}}

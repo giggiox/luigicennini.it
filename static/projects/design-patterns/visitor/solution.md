@@ -1,7 +1,8 @@
 {{< rawdetails title="visitor">}}
 
 
-## Problem
+{{< rawdetails title="problem description">}}
+
 You have one (or more) class(es) where you want to add a new functionality.
 For example you have a `Dot` class and a `Circle` class, like this:
 ```java
@@ -21,11 +22,11 @@ class Circle implements Shape{
 ```
 
 Now you want to add an `export` functionality.
-You can do it in two ways:
+You can do it in two ways.
+{{< endrawdetails >}}
 
-## Solution
 
-{{< rawdetails title="1. adding `export` functionality directly inside the 2 classes ">}}
+{{< rawdetails title="solution 1. adding `export` functionality directly inside the 2 classes (good)">}}
 ```java
 interface Shape {
     public void draw ();
@@ -65,10 +66,12 @@ public class Client {
 	}
 }
 ```
-{{< endrawdetails >}}
+
 This one works fine, but we have modified the code of `Shape` and `Dot`. What if we do not want to do that?
 
-{{< rawdetails title="2. (wrong) adding new class handling `export` functionality for all shapes  ">}}
+{{< endrawdetails >}}
+
+{{< rawdetails title="solution 2. adding new class handling `export` functionality for all shapes (bad)">}}
 
 ```java
 
@@ -128,7 +131,7 @@ This one will output correctly `Exporting Dot, x = 5.0, y = 8.0` because at stat
 {{< endrawdetails >}}
 
 
-{{< rawdetails title="2. (correct) using visitor pattern  ">}}
+{{< rawdetails title="solution 2. using visitor pattern  (good)">}}
 
 
 ```java
@@ -189,7 +192,8 @@ Notice how we are in fact changing the `Dot` and `Circle` code, but notice how t
 {{< endrawdetails >}}
 
 
-## Notes
+{{< rawdetails title="notes">}}
+
 {{< rawdetails title="adding another operation with visitor">}}
 
 You might be thinking that if you need to add another operation, for example a `Transform` operation, You have to
@@ -283,7 +287,8 @@ public class Client{
 
 {{< rawdetails title="class diagram">}}
 The architecture described above is reflected in the class diagram below:
-![](/projects/design-patterns/visitor/visitor.png)
+{{< includeImage path="/projects/design-patterns/visitor/visitor.png" >}}
+
 {{< endrawdetails >}}
 
 
@@ -292,13 +297,17 @@ The architecture described above is reflected in the class diagram below:
 {{< rawdetails title="strategy & visitor">}}
 They both delegate the an operation to an extern object.
 The class diagrams are the following:
-![](/projects/design-patterns/visitor/strategyvisitor.png)
+{{< includeImage path="/projects/design-patterns/visitor/strategyvisitor.png" >}}
 
 
 
 They have 2 different intent:
 - **Visitor**: rapresent an operation to execute on an object structure.
 - **Strategy**: rapresent different type of operations to be executed in an object.
+
+{{< endrawdetails >}}
+
+
 
 {{< endrawdetails >}}
 

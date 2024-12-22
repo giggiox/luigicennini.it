@@ -1,6 +1,6 @@
 {{< rawdetails title="iterator">}}
 
-## Problem
+{{< rawdetails title="problem description">}}
 Given a component containing an aggregate of elements, we want a way to iterate over it without knowing the underlying data structure  (array, hashmap, graph, tree...).
 ```java
 class Social1 {
@@ -19,8 +19,10 @@ class Social1 {
 ```
 The problem of this code is that  if i change the implementation of `emails` from `List` to `HashSet` clients will break. I can change the type to be a `Collection` but again, if i change the implementation to be an array, clients will break again.
 
-## Solution
-{{< rawdetails title="using iterator pattern">}}
+{{< endrawdetails >}}
+
+
+{{< rawdetails title="solution using iterator pattern">}}
 Iterator pattern gives a way of accessing aggregate elements in a *sequential* way without exposing underlying representation.
 
 It exposes only 2 interface method: `hasNext` and `getNext`.
@@ -84,10 +86,10 @@ class Social1Iterator {
 
 
 
-## Notes
+{{< rawdetails title="notes">}}
 
 {{< rawdetails title="(example) class diagram">}}
-![](/projects/design-patterns/iterator/iterator.png)
+{{< includeImage path="/projects/design-patterns/iterator/iterator.png" >}}
 {{< endrawdetails >}}
 
 
@@ -211,8 +213,12 @@ class InOrderOrderIterator implements TreeIterator{
 {{< endrawdetails >}}
 
 {{< rawdetails title="(official) class diagram">}}
-![](/projects/design-patterns/iterator/iterator1.png)
+{{< includeImage path="/projects/design-patterns/iterator/iterator1.png" >}}
 {{< endrawdetails >}}
+
+
+{{< endrawdetails >}}
+
 
 
 

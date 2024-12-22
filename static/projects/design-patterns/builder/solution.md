@@ -1,11 +1,13 @@
 {{< rawdetails title="builder">}}
 
 
-## Problem
-Suppose you have a complex object to build, you can do that in many ways:
+{{< rawdetails title="problem description">}}
+Suppose you have a complex object to build, you can do that in many ways.
+{{< endrawdetails >}}
 
-{{< rawdetails title="1. Overloading the constructor">}}
 
+
+{{< rawdetails title="solution 1. overloading the constructor">}}
 ```java
 class Car {
 	private String engine; // This is not optional
@@ -17,25 +19,24 @@ class Car {
 	Car (String engine, String transmission, int airbags) { ... }
 }
 ```
-{{< endrawdetails >}}
-
 You can see that as the complexity of the object grows, the constructor gets crammed with more and more parameters, which is not optimal.
 
-{{< rawdetails title="2. Using setters">}}
+{{< endrawdetails >}}
+
+
+{{< rawdetails title="solution 2. using setters">}}
 ```java
 Car car = new Car("V8");
 car.setTransmission("automatic");
 car.setAirbags(5);
 ```
-{{< endrawdetails >}}
 
 Again this is not optimal with complex objects.
 
+{{< endrawdetails >}}
 
-## Solution
 
-{{< rawdetails title="3. using builder pattern">}}
-
+{{< rawdetails title="solution 3. using builder pattern">}}
 The builder pattern propose a solution to this problem, where the construction of the object is handled by (usually) a private static class inside the object itself.
 So to build the `Car` object you will do something like this
 

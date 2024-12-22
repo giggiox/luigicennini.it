@@ -1,10 +1,6 @@
 {{< rawdetails title="factory method">}}
 
-## Problem
-
-
-{{< rawdetails title="see problem description">}}
-
+{{< rawdetails title="problem description">}}
 Suppose you have a class `MyType` with 2 implementation `MyImpl` and `MyOtherImpl` and suppose this class is used by your application class, like this:
 
 ```java
@@ -47,10 +43,8 @@ It can also happen that you extends the `App` class, you override only one of th
 {{< endrawdetails >}}
 
 
-## Solution
 
-
-{{< rawdetails title="using factory method pattern">}}
+{{< rawdetails title="solution using factory method pattern">}}
 
 Factory method pattern propose a solution where you *refactor* your code to instantiate the object only in one part of your code, so the error could not happen.
 

@@ -1,17 +1,14 @@
 {{< rawdetails title="chain of responsabilities">}}
 
-## Problem
-
+{{< rawdetails title="problem description">}}
 An object wants to pass the responsability of performing an action to a chain of other objects.
-
-![](/projects/design-patterns/chainofresponsability/chainofresp.png)
-
-
+{{< includeImage path="/projects/design-patterns/chainofresponsability/chainofresp.png" >}}
+{{< endrawdetails >}}
 
 
-{{< rawdetails title="using chain of responsabilities pattern">}}
+
+{{< rawdetails title="solution using chain of responsabilities pattern">}}
 Each object in the chain tries to handle the request, if it can't, the request is passed down in the chain.
-
 
 ```java
 StringFinder finder = new EqualsStringFinder(
@@ -97,10 +94,10 @@ class SuffixStringFinder extends StringFinder {
 
 
 
-## Notes
+{{< rawdetails title="notes">}}
 
 {{< rawdetails title="example class diagram">}}
-![](/projects/design-patterns/chainofresponsability/chainofresp1.png)
+{{< includeImage path="/projects/design-patterns/chainofresponsability/chainofresp1.png" >}}
 {{< endrawdetails >}}
 
 
@@ -183,6 +180,8 @@ class SuffixStringFinder extends StringFinder {
     }
 }
 ```
+{{< endrawdetails >}}
+
 {{< endrawdetails >}}
 
 

@@ -1,13 +1,12 @@
 {{< rawdetails title="decorator">}}
 
-## Problem
-
+{{< rawdetails title="problem description">}}
 We want to add new behaviors to objects without modifying them (because we don't want to modify them or maybe we can't!).
+{{< endrawdetails >}}
 
 
-## Solution
 
-{{< rawdetails title="using decorator pattern">}}
+{{< rawdetails title="solution using decorator pattern">}}
 Decorator lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 
 ```java
@@ -59,10 +58,12 @@ class Decorator implements Component{
 
 
 
-## Notes
+{{< rawdetails title="notes">}}
 
 {{< rawdetails title="example class diagram">}}
-![](/projects/design-patterns/decorator/decorator.png)
+
+{{< includeImage path="/projects/design-patterns/decorator/decorator.png" >}}
+
 {{< endrawdetails >}}
 
 {{< rawdetails title="example with multiple decorators">}}
@@ -134,9 +135,10 @@ class ConcreteDecorator2 extends Decorator{
 
 
 {{< rawdetails title="class diagram">}}
-![](/projects/design-patterns/decorator/decorator1.png)
+{{< includeImage path="/projects/design-patterns/decorator/decorator1.png" >}}
 {{< endrawdetails >}}
 
+{{< endrawdetails >}}
 
 
 {{< endrawdetails >}}

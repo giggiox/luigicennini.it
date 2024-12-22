@@ -1,22 +1,21 @@
 {{< rawdetails title="facade">}}
 
-## Problem
+{{< rawdetails title="problem description">}}
 
 You have an object that has to interact with a broad set of objects that belong to a sophisticated library.
 To do that you would normally initilize all the objects, execute methods and so on.
 
 The result is that the business logic will be tightly coupled with the implementation of 3rd-party classes, making it hard to mantain.
 
-![](/projects/design-patterns/facade/facade.png)
+{{< includeImage path="/projects/design-patterns/facade/facade.png" >}}
+
+{{< endrawdetails >}}
 
 
-
-
-## Solution
-
-We use facade pattern to hide the complexity of the system.
 
 {{< rawdetails title="using facade pattern">}}
+We use facade pattern to hide the complexity of the system.
+
 ```java
 ComputerFacade computer = new ComputerFacade();
 computer.start();
@@ -55,9 +54,13 @@ class ComputerFacade {
 
 
 
-## Notes
+{{< rawdetails title="notes">}}
+
 {{< rawdetails title="facade & decorator">}}
 Facade wraps a whole system while Decorator wraps only a component of the system.
 {{< endrawdetails >}}
+
+{{< endrawdetails >}}
+
 
 {{< endrawdetails >}}

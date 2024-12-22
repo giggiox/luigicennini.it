@@ -13,6 +13,7 @@ toc: true
 mathjax: true
 ---
 
+
 {{< rawhtml >}}
 <style>
 .carousel-control-prev-icon,
@@ -106,6 +107,7 @@ h1 a {
 {{< /rawhtml >}}
 
 
+
 I made this project as an easy way to access and revise design patterns. 
 
 There are plenty of resources online about design patterns, so why did i made mine?
@@ -145,9 +147,6 @@ So here you go, take a look into this fabulous handbook of design patterns!
 {{< include path="/projects/design-patterns/fluentinterface/solution.md" >}}
 {{< include path="/projects/design-patterns/singleton/solution.md" >}}
 
-
-
-
 # Structural
 {{< include path="/projects/design-patterns/decorator/solution.md" >}}
 {{< include path="/projects/design-patterns/facade/solution.md" >}}
@@ -157,9 +156,11 @@ So here you go, take a look into this fabulous handbook of design patterns!
 {{< include path="/projects/design-patterns/observer/solution.md" >}}
 {{< include path="/projects/design-patterns/pubsub/solution.md" >}}
 {{< include path="/projects/design-patterns/strategy/solution.md" >}}
+{{< include path="/projects/design-patterns/state/solution.md" >}}
 {{< include path="/projects/design-patterns/visitor/solution.md" >}}
 {{< include path="/projects/design-patterns/iterator/solution.md" >}}
 {{< include path="/projects/design-patterns/chainofresponsability/solution.md" >}}
+
 
 
 {{< rawhtml >}}
@@ -167,8 +168,7 @@ So here you go, take a look into this fabulous handbook of design patterns!
 {{< /rawhtml >}}
 
 
-    
-	
+
 {{< rawhtml >}}
 <script>
 

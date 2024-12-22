@@ -1,11 +1,10 @@
 {{< rawdetails title="fluent interface">}}
 
-## Problem
+{{< rawdetails title="problem description">}}
 We want a readable way to interact with an API.
+{{< endrawdetails >}}
 
-## Solution
-
-{{< rawdetails title="using fluent interface pattern">}}
+{{< rawdetails title="solution using fluent interface pattern">}}
 ```java
 class Car {
     private String engine;

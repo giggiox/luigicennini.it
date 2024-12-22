@@ -1,19 +1,17 @@
 {{< rawdetails title="observer">}}
 
-## Problem
+{{< rawdetails title="problem description">}}
 An object `Subject` has a state and one or more object(s) `Observer`s wants to know when the `Subject` state changes.
-
-![](/projects/design-patterns/observer/observer1.png)
-
-## Solution
+{{< includeImage path="/projects/design-patterns/observer/observer1.png" >}}
+{{< endrawdetails >}}
 
 
-{{< rawdetails title="1. polling">}}
+{{< rawdetails title="solution 1. (bad) polling">}}
 **polling** means that `Observer` will constantly look at the state inside `Subject`. This solution is inefficient.
 {{< endrawdetails >}}
 
 
-{{< rawdetails title="2. use observer pattern">}}
+{{< rawdetails title="solution 2. (good) use observer pattern">}}
 
 This way, each `Observer` subscribes to a `Subject` and it's the `Subject` who has the task of informing all of it's `Observer`s when the state changes.
 
@@ -103,12 +101,11 @@ public class Client {
 {{< endrawdetails >}}
 
 
-## Notes
-
+{{< rawdetails title="notes">}}
 
 {{< rawdetails title="(example) class diagram">}}
 The architecture described above is reflected in the class diagram below:
-![](/projects/design-patterns/observer/observer.png)
+{{< includeImage path="/projects/design-patterns/observer/observer.png" >}}
 {{< endrawdetails >}}
 
 {{< rawdetails title="abstracting observer logic handling">}}
@@ -146,6 +143,7 @@ class Subject extends AbstractSubject{
 ```
 {{< endrawdetails >}}
 
+{{< endrawdetails >}}
 
 
 {{< endrawdetails >}}

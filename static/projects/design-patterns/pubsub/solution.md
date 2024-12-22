@@ -1,16 +1,19 @@
-{{< rawdetails title="publish-subscriber (pub-sub)">}}
-## Problem
+{{< rawdetails title="publish-subscriber">}}
+
+
+{{< rawdetails title="problem description">}}
 
 The problem is the same as the observer pattern: we have a Subject we want to observe for it's updates.
 
 This time though there is a twist: in this case a message is not broadcasted to all observers but a subscriber can subscribe to different topics he is interested into.
 
-![](/projects/design-patterns/pubsub/pubsub1.PNG)
+{{< includeImage path="/projects/design-patterns/pubsub/pubsub1.PNG" >}}
+
+{{< endrawdetails >}}
 
 
 
-## Solution
-{{< rawdetails title="use publish-subscriber pattern">}}
+{{< rawdetails title="solution using publish-subscriber pattern">}}
 
 ```java
 MessageBroker broker = new MessageBroker();
@@ -92,10 +95,15 @@ class ConcreteSubscriber2 implements Subscriber {
 {{< endrawdetails >}}
 
 
-## Notes
+{{< rawdetails title="notes">}}
+
 {{< rawdetails title="(example) class diagram">}}
 The architecture described above is reflected in the class diagram below:
-![](/projects/design-patterns/pubsub/pubsub.png)
+{{< includeImage path="/projects/design-patterns/pubsub/pubsub.png" >}}
+
 {{< endrawdetails >}}
+
+{{< endrawdetails >}}
+
 
 {{< endrawdetails >}}

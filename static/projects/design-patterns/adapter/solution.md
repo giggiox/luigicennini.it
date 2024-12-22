@@ -1,10 +1,8 @@
 {{< rawdetails title="adapter">}}
 
-## Problem
+{{< rawdetails title="problem description">}}
 
 We want to allow objects with incompatible interfaces to work together.
-
-{{< rawdetails title="see problem description">}}
 
 Suppose you have an app that displays menus using XML data, like this.
 ```java
@@ -36,10 +34,7 @@ So how can we make the 2 components work together?
 
 {{< endrawdetails >}}
 
-
-
-## Solution
-{{< rawdetails title="using adapter design pattern">}}
+{{< rawdetails title="solution using adapter design pattern">}}
 ```java
 XmlData xmlDataToDisplay = new XmlData();
 
@@ -92,15 +87,20 @@ class FancyUIServiceAdapter implements IApp{
 {{< endrawdetails >}}
 
 
+{{< rawdetails title="notes">}}
+
+
 {{< rawdetails title="example class diagram">}}
-![](/projects/design-patterns/adapter/adapter.png)
+{{< includeImage path="/projects/design-patterns/adapter/adapter.png" >}}
+
 {{< endrawdetails >}}
 
-
-## Notes
 {{< rawdetails title="adapter & decorator">}}
 The main objective of the Adapter pattern is to adapt an **interface** to another, where this interface is expected by the client.
 In the example you have an interface IApp which is obsolete, the objective is to adapt FancyUIService to resemble an implementation of IApp.
 {{< endrawdetails >}}
 
 {{< endrawdetails >}}
+
+{{< endrawdetails >}}
+
