@@ -12,6 +12,46 @@ def bfs(root):
 				mark v
 				q.append(v)
 ```
+
+{{< rawdetails title="BFS trees">}}
+We can construct a BFS tree while doing BFS.
+```python
+def bfs(root):
+	T = [root] # Tree
+	q = deque([root])
+	mark root
+	while q:
+		u = q.popleft()
+		for all edges(u,v):
+			if v is not marked:
+				mark v
+				q.append(v)
+				make v son of u in T
+```
+
+The constructed tree has some nice properties, one of which being that it gives us the distance (shortest path) from the root to any other node.
+For an unweighted graph, the BFS tree ensures that the path from the root to any node in the tree corresponds to the shortest path (in terms of the number of edges) from the root to that node in the original graph.
+This property makes BFS useful for finding shortest paths in unweighted graphs.
+
+**Example**:
+{{< includeImage path="/projects/leetcode-solutions/graphs/visits/images/bfstree.png" >}}
+
+Denoting $d(u,v)$ as the shortest path between $u$ and $v$, we get that 
+
+$$d(1,2) = 1$$
+$$d(1,5) = 1$$
+$$d(1,6) = 1$$
+$$d(1,3) = 2$$
+$$d(1,4) = 2$$
+
+
+
+
+
+{{< endrawdetails >}}
+
+
+
 {{< endrawdetails >}}
 
 {{< rawdetails title="DFS-recurisve">}}

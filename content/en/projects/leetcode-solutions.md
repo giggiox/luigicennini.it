@@ -110,12 +110,6 @@ details details details {
   margin-left: calc(20px * 3);
 }
 
-
-
-
-
-
-
 </style>
 
 
@@ -128,6 +122,7 @@ details details details {
 </script>
     
 {{< /rawhtml >}}
+
 
 
 This project is primarily for me. It's a way to organize my leetcode solutions in a way that’s easily searchable and comparable. 
@@ -205,11 +200,14 @@ Not all solutions have visual aids just yet, but they will be added over time as
 
 # 2D Dynamic Programming
 {{< include path="/projects/leetcode-solutions/2ddp/1143/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/2ddp/72/solution.md" >}}
 
 # Graphs
 {{< include path="/projects/leetcode-solutions/graphs/visits/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/graphs/topological-sort/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/graphs/detect-cycles/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/connected-components/solution.md" >}}
+{{< include path="/projects/leetcode-solutions/graphs/dijkstra/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/graphs/200/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/graphs/130/solution.md" >}}
 {{< include path="/projects/leetcode-solutions/graphs/207/solution.md" >}}

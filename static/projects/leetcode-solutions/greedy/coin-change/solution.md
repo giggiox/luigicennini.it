@@ -1,12 +1,11 @@
 {{< rawdetails title="coin change" >}}
 
 Time complexity of the coin change problem (see 322. Coin Change) is 
-$$ O(N*K) $$
+$$ O(n*k) $$
 
-**IF** you have a canonical coin set (\*) you can use a fully greedy approach.
+**IF** you have a canonical coin set you can use a fully greedy approach. Note that to identify if a coin set is canonical there is a $O(n^3)$ algorithm.
 In the case of problem 322 the testcase does not always have a canonical coin system, so we have to use a bruteforce approach (which is dynamic programming).
 
-The greedy choiche in this case is choosing at each step the largest coin that is less than the change.
 The pseudo-code of the algorithm is the following:
 ```python
 def coinChange(change, coins):
@@ -19,6 +18,27 @@ def coinChange(change, coins):
 		S = S + {c}
 	return S
 ```
+
+Take for example this coin set:
+
+$coins = \[150,90,90,20,10\]$
+
+$change = 180$
+
+
+In this case the solution from the greedy algorithm is:
+
+$S(greedy) = \[150,20,10\]$
+
+But it's not the optimal one, which is:
+
+$S(optimal) = \[90,90\]$
+
+The optimal one is the one returned by the dynamic programming algorithm.
+
+
+
+
 
 
 In python the code is:

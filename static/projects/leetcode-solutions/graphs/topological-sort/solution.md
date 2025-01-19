@@ -3,6 +3,9 @@ Problem statment:
 
 > Given a DAG (directed *acyclic* graph) a topological sort is a linear ordering of all vertices such that for any edge (u, v), u comes before v in the ordering.
 
+
+A Directed Acyclic Graph (DAG) is a directed graph with no cycles. That is, if for any pair of nodes x and y, either the path from x to y or the path from y to x does not exist.
+
 ![](/projects/leetcode-solutions/graphs/topological-sort/images/0.PNG)
 
 So a topological ordering for the graph in the photo is: $[1,4,2,3,5,6]$.
@@ -39,6 +42,20 @@ The outuput does not depend on the node we start with. This is because we loop t
 For this reason, let's see another example, starting from another node.
 
 {{< carousel path="projects/leetcode-solutions/graphs/topological-sort/2/" >}}
+
+It can be proved that the above is a topological ordering.
+
+**Theorem**: The algorithm above provides a topological ordering.
+
+**Proof**: Remember that a topological ordering is an ordering where $\forall(x,y) \in E$, $x$ appear before $y$ in the ordering.
+So in this case it has to be $out(x) > out(y)$ (where it's $>$ and not $<$ because we output $out$ values in descending order).
+Notice how when we are doing $dfs(x)$ there are 2 cases:
+1. Node $y$ is already visited, in this case, the $out$ time of $y$ is for sure less than the one from $x$.
+2. Node $y$ has to be visited, in this case, we will then start a $dfs(y)$ that will terminate making $out(y) < out(x)$.
+
+
+
+
 
 
 {{< endrawdetails >}}

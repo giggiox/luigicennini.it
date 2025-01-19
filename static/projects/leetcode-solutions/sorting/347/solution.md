@@ -1,7 +1,7 @@
 {{< rawdetails title="347. Top K Frequent Elements" link="https://leetcode.com/problems/top-k-frequent-elements/"
 	desc="projects/leetcode-solutions/sorting/347/description.html">}}
 
-You can also solve this problem with heap, the solution with heap will have a complexity of $O(nlogk)$ while this solution is $O(n)$.
+You can also solve this problem with heap, the solution with heap will have a complexity of $O(n*logk)$ while this solution (using **bucket sort**) is $O(n)$.
 
 ```python
 n = len(nums)

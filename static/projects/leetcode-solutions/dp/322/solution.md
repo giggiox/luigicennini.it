@@ -11,7 +11,7 @@ def dfs(total):
         return math.inf
     min_steps = math.inf
     for coin in coins:
-        steps = dfs(total + coin)
+        steps = dfs(total - coin)
         min_steps = min(min_steps, steps + 1)            
     return min_steps
 result = dfs(amount)
