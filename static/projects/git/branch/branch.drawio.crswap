@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36" version="26.0.5">
+  <diagram name="Pagina-1" id="ug0gWHaAXDHAtzjy_xjR">
+    <mxGraphModel dx="3585" dy="781" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Xeb5spsY4oEFiOL5pdmb-3" value="" style="rounded=1;whiteSpace=wrap;html=1;strokeWidth=2;strokeColor=none;absoluteArcSize=1;arcSize=0;" vertex="1" parent="1">
+          <mxGeometry x="140" y="2170" width="990" height="450" as="geometry" />
+        </mxCell>
+        <mxCell id="Xeb5spsY4oEFiOL5pdmb-4" value="crazyFeature" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#ffe6cc;strokeColor=#b46504;" vertex="1" parent="1">
+          <mxGeometry x="703.5" y="1285" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="Xeb5spsY4oEFiOL5pdmb-5" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;" edge="1" parent="1" source="Xeb5spsY4oEFiOL5pdmb-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="750" y="1315" as="sourcePoint" />
+            <mxPoint x="657" y="1250" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

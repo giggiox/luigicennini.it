@@ -182,7 +182,7 @@ params:
     read: "Read"
     toc: "Table Of Contents"
     copyright: "All rights reserved"
-    pageNotFound: "Page not found"
+    pageNotFound: "Page not found :("
     emailText: "Check out this site"
 
   datesFormat:
