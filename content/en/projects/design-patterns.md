@@ -7,11 +7,12 @@ tags:
   - Rich content
   - Sample
   - example
-image: /projects/design-patterns/aaaa.png
+image: /projects/design-patterns/copertina.png
 description: ""
 toc: true
 mathjax: true
 ---
+
 
 
 {{< rawhtml >}}
