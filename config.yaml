@@ -160,6 +160,14 @@ params:
       title: progetti recenti
       enable: true
       disableFeaturedImage: false
+      
+  blog:
+    recentPosts:
+      path: blog
+      count: 20
+      title: blog posts
+      enable: true # Just put enable: false to disable blog posts!
+      
 
 
 

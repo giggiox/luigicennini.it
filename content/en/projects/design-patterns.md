@@ -109,6 +109,7 @@ h1 a {
 
 
 
+
 I made this project as an easy way to access and revise design patterns. 
 
 There are plenty of resources online about design patterns, so why did i made mine?
@@ -124,20 +125,16 @@ So here you go, take a look into this fabulous handbook of design patterns!
 
 
 {{< rawhtml >}}
-<div id="design-patterns">
-
-
-
-
-<div class="container text-center">
-    <div class="row">
-        <div class="col-12 text-center">
-            <button id="toggleAll" class="btn btn-primary">
-                <span id="buttonText">expand all</span>
-            </button>
+<div id="collapse-all">
+    <div class="container text-end"> 
+        <div class="row">
+            <div class="col-12">
+                <span id="toggleAll" style="cursor: pointer;">
+                    ▶ Expand All
+                </span>
+            </div>
         </div>
     </div>
-</div>
 {{< /rawhtml >}}
 
 ## Creational
@@ -175,13 +172,13 @@ So here you go, take a look into this fabulous handbook of design patterns!
 
 
 const toggleLink = document.getElementById("toggleAll");
-const detailsElements = document.querySelectorAll("#design-patterns details");
+const detailsElements = document.querySelectorAll("#collapse-all details");
 let allExpanded = false; 
 
 toggleLink.addEventListener("click", () => {
     allExpanded = !allExpanded;
     detailsElements.forEach(details => details.open = allExpanded);            
-    toggleLink.textContent = allExpanded ? "Close All" : "Expand All";
+    toggleLink.textContent = allExpanded ? "▼ Close All" : "▶ Expand All";
 });
 
 </script>

@@ -1,5 +1,5 @@
 ---
-title: "graph theory visualizer"
+title: "Graph Theory Visualizer"
 date: 2022-01-01T19:53:33+05:30
 draft: false
 author: "Luigi"

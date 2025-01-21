@@ -1,5 +1,5 @@
 ---
-title: "leetcode solutions"
+title: "Leetcode Solutions"
 date: 2024-09-01T19:53:33+05:30
 draft: false
 author: "Luigi"

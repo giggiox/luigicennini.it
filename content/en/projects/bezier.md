@@ -1,5 +1,5 @@
 ---
-title: "Bézier curves and patches - interactive visualization"
+title: "Bézier Curves and Patches - Interactive Visualization"
 date: 2023-10-01T19:53:33+05:30
 draft: false
 author: "Luigi"

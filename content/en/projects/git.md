@@ -1,6 +1,6 @@
 ---
-title: "git workflows"
-date: 2024-12-01T19:53:33+05:30
+title: "Git Workflows"
+date: 2025-01-10T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
@@ -112,6 +112,20 @@ Check out the following links:
 
 
 
+{{< rawhtml >}}
+<div id="collapse-all">
+    <div class="container text-end"> 
+        <div class="row">
+            <div class="col-12">
+                <span id="toggleAll" style="cursor: pointer;">
+                    ▶ Expand All
+                </span>
+            </div>
+        </div>
+    </div>
+{{< /rawhtml >}}
+
+
 
 # Working with Git locally
 
@@ -126,8 +140,7 @@ This tells Git to start tracking changes in your files.
 It’s the first step in bringing your project under version control.
 
 ```bash
-$ git init
-Initialized empty Git repository in /your/project/path/.git/
+git init
 ```
 
 
@@ -138,15 +151,15 @@ The `git add .` command stages all changes in your current directory for the nex
 Whether you’ve created new files, updated existing ones, or deleted something, this command ensures Git knows about it.
 
 ```bash
-$ git add .
+git add .
 ```
 
 The `.` after `git add` means "track every file in the repository" (expect the one specified in `.gitignore`).
 If you only want to track specific files or directorys, you can do:
 
 ```bash
-$ git add /path/to/file
-$ git add /path/to/dir/
+git add /path/to/file
+git add /path/to/dir/
 ```
 
 
@@ -157,8 +170,7 @@ The git commit command saves a snapshot of your staged changes.
 It also requires a message describing what you’ve done, like this:
 
 ```bash
-$ git commit -m "first commit"
-[master (root-commit) abc1234] Initial commit
+git commit -m "first commit"
 ```
 
 
@@ -186,8 +198,20 @@ git commit -m "second commit"
 
 ### What is master and HEAD
 Master and HEAD are both references.
-Master points to most recent commit sha-1 (you can move master with reset command).
-HEAD points to either a branch ref, or a commit directly.
+In the example above, HEAD reference always points to master branch reference.
+You can run:
+```
+$ cat .git/HEAD
+ref: refs/heads/master
+```
+Where you see that HEAD points to master branch reference.
+In the other hand, the master reference points to the most recent commit sha.
+```
+$ cat .git/refs/heads/master
+b9b394fb13ea56880d3d49b5a87bc8a19cdb8ab2
+```
+
+
 {{< endrawdetails >}}
 
 
@@ -210,15 +234,98 @@ Graphically, it can be seen as follows:
 
 {{< carousel path="projects/git/branch/images/" >}}
 
-
-
 To delete a branch ref, simply type:
 ```bash
 git branch -d crazyFeature
 ```
+{{< endrawdetails >}}
 
+
+
+
+
+
+
+
+
+
+
+{{< rawdetails title="git log">}}
+The git log command allows you to view the commit history of your repository. 
+It shows details like commit hashes, authors, dates, and commit messages.
+
+```bash
+git log
+```
+To make the output more compact and visually appealing, you can use the following options:
+1. `--oneline`: Displays each commit in a single line, making it easier to scan.
+2. `--all`: Includes all branches, not just the one your HEAD is pointing to.
+3. `--graph`: Displays the history in a graphical representation, showing branch relationships.
+4. `--date-order`: By default the ordering of commits is topological (`--topo-order`), to have a chronologically ordered output you have to add the `--date-order` flag.
+```bash
+git log --oneline --all --graph --date-order
+```
+
+Example:
+
+```bash
+*   abc123 (HEAD -> master) Merge branch 'crazyFeature'
+|\  
+| * xyz789 Added crazy feature
+| * def456 Initial commit on crazyFeature branch
+* 456def Third commit
+* 123abc Second commit
+* 789xyz Initial commit
+```
+This view helps you understand the branching and merging structure at a glance.
+{{< endrawdetails >}}
+
+
+
+{{< rawdetails title="git status">}}
+The git status command gives you a snapshot of your working directory. It tells you:
+
+1. Which changes are staged for commit.
+2. Which changes are not staged yet.
+3. Any untracked files in your directory.
+
+```bash
+git status
+```
+{{< endrawdetails >}}
+
+
+
+
+
+
+
+{{< rawdetails title="git diff">}}
+The git diff command is a powerful way to view the differences between various states of your repository. It shows you what’s changed in your files, making it easier to review and understand your modifications before committing or pushing.
+
+
+### Common Use Cases
+
+1. **View Changes in Your Working Directory**:
+To see changes between your working directory and the last committed state:
+```bash
+git diff
+```
+
+2. **Check Changes in a Specific File**:
+If you want to focus on the changes in a particular file, specify its path:
+```bash
+git diff path/to/file  
+```
+
+3. **Compare Two Commits**:
+To view the differences between two commits, provide their commit hashes:
+```bash
+git diff commit1-sha commit2-sha  
+```
 
 {{< endrawdetails >}}
+
 
 
 
@@ -332,9 +439,9 @@ And this is a visualization of what happens:
 ## Git reset options
 The git reset command has three primary modes to control what happens to your working directory and staging area.
 
-1. hard
+1. **hard**
 
-A hard reset (--hard) changes the branch tip, staging area, and working directory to match the specified commit. 
+A hard reset (`--hard`) changes the branch tip, staging area, and working directory to match the specified commit. 
 All uncommitted changes are lost.
 {{< carousel path="projects/git/reset/reset-hard/" >}}
 
@@ -342,16 +449,22 @@ All uncommitted changes are lost.
 ```bash
 git reset --hard HEAD
 ```
-Note that any untracked file will still be kept.
+Note that any untracked file will still be kept (git does not know about untracked files).
 
-2. mixed
+2. **mixed**
 
-A mixed reset (--mixed) changes the branch tip and un-stages changes, but your working directory remains untouched.
+A mixed reset (`--mixed`) changes the branch tip and un-stages changes, but your working directory remains untouched.
 {{< carousel path="projects/git/reset/reset-mixed/" >}}
 
-3. soft
+**Use case**: If you want to split last commit into multiple commits, you can do 
+```
+git reset --mixed HEAD~
+```
+This will keep your file in the working area and now you can stage only the one you want and make more than one commit.
 
-A soft reset (--soft) moves the branch tip but leaves both your working directory and staging area unchanged.
+3. **soft**
+
+A soft reset (`--soft`) moves the branch tip but leaves both your working directory and staging area unchanged.
 {{< carousel path="projects/git/reset/reset-soft/" >}}
 
 
@@ -577,7 +690,7 @@ git stash clear
 
 
 
-## Working with Git remotely
+# Working with Git remotely
 
 
 
@@ -623,7 +736,18 @@ To share a branch with others, you can push it to the remote repository using:
 git push origin crazyFeature  
 ```
 This command creates a new branch in the remote repository (if it doesn’t already exist) and pushes the commits from your local crazyFeature branch to the remote crazyFeature branch.
+
 {{< carousel path="projects/git/remotes/branch/images/" >}}
+
+### Deleting a branch
+To delete a local branch reference, you can do
+```bash
+git push branch -d crazyFeature
+```
+To do the same thing but for a remote repository, you can do
+```bash
+git push -d origin crazyFeature
+```
 {{< endrawdetails >}}
 
 
@@ -728,4 +852,33 @@ If you have local commits that are ahead of the remote branch and you run git pu
 {{< carousel path="projects/git/remotes/pull/problem/" >}}
 {{< endrawdetails >}}
 {{< endrawdetails >}}
+
+
+
+
+
+{{< rawhtml >}}
+</div>
+{{< /rawhtml >}}
+
+
+
+{{< rawhtml >}}
+<script>
+
+
+const toggleLink = document.getElementById("toggleAll");
+const detailsElements = document.querySelectorAll("#collapse-all details");
+let allExpanded = false; 
+
+toggleLink.addEventListener("click", () => {
+    allExpanded = !allExpanded;
+    detailsElements.forEach(details => details.open = allExpanded);            
+    toggleLink.textContent = allExpanded ? "▼ Close All" : "▶ Expand All";
+});
+
+</script>
+    
+	
+{{< /rawhtml >}}
 

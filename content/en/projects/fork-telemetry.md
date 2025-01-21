@@ -1,5 +1,5 @@
 ---
-title: "fork telemetry"
+title: "Fork Telemetry"
 date: 2023-04-03T19:53:33+05:30
 draft: false
 author: "Luigi"
