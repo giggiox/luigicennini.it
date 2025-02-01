@@ -85,15 +85,15 @@ details[open] > summary::marker {
 
 details {
   border-radius: 5px;
-  margin-left: 20px;
+  // margin-left: 20px;
 }
 
 details details {
-  margin-left: calc(20px * 2);
+  margin-left: calc(20px * 1);
 }
 
 details details details {
-  margin-left: calc(20px * 3);
+  margin-left: calc(20px * 2);
 }
 
 </style>

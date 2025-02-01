@@ -71,15 +71,15 @@ details[open] > summary::marker {
   content: "▼ "; /* Freccia orientata verso il basso */
 }
 details {
-  margin-left: 20px;
+  // margin-left: 20px;
 }
 
 details details {
-  margin-left: calc(20px * 2);
+  margin-left: calc(20px * 1);
 }
 
 details details details {
-	margin-left: calc(20px * 3);
+	margin-left: calc(20px * 2);
 }
 
 h1 a {
