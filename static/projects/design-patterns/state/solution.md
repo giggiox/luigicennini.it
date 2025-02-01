@@ -4,7 +4,45 @@
 {{< rawdetails title="probelem description">}}
 We want to implement a finite state machine.
 
-![](/projects/design-patterns/state/fsm.png)
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        style=filled
+        fillcolor=gray95
+    ]
+    
+    null [shape=point, pos="-2,0!"];
+    
+
+    1 [ 
+        label="off state",
+        pos="0,0!"
+    ]
+
+    2 [ 
+        label="locked state",
+        pos="4,0!"
+    ]
+
+    3 [ 
+        label="ready state",
+        pos="2.5,-2!"
+    ]
+
+    null -> 1[label="Initial state"]
+    1 -> 2[label="Home Button\nPower button"]
+    2 -> 1[label="Power Button"]
+    2 -> 3[label="Home button"]
+    3 -> 1[label="Power button"]
+    3 -> 3[label="Home button"]
+ 
+}
+</pre>
+
+<!-- ![](/projects/design-patterns/state/fsm.png) -->
 {{< endrawdetails >}}
 
 
@@ -157,7 +195,68 @@ class ReadyState extends State {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="class diagram">}}
-{{< includeImage path="/projects/design-patterns/state/classdiagram.png" >}}
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Context [ 
+        label="{
+            Context\n
+            |
+            -state: State\l
+            |
+            getState()\l
+            setState(State)\l
+        }",
+        pos="0,0!"
+    ]
+
+    State [ 
+        label="{
+            «abstract»\n
+            State
+            |
+            -context: Context\l
+            |
+            State(Context)\l
+            action()\l
+        }",
+        pos="4,0!"
+    ]
+
+    ConcreteState1 [ 
+        label="{
+            ConcreteState1
+            |
+            action()\l
+        }",
+        pos="2.5,-2!"
+    ]
+
+    ConcreteState2 [ 
+        label="{
+            ConcreteState2
+            |
+            action()\l
+        }",
+        pos="6,-2!"
+    ]
+
+  
+
+    ConcreteState1 -> State [arrowhead="empty"];
+    ConcreteState2 -> State [arrowhead="empty"];
+    Context -> State [arrowtail=diamond, dir=both, arrowhead=diamond, style=solid]; 
+}
+</pre>
+<!-- {{< includeImage path="/projects/design-patterns/state/classdiagram.png" >}} -->
 {{< endrawdetails >}}
 
 {{< rawdetails title="state & strategy">}}

@@ -451,6 +451,11 @@ git reset --hard HEAD
 ```
 Note that any untracked file will still be kept (git does not know about untracked files).
 
+To also remove untracked files (which you can view running `git status`) you can use the `git clean` command.
+
+Use `git clean -d` to also recurse into directorys, or `git clean -i` for an interactive mode.
+In any way, `git clean` is just a "fancy" bash `rm`.
+
 2. **mixed**
 
 A mixed reset (`--mixed`) changes the branch tip and un-stages changes, but your working directory remains untouched.
@@ -473,7 +478,7 @@ If you want to revert changes in a single file rather than resetting the entire 
 ```bash
 git reset -- file.txt
 ```
-Here, -- tells Git not to interpret subsequent arguments as commands.
+Here, `--` tells Git not to interpret subsequent arguments as commands.
 
 
 ### Diagram for git reset

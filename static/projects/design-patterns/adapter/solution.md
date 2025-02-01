@@ -91,7 +91,71 @@ class FancyUIServiceAdapter implements IApp{
 
 
 {{< rawdetails title="example class diagram">}}
-{{< includeImage path="/projects/design-patterns/adapter/adapter.png" >}}
+
+
+<pre class="graphviz">
+digraph {
+    bgcolor="#f8f9fA"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Client [label="{
+            Client    
+        }",
+        pos="-3,1!"
+    ]
+
+    Target [label="{
+        «interface»\n
+            Target
+            |
+            method(data)\l
+        }",
+        pos="0,1!"
+    ];
+    
+    ConcreteTarget [
+        label="{
+            ConcreteTarget
+            |
+            method(data)\l
+        }",
+        pos="-1,-1!"
+    ]
+    
+    Adapter [
+        label="{
+            Adapter
+            |
+            method(data)\l
+        }",
+        pos="2,-1!"
+    ]
+    
+    Service [
+        label="{
+            Service
+            |
+            serviceMethod(specialData)\l
+        }",
+        pos="3,1!"
+    ]
+    
+    Client -> Target;
+    ConcreteTarget -> Target [style=dashed, arrowhead="empty"];
+    Adapter -> Target [style=dashed, arrowhead="empty"];
+    Adapter -> Service [arrowhead="empty"];
+
+
+}
+</pre>
+
+
+<!-- {{< includeImage path="/projects/design-patterns/adapter/adapter.png" >}} -->
 
 {{< endrawdetails >}}
 

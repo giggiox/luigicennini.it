@@ -62,7 +62,55 @@ class Decorator implements Component{
 
 {{< rawdetails title="example class diagram">}}
 
-{{< includeImage path="/projects/design-patterns/decorator/decorator.png" >}}
+<pre class="graphviz">
+digraph {
+    bgcolor="#f8f9fA"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Product [label="{
+        «interface»\n
+            Component
+            |
+            method()\l
+        }",
+        pos="0,1!"
+    ];
+    
+    ConcreteComponent [
+        label="{
+            ConcreteComponent
+            |
+            method()\l
+        }",
+        pos="0,-1!"
+    ]
+    
+    ConcreteDecorator [
+        label="{
+            ConcreteDecorator
+            |
+            method()\l
+            newMethod()\l
+        }",
+        pos="3,-1!"
+    ]
+    
+
+    
+    ConcreteComponent -> Product [style=dashed, arrowhead="empty"];
+    ConcreteDecorator -> Product [style=dashed,arrowhead="empty"]; 
+
+}
+</pre>
+
+
+
+<!-- {{< includeImage path="/projects/design-patterns/decorator/decorator.png" >}} -->
 
 {{< endrawdetails >}}
 
@@ -135,7 +183,80 @@ class ConcreteDecorator2 extends Decorator{
 
 
 {{< rawdetails title="class diagram">}}
-{{< includeImage path="/projects/design-patterns/decorator/decorator1.png" >}}
+
+
+<pre class="graphviz">
+digraph {
+    bgcolor="#f8f9fA"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    // Define nodes (classes) with explicit positions
+    Product [label="{
+        «interface»\n
+            Component
+            |
+            method()\l
+        }",
+        pos="0,1!"
+    ];
+    
+    ConcreteComponent [
+        label="{
+            ConcreteComponent
+            |
+            method()\l
+        }",
+        pos="0,-1!"
+    ]
+    
+    Decorator [
+        label="{
+            «abstract»\n
+            Decorator
+            |
+            method()\l
+            newMethod()\l
+        }",
+        pos="3,-1!"
+    ]
+    
+    ConcreteDecorator1 [
+        label="{
+            ConcreteDecorator1
+            |
+            method()\l
+            newMethod1()\l
+        }",
+        pos="2,-3!"
+    ]
+    
+    ConcreteDecorator2 [
+        label="{
+            ConcreteDecorator2
+            |
+            method()\l
+            newMethod1()\l
+        }",
+        pos="5,-3!"
+    ]
+    
+
+    
+    ConcreteComponent -> Product [style=dashed, arrowhead="empty"];
+    Decorator -> Product [style=dashed,arrowhead="empty"];
+    ConcreteDecorator1 -> Decorator [arrowhead="empty"]; 
+    ConcreteDecorator2 -> Decorator [arrowhead="empty"]; 
+}
+</pre>
+
+
+
+<!-- {{< includeImage path="/projects/design-patterns/decorator/decorator1.png" >}} -->
 {{< endrawdetails >}}
 
 {{< endrawdetails >}}

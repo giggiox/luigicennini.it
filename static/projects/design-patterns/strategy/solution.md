@@ -132,7 +132,67 @@ class Shop {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="class diagram">}}
-![](/projects/design-patterns/strategy/strategy.png)
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Element [ 
+        label="{
+            Element\n
+            |
+            -strategy: Strategy\l
+            |
+            setStrategy(Strategy)\l
+            elementAlgorithm()\l
+        }",
+        pos="0,0!"
+    ]
+
+    Strategy [ 
+        label="{
+            «interface»\n
+            Strategy
+            |
+            algorithm()\l
+        }",
+        pos="4,0!"
+    ]
+
+    ConcreteStrategy1 [ 
+        label="{
+            ConcreteStrategy1
+            |
+            algorithm()\l
+        }",
+        pos="2.5,-2!"
+    ]
+
+    ConcreteStrategy2 [ 
+        label="{
+            ConcreteStrategy2
+            |
+            algorithm()\l
+        }",
+        pos="6,-2!"
+    ]
+
+  
+
+    ConcreteStrategy1 -> Strategy [style=dashed, arrowhead="empty"];
+    ConcreteStrategy2 -> Strategy [style=dashed, arrowhead="empty"];
+    Element -> Strategy [arrowtail=diamond, dir=both, arrowhead=none, style=solid]; 
+}
+
+
+</pre>
+<!-- ![](/projects/design-patterns/strategy/strategy.png) -->
 {{< endrawdetails >}}
 
 

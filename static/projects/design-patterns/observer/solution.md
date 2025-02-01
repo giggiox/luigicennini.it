@@ -2,7 +2,43 @@
 
 {{< rawdetails title="problem description">}}
 An object `Subject` has a state and one or more object(s) `Observer`s wants to know when the `Subject` state changes.
-{{< includeImage path="/projects/design-patterns/observer/observer1.png" >}}
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        style=filled
+        fillcolor=gray95
+    ]
+    
+    1 [ 
+        label="subject",
+        pos="1,0!"
+    ]
+
+    2 [ 
+        label="Observer1",
+        pos="4,1!"
+    ]
+
+    3 [ 
+        label="Observer2",
+        pos="4,0!"
+    ]
+    
+    4 [ 
+        label="Observer3",
+        pos="4,-1!"
+    ]
+    1:ne -> 1:nw[label = "event"]
+    1 -> 2[label = "notify()"]
+    1 -> 3[label = "notify()"]
+    1 -> 4[label = "notify()"]
+}
+</pre>
+
+<!-- {{< includeImage path="/projects/design-patterns/observer/observer1.png" >}} -->
 {{< endrawdetails >}}
 
 
@@ -105,7 +141,69 @@ public class Client {
 
 {{< rawdetails title="(example) class diagram">}}
 The architecture described above is reflected in the class diagram below:
-{{< includeImage path="/projects/design-patterns/observer/observer.png" >}}
+<!-- {{< includeImage path="/projects/design-patterns/observer/observer.png" >}} -->
+
+<pre class="graphviz">
+digraph {
+    bgcolor="#f8f9fA"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Subject [label="{
+            Subject
+            |
+            - observer: Observer[]\l
+            - state\l
+            |
+            addObserver(Observer)\l
+            removeObserver(Observer)\l
+            notifyObservers()\l
+            mainLogic()\l
+        }",
+        pos="-5,1!"
+    ]
+
+    Observer [label="{
+        «interface»\n
+            Observer
+            |
+            update()\l
+        }",
+        pos="0,1!"
+    ];
+    
+    ConcreteObserver1 [
+        label="{
+            ConcreteObserver1
+            |
+            ConcreteObserver1(Subject)\l
+            update()\l
+        }",
+        pos="-1,-1!"
+    ]
+    
+    ConcreteObserver2 [
+        label="{
+            ConcreteObserver2
+            |
+            ConcreteObserver2(Subject)\l
+            update()\l
+        }",
+        pos="2,-1!"
+    ]
+    
+    ConcreteObserver1 -> Observer [style=dashed, arrowhead="empty"];
+    ConcreteObserver2 -> Observer [style=dashed, arrowhead="empty"];
+    Subject -> Observer [arrowtail=odiamond, dir=both, arrowhead="none"];
+}
+</pre>
+
+
+
 {{< endrawdetails >}}
 
 {{< rawdetails title="abstracting observer logic handling">}}

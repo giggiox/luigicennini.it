@@ -89,7 +89,42 @@ class Social1Iterator {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="(example) class diagram">}}
-{{< includeImage path="/projects/design-patterns/iterator/iterator.png" >}}
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    ConcreteAggregate [ 
+        label="{
+            ConcreteAggregate
+            |
+            -collection: Collection\l
+            |
+            createIterator()\l
+        }",
+        pos="0,0!"
+    ]
+
+    ConcreteIterator [ 
+        label="{
+            ConcreteIterator
+            |
+            hasNext(): boolean\l
+            getNext()\l
+        }",
+        pos="4,0!"
+    ]
+
+    ConcreteAggregate -> ConcreteIterator [style="dashed"]
+    ConcreteIterator -> ConcreteAggregate
+}
+</pre>
+<!-- {{< includeImage path="/projects/design-patterns/iterator/iterator.png" >}} -->
 {{< endrawdetails >}}
 
 
@@ -213,7 +248,75 @@ class InOrderOrderIterator implements TreeIterator{
 {{< endrawdetails >}}
 
 {{< rawdetails title="(official) class diagram">}}
-{{< includeImage path="/projects/design-patterns/iterator/iterator1.png" >}}
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+    
+    ConcreteAggregate [ 
+        label="{
+            ConcreteAggregate
+            |
+            -collection: Collection\l
+            |
+            createIterator()\l
+        }",
+        pos="2,-2!"
+    ]
+
+    Iterator [ 
+        label="{
+            «interface»\n
+            Iterator
+            |
+            hasNext(): boolean\l
+            getNext()\l
+        }",
+        pos="9,0!"
+    ]
+    ConcreteIterator1 [ 
+        label="{
+            ConcreteIterator1
+            |
+            hasNext(): boolean\l
+            getNext()\l
+        }",
+        pos="5,-2!"
+    ]
+    ConcreteIterator2 [ 
+        label="{
+            ConcreteIterator2
+            |
+            hasNext(): boolean\l
+            getNext()\l
+        }",
+        pos="9,-2!"
+    ]
+    ConcreteIterator3 [ 
+        label="{
+            ConcreteIterator3
+            |
+            hasNext(): boolean\l
+            getNext()\l
+        }",
+        pos="13,-2!"
+    ]
+
+    ConcreteIterator1 -> Iterator [style=dashed, arrowhead="empty"];
+    ConcreteIterator2 -> Iterator [style=dashed, arrowhead="empty"];
+    ConcreteIterator3 -> Iterator [style=dashed, arrowhead="empty"];
+    
+    ConcreteAggregate -> ConcreteIterator1 [style=dashed];
+    ConcreteIterator1 -> ConcreteAggregate
+}
+</pre>
+<!-- {{< includeImage path="/projects/design-patterns/iterator/iterator1.png" >}} -->
 {{< endrawdetails >}}
 
 

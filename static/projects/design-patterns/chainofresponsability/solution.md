@@ -97,7 +97,61 @@ class SuffixStringFinder extends StringFinder {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="example class diagram">}}
-{{< includeImage path="/projects/design-patterns/chainofresponsability/chainofresp1.png" >}}
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+    
+    Handler [ 
+        label="{
+            «abstract»\n
+            Handler
+            |
+            -next: Handler\l
+            |
+            handleRequest()\l
+        }",
+        pos="9,0!"
+    ]
+    ConcreteHandler1 [ 
+        label="{
+            ConcreteHandler1
+            |
+            handleRequest()\l
+        }",
+        pos="5,-2!"
+    ]
+    ConcreteHandler2 [ 
+        label="{
+            ConcreteHandler2
+            |
+            handleRequest()\l
+        }",
+        pos="9,-2!"
+    ]
+    ConcreteHandler3 [ 
+        label="{
+            ConcreteHandler3
+            |
+            handleRequest()\l
+        }",
+        pos="13,-2!"
+    ]
+
+    ConcreteHandler1 -> Handler [arrowhead="empty"];
+    ConcreteHandler2 -> Handler [arrowhead="empty"];
+    ConcreteHandler3 -> Handler [arrowhead="empty"];
+    Handler -> Handler
+}
+
+</pre>
+<!-- {{< includeImage path="/projects/design-patterns/chainofresponsability/chainofresp1.png" >}} -->
 {{< endrawdetails >}}
 
 

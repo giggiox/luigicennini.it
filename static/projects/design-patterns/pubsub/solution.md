@@ -99,7 +99,77 @@ class ConcreteSubscriber2 implements Subscriber {
 
 {{< rawdetails title="(example) class diagram">}}
 The architecture described above is reflected in the class diagram below:
-{{< includeImage path="/projects/design-patterns/pubsub/pubsub.png" >}}
+
+<pre class="graphviz">
+digraph {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Publisher [label="{
+        Publisher\n
+        |
+        -broker: MessageBroker\l
+        |
+        sendMessage(String topic, String message)\l
+            
+        }",
+        pos="-8,0!"
+    ];
+    
+    MessageBroker [ 
+        label="{
+            MessageBroker\n
+            |
+            -subscribers: Map﹤String, List﹤Subscriber﹥﹥\l
+            |
+            subscribe(String topic, Subscriber)\l
+            publish(String topic, String message)\l
+        }",
+        pos="-3,0!"
+    ]
+    
+    
+    Subscriber [ 
+        label="{
+            «interface»\n
+            Subscriber
+            |
+            receive(message)\l
+        }",
+        pos="4,0!"
+    ]
+    
+    ConcreteSubscriber1 [ 
+        label="{
+            ConcreteSubscriber1
+            |
+            receive(message)\l
+        }",
+        pos="3,-2!"
+    ]
+    
+    ConcreteSubscriber2 [ 
+        label="{
+            ConcreteSubscriber2
+            |
+            receive(message)\l
+        }",
+        pos="6,-2!"
+    ]
+    
+    
+    ConcreteSubscriber1 -> Subscriber [style=dashed, arrowhead="empty"];
+    ConcreteSubscriber2 -> Subscriber [style=dashed, arrowhead="empty"];
+    MessageBroker -> Subscriber [arrowtail=odiamond, dir=both, arrowhead="none"];
+    Publisher -> MessageBroker [style=dashed, arrowhead="vee"];
+}
+</pre>
+<!-- {{< includeImage path="/projects/design-patterns/pubsub/pubsub.png" >}} -->
 
 {{< endrawdetails >}}
 

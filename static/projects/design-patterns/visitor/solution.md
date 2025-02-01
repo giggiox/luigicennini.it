@@ -287,7 +287,80 @@ public class Client{
 
 {{< rawdetails title="class diagram">}}
 The architecture described above is reflected in the class diagram below:
-{{< includeImage path="/projects/design-patterns/visitor/visitor.png" >}}
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Element [ 
+        label="{
+            «interface»\n
+            Element
+            |
+            method()\l
+            visit(Visitor)\l
+        }",
+        pos="4,0!"
+    ]
+
+    ConcreteElement1 [ 
+        label="{
+            ConcreteElement1
+            |
+            method()\l
+            accept(Visitor)\l
+        }",
+        pos="2.5,-2!"
+    ]
+
+    ConcreteElement2 [ 
+        label="{
+            ConcreteElement2
+            |
+            method()\l
+            accept(Visitor)\l
+        }",
+        pos="6,-2!"
+    ]
+    
+    Visitor [ 
+        label="{
+            «interface»\n
+            Visitor
+            |
+            visit(ConcreteElement1)\l
+            visit(ConcreteElement2)\l
+        }",
+        pos="9,0!"
+    ]
+    
+    ConcreteVisitor [ 
+        label="{
+            ConcreteVisitor
+            |
+            visit(ConcreteElement1)\l
+            visit(ConcreteElement2)\l
+        }",
+        pos="9,-2!"
+    ]
+
+  
+
+    ConcreteElement1 -> Element [style=dashed, arrowhead="empty"];
+    ConcreteElement2 -> Element [style=dashed, arrowhead="empty"];
+    ConcreteVisitor -> Visitor [style=dashed, arrowhead="empty"];
+    Element -> Visitor [style=dashed, arrowhead="vee", label="use"];
+
+
+}
+</pre>
+
+<!-- {{< includeImage path="/projects/design-patterns/visitor/visitor.png" >}} -->
 
 {{< endrawdetails >}}
 
@@ -297,7 +370,138 @@ The architecture described above is reflected in the class diagram below:
 {{< rawdetails title="strategy & visitor">}}
 They both delegate the an operation to an extern object.
 The class diagrams are the following:
-{{< includeImage path="/projects/design-patterns/visitor/strategyvisitor.png" >}}
+
+
+
+<pre class="graphviz">
+digraph G {
+    bgcolor="#f8f9fa"
+    node [
+        fontname="Helvetica,Arial,sans-serif"
+        shape=record
+        style=filled
+        fillcolor=gray95
+    ]
+
+    Element [ 
+        label="{
+            «interface»\n
+            Element
+            |
+            method()\l
+            visit(Visitor)\l
+        }",
+        pos="4,0!"
+    ]
+
+    ConcreteElement1 [ 
+        label="{
+            ConcreteElement1
+            |
+            method()\l
+            accept(Visitor)\l
+        }",
+        pos="2.5,-2!"
+    ]
+
+    ConcreteElement2 [ 
+        label="{
+            ConcreteElement2
+            |
+            method()\l
+            accept(Visitor)\l
+        }",
+        pos="6,-2!"
+    ]
+    
+    Visitor [ 
+        label="{
+            «interface»\n
+            Visitor
+            |
+            visit(ConcreteElement1)\l
+            visit(ConcreteElement2)\l
+        }",
+        pos="9,0!"
+    ]
+    
+    ConcreteVisitor [ 
+        label="{
+            ConcreteVisitor
+            |
+            visit(ConcreteElement1)\l
+            visit(ConcreteElement2)\l
+        }",
+        pos="9,-2!"
+    ]
+
+  
+
+    ConcreteElement1 -> Element [style=dashed, arrowhead="empty"];
+    ConcreteElement2 -> Element [style=dashed, arrowhead="empty"];
+    ConcreteVisitor -> Visitor [style=dashed, arrowhead="empty"];
+    Element -> Visitor [style=dashed, arrowhead="vee", label="use"];
+    
+    VisitorLabel [ 
+        label="{Visitor}",
+        pos="6,2!"
+    ]
+    
+    StrategyLabel [ 
+        label="{Strategy}",
+        pos="17,2!"
+    ]
+    
+    
+    Element1 [ 
+        label="{
+            Element\n
+            |
+            -strategy: Strategy\l
+            |
+            setStrategy(Strategy)\l
+            elementAlgorithm()\l
+        }",
+        pos="15,0!"
+    ]
+
+    Strategy [ 
+        label="{
+            «interface»\n
+            Strategy
+            |
+            algorithm()\l
+        }",
+        pos="19,0!"
+    ]
+
+    ConcreteStrategy1 [ 
+        label="{
+            ConcreteStrategy1
+            |
+            algorithm()\l
+        }",
+        pos="17.5,-2!"
+    ]
+
+    ConcreteStrategy2 [ 
+        label="{
+            ConcreteStrategy2
+            |
+            algorithm()\l
+        }",
+        pos="21,-2!"
+    ]
+
+  
+
+    ConcreteStrategy1 -> Strategy [style=dashed, arrowhead="empty"];
+    ConcreteStrategy2 -> Strategy [style=dashed, arrowhead="empty"];
+    Element1 -> Strategy [arrowtail=diamond, dir=both, arrowhead=none, style=solid]; 
+}
+</pre>
+
+<!-- {{< includeImage path="/projects/design-patterns/visitor/strategyvisitor.png" >}} -->
 
 
 
