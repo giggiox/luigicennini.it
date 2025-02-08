@@ -158,16 +158,11 @@ MathJax = {
 	
 {{< /rawhtml >}}
 
-I made this project as an easy way to access and revise design patterns. 
+While working on my LeetCode solutions project [(link)](https://www.luigicennini.it/en/projects/leetcode-solutions/), I realized that collapsing solutions helped me see the big picture and compare different approaches more effectively. I applied the same idea to design patterns, presenting them in a way that's easy to scan, compare, and understand at a glance.
+I will also explore some common refactoring patterns in the last part of this project.
 
-There are plenty of resources online about design patterns, so why did i made mine?
+So, dive in and explore this streamlined handbook of design patterns!
 
-This is because the resources i found:
-
-- Do not have the right balance between too verbose and straight to the point explanation.
-- Are not *easily* searchable: why so many pages-subpages where i can't just ctrl+f (or cmd+f), and also always so many clicks away to knowing the solution.
-
-So here you go, take a look into this fabulous handbook of design patterns!
 
 
 {{< rawhtml >}}
@@ -187,7 +182,6 @@ var isDarkMode = document.body.className.includes("dark");
 document.body.classList.toggle('d-mode', isDarkMode);
 document.body.classList.toggle('l-mode', !isDarkMode);
 
-console.log(isDarkMode);
 document.getElementById("theme-toggle").addEventListener("click", () => {
 	if (document.body.className.includes("dark")) {
 		isDarkMode = false;
@@ -409,7 +403,7 @@ void processUser(User user) {
 
 {{< rawdetails title="naming">}}
 
-There are better practice about naming:
+There are best practices for naming, for example:
 
 1. **Avoid Abbreviations**: Write full, descriptive names. For example, use `isPasswordLongEnough` instead of `checkPwdLen`.
     

@@ -197,3 +197,8 @@ params:
     article: "Jan 2, 2006"
     articleList: "Jan 2, 2006"
     articleRecent: "Jan 2, 2006"
+    
+markup:
+   tableOfContents:
+      startLevel: 1
+      endLevel: 6

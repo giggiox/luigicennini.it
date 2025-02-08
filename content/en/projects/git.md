@@ -7,7 +7,7 @@ tags:
   - Rich content
   - Sample
   - example
-image: /projects/git/gitcopertina.png
+image: /projects/git/gitcopertina1.png
 description: ""
 toc: true
 mathjax: true
@@ -106,8 +106,8 @@ In this project, I want to create a visual guide to better understand Git operat
 While learning how to effectively work with Git, I realized that seeing what happens visually when running Git commands helps solidify the concepts. 
 
 Check out the following links:
-1. A fantastic tool for seeing Git commands in action with a visual representation:  https://git-school.github.io/visualizing-git/
-2. A humorous and practical guide for fixing Git mistakes quickly and effectively: https://ohshitgit.com/
+1. A fantastic tool for seeing Git commands in action with a visual representation:  [link](https://git-school.github.io/visualizing-git/)
+2. A humorous and practical guide for fixing Git mistakes quickly and effectively: [link](https://ohshitgit.com/)
 
 
 

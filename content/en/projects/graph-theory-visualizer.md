@@ -13,8 +13,6 @@ toc: true
 mathjax: true
 ---
 
-# graphTheory-Visualizer
-
 The project was done to visualize the operations that can be done on a graph, such as BFS, DFS, Kruskal, and Dijkstra.
 
 The goal is to have a real time update of the various operations, so that if the graph changes while an 'operation is being performed on it, the result of the operation also changes.

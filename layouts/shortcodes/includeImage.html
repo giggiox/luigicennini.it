@@ -1,4 +1,10 @@
 {{ $filePath := .Get "path" }}
+{{ $class := .Get "class" }}
+
 <center>
-	<img src="{{ $filePath }}">
+	{{ if $class }}
+		<img src="{{ $filePath }}" class="{{ $class }}">
+	{{ else }}
+		<img src="{{ $filePath }}">
+	{{ end }}
 </center>
