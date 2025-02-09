@@ -167,7 +167,12 @@ params:
       count: 20
       title: blog posts
       enable: true # Just put enable: false to disable blog posts!
-      
+  handbooks:
+    recentHandbooks:
+      path: handbooks
+      count: 20
+      title: handbooks
+      enable: true
 
 
 

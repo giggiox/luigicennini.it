@@ -1,5 +1,5 @@
 ---
-title: "Design Patterns - handbook"
+title: "Design Patterns"
 date: 2024-11-05T19:53:33+05:30
 draft: false
 author: "Luigi"
