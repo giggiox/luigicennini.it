@@ -58,8 +58,8 @@ Istruzioni editor:
 
 
 {{< rawhtml >}} 
-<script src="/p5.min.js"></script>
-<script src="/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/7.5.1/math.min.js"></script>
 {{< /rawhtml >}}
 
 {{< rawhtml >}} 

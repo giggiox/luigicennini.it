@@ -4,6 +4,8 @@
     {{ $recentPostsPath := .Site.Params.handbooks.recentHandbooks.path | default "blogs" }}
     {{ $recentPostsCount := .Site.Params.handbooks.recentHandbooks.count | default 3 }}
     {{ $recentPosts := where .Site.RegularPages "Section" $recentPostsPath | first $recentPostsCount }}
+	{{ if gt (len $recentPosts) 0 }}
+
     <div class="h3 text-center text-secondary py-3">
         {{ .Site.Params.handbooks.recentHandbooks.title | default "Recent Posts" }}
     </div>
@@ -35,5 +37,6 @@
         {{ end }}
     </div>
     {{ end }}
+	{{ end }}
 </div>
 </footer>

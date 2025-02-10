@@ -76,7 +76,7 @@ document.getElementById('quad').src = img[position].src;
 </script>
 {{< /rawhtml >}}
 
-(animation taken from [questo sito](https://www.pjrc.com/teensy/td_libs_Encoder.html))
+(animation taken from [here](https://www.pjrc.com/teensy/td_libs_Encoder.html))
 
 
 
@@ -128,7 +128,7 @@ For the prototyping of the fork sensor, I used the [fusion 360](https://www.auto
 
 
 {{< rawhtml >}} 
-<script type="module" src="/model-viewer.min.js"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <center>
 <model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
     <div class="progress-bar hide" slot="progress-bar">
