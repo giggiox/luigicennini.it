@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36" version="26.0.11">
   <diagram name="Pagina-1" id="SbGd_k5piXWVg5X-wzVI">
-    <mxGraphModel dx="2868" dy="1560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="780" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -422,22 +422,25 @@
           <mxGeometry x="905.87" y="3560" width="90" height="30" as="geometry" />
         </mxCell>
         <mxCell id="2-WtEcRPYQzorM6wf-GJ-1" value="file1.txt" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="154.87" y="1842" width="80" height="30" as="geometry" />
+          <mxGeometry x="147.87" y="1102" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="2-WtEcRPYQzorM6wf-GJ-2" value="" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="142.37" y="1872" width="105" height="100" as="geometry" />
+          <mxGeometry x="135.37" y="1132" width="105" height="100" as="geometry" />
         </mxCell>
         <mxCell id="2-WtEcRPYQzorM6wf-GJ-3" value="first commit" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="149.37" y="1882" width="65" height="30" as="geometry" />
+          <mxGeometry x="142.37" y="1142" width="65" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2-WtEcRPYQzorM6wf-GJ-4" value="new change" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="137.56" y="1167" width="74.62" height="30" as="geometry" />
         </mxCell>
         <mxCell id="2-WtEcRPYQzorM6wf-GJ-5" value="file2.txt" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="306.87" y="1842" width="80" height="30" as="geometry" />
+          <mxGeometry x="299.87" y="1102" width="80" height="30" as="geometry" />
         </mxCell>
         <mxCell id="2-WtEcRPYQzorM6wf-GJ-6" value="" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document;strokeWidth=2;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
-          <mxGeometry x="294.37" y="1872" width="105" height="100" as="geometry" />
+          <mxGeometry x="287.37" y="1132" width="105" height="100" as="geometry" />
         </mxCell>
         <mxCell id="2-WtEcRPYQzorM6wf-GJ-7" value="first line" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="293.37" y="1882" width="65" height="30" as="geometry" />
+          <mxGeometry x="286.37" y="1142" width="65" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

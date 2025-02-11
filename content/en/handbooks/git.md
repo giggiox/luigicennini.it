@@ -657,7 +657,7 @@ When you run:
 ```bash
 git stash
 ```
-Git saves the changes in your working directory and staging area to a "stash stack." 
+Git saves the changes in your working directory (tracked) and staging area to a "stash stack." 
 This clears your working directory, allowing you to start fresh or switch branches without interference.
 
 To retrieve your changes later, you use:
@@ -684,6 +684,15 @@ git stash apply
 ```bash
 git stash clear
 ```
+
+4. Include untracked files in the stack: By default is only tracked files (the only git knows about):
+```bash
+git stash -u
+```
+
+
+
+{{< includeImage path="/projects/git/stash/stash.png" >}}
 
 
 
