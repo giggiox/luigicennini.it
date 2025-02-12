@@ -96,6 +96,21 @@ details details details {
   margin-left: calc(20px * 2);
 }
 
+.navbar-brand img{
+	filter: none;
+	mix-blend-mode: normal;
+}
+.featured-image img{
+	filter: none;
+	mix-blend-mode: normal;
+}
+body img{
+    filter: invert(100%);
+    mix-blend-mode: difference;
+    background-color: #18191A; /* Questo diventa il nuovo "bianco" */
+}
+
+
 </style>
 
     

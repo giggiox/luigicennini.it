@@ -143,6 +143,20 @@ body.d-mode svg ellipse{
 	stroke: #ffffff;
 }
 
+.navbar-brand img{
+	filter: none;
+	mix-blend-mode: normal;
+}
+.featured-image img{
+	filter: none;
+	mix-blend-mode: normal;
+}
+body img{
+    filter: invert(100%);
+    mix-blend-mode: difference;
+    background-color: #18191A; /* Questo diventa il nuovo "bianco" */
+}
+
 </style>
 
 
