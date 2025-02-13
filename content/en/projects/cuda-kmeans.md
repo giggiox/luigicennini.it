@@ -161,6 +161,14 @@ body.d-mode img{
   text-decoration: underline;
 }
 
+.math-container {
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+    text-align: center;
+}
+
+
 
 </style>
 <script>
@@ -207,10 +215,10 @@ Formally, we have $(x_1,...,x_n), x_i \in \mathbb{R}^d$ (data points). The k-mea
 So the algorithm minimizes:
 $$SSE = \sum_{i=1}^{k} \sum_{x_j \in S_i} dist(x_j, \mu_i)^2$$
 
-$$\frac{\partial E}{\partial \mu_i} = 0 \implies \mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$$
+$$\frac{\partial SSE}{\partial \mu_i} = 0 \implies \mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$$
 
 So the solution is to take each group element average as a new centroid (as per step (**b**)).
-The relationship holds because in the differentiation we used **euclidean distance** as a distance function, different centroid updates can be found by changing the distance metric.
+The relationship holds because in the SSE formula we used **euclidean distance** as a distance function, different centroid updates can be found by changing the distance metric.
 
 
 
@@ -927,4 +935,33 @@ Although the indexing was initially challenging, witnessing the dramatic speedup
 
 
   </script>
+{{< /rawhtml >}}
+
+
+
+
+{{< rawhtml >}} 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.MathJax) {
+        MathJax.startup.promise.then(() => {
+            document.querySelectorAll("mjx-container.MathJax").forEach(function (el) {
+                // Controlla se è un'equazione a blocco (display math)
+                if (el.getAttribute("display") === "true") {
+                    // Controlla se non è già avvolto in un math-container
+                    if (!el.parentElement.classList.contains("math-container")) {
+                        let wrapper = document.createElement("div");
+                        wrapper.classList.add("math-container");
+
+                        el.parentNode.insertBefore(wrapper, el);
+                        wrapper.appendChild(el);
+                    }
+                }
+            });
+        }).catch((err) => console.error("Errore MathJax:", err));
+    } else {
+        console.warn("MathJax non è stato caricato.");
+    }
+});
+</script>
 {{< /rawhtml >}}
