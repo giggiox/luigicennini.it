@@ -132,7 +132,7 @@ class Shop {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="class diagram">}}
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -189,9 +189,9 @@ digraph G {
     ConcreteStrategy2 -> Strategy [style=dashed, arrowhead="empty"];
     Element -> Strategy [arrowtail=diamond, dir=both, arrowhead=none, style=solid]; 
 }
-
-
 </pre>
+{{< /rawhtml >}}
+
 <!-- ![](/projects/design-patterns/strategy/strategy.png) -->
 {{< endrawdetails >}}
 

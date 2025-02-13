@@ -4,7 +4,7 @@
 {{< rawdetails title="probelem description">}}
 We want to implement a finite state machine.
 
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -41,6 +41,7 @@ digraph G {
  
 }
 </pre>
+{{< /rawhtml >}}
 
 <!-- ![](/projects/design-patterns/state/fsm.png) -->
 {{< endrawdetails >}}
@@ -196,6 +197,7 @@ class ReadyState extends State {
 
 {{< rawdetails title="class diagram">}}
 
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -256,6 +258,8 @@ digraph G {
     Context -> State [arrowtail=diamond, dir=both, arrowhead=diamond, style=solid]; 
 }
 </pre>
+{{< /rawhtml >}}
+
 <!-- {{< includeImage path="/projects/design-patterns/state/classdiagram.png" >}} -->
 {{< endrawdetails >}}
 

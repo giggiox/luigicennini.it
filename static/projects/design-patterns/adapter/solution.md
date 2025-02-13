@@ -92,7 +92,7 @@ class FancyUIServiceAdapter implements IApp{
 
 {{< rawdetails title="example class diagram">}}
 
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph {
     bgcolor="#f8f9fA"
@@ -153,6 +153,8 @@ digraph {
 
 }
 </pre>
+{{< /rawhtml >}}
+
 
 
 <!-- {{< includeImage path="/projects/design-patterns/adapter/adapter.png" >}} -->

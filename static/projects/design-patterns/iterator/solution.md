@@ -89,6 +89,7 @@ class Social1Iterator {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="(example) class diagram">}}
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -124,6 +125,8 @@ digraph G {
     ConcreteIterator -> ConcreteAggregate
 }
 </pre>
+{{< /rawhtml >}}
+
 <!-- {{< includeImage path="/projects/design-patterns/iterator/iterator.png" >}} -->
 {{< endrawdetails >}}
 
@@ -248,7 +251,7 @@ class InOrderOrderIterator implements TreeIterator{
 {{< endrawdetails >}}
 
 {{< rawdetails title="(official) class diagram">}}
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -316,6 +319,8 @@ digraph G {
     ConcreteIterator1 -> ConcreteAggregate
 }
 </pre>
+{{< /rawhtml >}}
+
 <!-- {{< includeImage path="/projects/design-patterns/iterator/iterator1.png" >}} -->
 {{< endrawdetails >}}
 

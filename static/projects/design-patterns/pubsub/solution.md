@@ -99,7 +99,7 @@ class ConcreteSubscriber2 implements Subscriber {
 
 {{< rawdetails title="(example) class diagram">}}
 The architecture described above is reflected in the class diagram below:
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph {
     bgcolor="#f8f9fa"
@@ -169,6 +169,8 @@ digraph {
     Publisher -> MessageBroker [style=dashed, arrowhead="vee"];
 }
 </pre>
+{{< /rawhtml >}}
+
 <!-- {{< includeImage path="/projects/design-patterns/pubsub/pubsub.png" >}} -->
 
 {{< endrawdetails >}}

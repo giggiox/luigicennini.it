@@ -287,6 +287,8 @@ public class Client{
 
 {{< rawdetails title="class diagram">}}
 The architecture described above is reflected in the class diagram below:
+
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -359,6 +361,8 @@ digraph G {
 
 }
 </pre>
+{{< /rawhtml >}}
+
 
 <!-- {{< includeImage path="/projects/design-patterns/visitor/visitor.png" >}} -->
 

@@ -2,7 +2,7 @@
 
 {{< rawdetails title="problem description">}}
 An object `Subject` has a state and one or more object(s) `Observer`s wants to know when the `Subject` state changes.
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -37,6 +37,8 @@ digraph G {
     1 -> 4[label = "notify()"]
 }
 </pre>
+{{< /rawhtml >}}
+
 
 <!-- {{< includeImage path="/projects/design-patterns/observer/observer1.png" >}} -->
 {{< endrawdetails >}}
@@ -143,6 +145,7 @@ public class Client {
 The architecture described above is reflected in the class diagram below:
 <!-- {{< includeImage path="/projects/design-patterns/observer/observer.png" >}} -->
 
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph {
     bgcolor="#f8f9fA"
@@ -201,6 +204,8 @@ digraph {
     Subject -> Observer [arrowtail=odiamond, dir=both, arrowhead="none"];
 }
 </pre>
+{{< /rawhtml >}}
+
 
 
 

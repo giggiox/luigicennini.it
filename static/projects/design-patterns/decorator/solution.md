@@ -61,7 +61,7 @@ class Decorator implements Component{
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="example class diagram">}}
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph {
     bgcolor="#f8f9fA"
@@ -107,6 +107,8 @@ digraph {
 
 }
 </pre>
+{{< /rawhtml >}}
+
 
 
 
@@ -184,7 +186,7 @@ class ConcreteDecorator2 extends Decorator{
 
 {{< rawdetails title="class diagram">}}
 
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph {
     bgcolor="#f8f9fA"
@@ -253,6 +255,8 @@ digraph {
     ConcreteDecorator2 -> Decorator [arrowhead="empty"]; 
 }
 </pre>
+{{< /rawhtml >}}
+
 
 
 

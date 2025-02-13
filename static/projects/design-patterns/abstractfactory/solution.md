@@ -148,7 +148,7 @@ digraph {
 
 {{< rawdetails title="textbook class diagram">}}
 
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph {
     bgcolor="#f8f9fa"
@@ -240,6 +240,8 @@ digraph {
     ConcreteFactory2 -> AbstractFactory [arrowhead="empty"];
 }
 </pre>
+{{< /rawhtml >}}
+
 
 <!--  {{< includeImage path="/projects/design-patterns/abstractfactory/abstractfactory1.png" >}} -->
 {{< endrawdetails >}}

@@ -97,7 +97,7 @@ class SuffixStringFinder extends StringFinder {
 {{< rawdetails title="notes">}}
 
 {{< rawdetails title="example class diagram">}}
-
+{{< rawhtml >}}
 <pre class="graphviz">
 digraph G {
     bgcolor="#f8f9fa"
@@ -151,6 +151,8 @@ digraph G {
 }
 
 </pre>
+{{< /rawhtml >}}
+
 <!-- {{< includeImage path="/projects/design-patterns/chainofresponsability/chainofresp1.png" >}} -->
 {{< endrawdetails >}}
 
