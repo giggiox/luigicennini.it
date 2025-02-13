@@ -30,6 +30,11 @@ Therefore, after careful evaluation, I have concluded that using a rotary encode
 
 The main reason for this choice is that rotary encoders are less expensive than linear potentiometers and still offer good position measurement accuracy. In addition, rotary encoders are generally more robust and less prone to damage than linear encoders, which can be more fragile and susceptible to failure in off-road environments.
 
+
+{{< includeImage path="/projects/forktelemetry/comparison.png">}}
+
+
+
 ### how a rotative encoder works
 
 Encoders can sense movement in either direction, detecting holes or marks as they move through 2 positions. When the blue disc in the diagram below rotates clockwise, changes are first detected by pin 1 and then pin 2. When it rotates counterclockwise, pin 2 is the first to detect changes. This scheme is called 'quadrature coding' because the waveforms detected by the 2 pins are offset by 90 degrees.
