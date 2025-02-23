@@ -1,6 +1,6 @@
 ---
 title: "CUDA k-means"
-date: 2025-02-08T19:53:33+05:30
+date: 2025-02-16T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
@@ -188,11 +188,12 @@ document.body.classList.toggle('l-mode', !isDarkMode);
 {{< /rawhtml >}}
 
 
-
 Lately, I've been exploring GPU programming with CUDA by implementing the K-Means clustering algorithm. 
-Below is a overview of my approach and some insights into the CUDA implementation.
+Below is a overview of my approach and some insights into the CUDA implementation that achieved a **+100x speedup**  🚀.
 
-You can find the source code of everyhting that is going to be discussed at this [link](https://github.com/giggiox/CUDA-kmeans).
+*Note: every time you will read the term speedup in this post, it will be measured against to the sequential version*.
+
+You can find the source code of everyhting that is going to be discussed at this [public GitHub repository](https://github.com/giggiox/CUDA-kmeans).
 {{< custom-toc >}}
 
 # K-Means Algorithm
@@ -323,13 +324,13 @@ We organize the data in a [Structure of Arrays (SoA)](https://en.wikipedia.org/w
 This arrangement improves cache utilization and enables more efficient vectorized and parallel memory access, which is particularly advantageous for GPU processing compared to the traditional Array of Structures (AoS) layout.
 
 $$\text{points\_dev } = [x0, x1, x2, x3]$$ 
-$$= [x0.x, x0.y, x1.x, x1.y, x2.x, x2.y, x3.x, x3.y]$$
-$$= [0, 0, 0, 1, 1, 0, 1, 1]$$
+
+$$= [\overbrace{0, 0}^{x0}, \overbrace{0, 1}^{x1}, \overbrace{1,0}^{x2}, \overbrace{1, 1}^{x3}]$$
 
 And the same thing for the centroids:
 
 $$\text{centroids\_dev } = [c0, c1]$$ 
-$$= [0.5, 0, 0.5, 1]$$
+$$= [\overbrace{0.5, 0}^{c0}, \overbrace{0.5, 1}^{c1}]$$
 
 
 
@@ -540,14 +541,14 @@ Let's break down the findings:
 $K=5$:
 {{< includeImage path="/projects/cuda-kmeans/speedup1.png" >}}
 
-When processing one million data points, we observed a speedup of approximately $4\times$ over the sequential version. 
+When processing $10^7$ data points, we observed a speedup of approximately $4$x over the sequential version. 
 However, as the number of data points decreases, the speedup also diminishes. This is likely because the overhead of kernel launches and memory transfers becomes more significant when there is less work per kernel call.
 
 $K=100$ and $K=1000$:
 {{< includeImage path="/projects/cuda-kmeans/speedup2.png" >}}
 
 The increased computational load per data point (due to more centroid comparisons) allows the GPU to better utilize its parallel processing capabilities. 
-Here, the speedup reaches around $35\times$ with one million points. 
+Here, the speedup reaches around $35$x with $10^7$ points. 
 
 ## Effects of Threads per Block (TPB)
 It is also possibl to experiment varying the number of threads per block:
@@ -592,7 +593,7 @@ $ sudo nvprof ./build/kmeansCuda datasetUtils/generatedDatasets/1000000_100.csv 
                     0.00%     587ns         1     587ns     587ns     587ns  cuDeviceGetUuid
 ```
 
-Visually (using [nvvc](https://developer.nvidia.com/nvidia-visual-profiler)), 
+Visually (using [nvvp](https://developer.nvidia.com/nvidia-visual-profiler)), 
 {{< includeImage path="/projects/cuda-kmeans/V1.png" class="no-invert" >}}
 
 We can see that:
@@ -607,9 +608,9 @@ This shows that our main computation is concentrated in this kernel.
 
 
 
-# Splitting kernel - code V2
+# Splitting kernel - kernel V2
 One limitation of the code above is that nvprof does not break down the kernel into its internal operations, so it's hard to pinpoint exactly which part of the kernel is the slowest. 
-Additionally, I don't have access to NVIDIA's detailed GPU code analysis tools on this hardware (running on an old GeForce 920M 🥵).
+Additionally, I don't have access to NVIDIA's detailed GPU code analysis tools on my hardware (running on an old GeForce 920M 🥵).
 
 To further investigate the performance bottleneck, I decided to split the monolithic kernel into two distinct kernels:
 
@@ -662,6 +663,127 @@ We can observe that
 In summary, while the CUDA implementation scales very well and achieves significant speedup over the sequential version, the profiling data indicates that our primary focus for further optimization should be on the assignment phase of the algorithm rather than the atomic operations used in global memory.
 
 
+# Achieving 100x speedup - kernel V3
+At the beginning of this post i made a claim about 100x speedup, you trusted me until now, but i want you to see which change made the speedup from 35x to +100x speedup!
+
+From the sections above we know for sure that the bottleneck is before the atomic operations happening in global memory, so it has to be here:
+
+```cpp
+float minDistance = INFINITY;
+int clusterLabel = 0;
+for (int j = 0; j < K; ++j) {
+	float distance = distanceMetric(dataPoints_dev[index * 2], dataPoints_dev[index * 2 + 1],
+                                centroids_dev[j * 2], centroids_dev[j * 2 + 1]);
+	if (distance < minDistance){
+        minDistance = distance;
+        clusterLabel = j;
+    }
+}
+clusterLabel_dev[index] = clusterLabel;
+atomicAdd(&(newCentroids_shared[clusterLabel*2]), dataPoints_dev[index*2]);
+atomicAdd(&(newCentroids_shared[clusterLabel*2 + 1]), dataPoints_dev[index*2 + 1]);
+atomicAdd(&(clusterCardinality_shared[clusterLabel]),1);
+```
+
+If we look at this code closely, it is calculating the distance from a point to every centroids ($K$).
+But the centroids are in **global memory!**
+
+So what is happening is that we are doing $K$ access to the GPU DRAM for each thread.
+We can do better and "cache" those centroids.
+
+
+```cpp
+__global__ void centroidAssignAndUpdate(float *dataPoints_dev,  float *centroids_dev, float *newCentroids_dev, int *clusterCardinality_dev,int*clusterLabel_dev, int N){
+    
+	... same code as before ...
+	
+    __shared__ float newCentroids_shared[2*K];
+    __shared__ int clusterCardinality_shared[K];
+    __shared__ float centroids_shared[2*K]; // Add a shared copy of all centroids!
+
+    for(int i = localIndex; i < 2*K; i += blockDim.x) {
+        newCentroids_shared[i] = 0.0;
+        centroids_shared[i] = centroids_dev[i];
+        if (i < K) {
+            clusterCardinality_shared[i] = 0;
+        }
+    }
+
+    __syncthreads();
+    float minDistance = INFINITY;
+    int clusterLabel = 0;
+    for (int j = 0; j < K; ++j) {
+        float distance = distanceMetric(dataPoints_dev[index*2], dataPoints_dev[index*2+1],
+                                        centroids_shared[j*2], centroids_shared[j*2+1]);
+										// Calculate the distance to centroids accessing the shared memory!
+        if(distance < minDistance){
+            minDistance = distance;
+            clusterLabel = j;
+        }
+    }
+    clusterLabel_dev[index] = clusterLabel;
+    atomicAdd(&(newCentroids_shared[clusterLabel*2]), dataPoints_dev[index*2]);
+    atomicAdd(&(newCentroids_shared[clusterLabel*2 + 1]), dataPoints_dev[index*2 + 1]);
+    atomicAdd(&(clusterCardinality_shared[clusterLabel]),1);
+    __syncthreads();
+	
+	
+	... same code as before...
+	
+}
+```
+
+Time for some speedup analysis:
+
+With $K=100$:
+{{< includeImage path="/projects/cuda-kmeans/speedupV3k100.png">}}
+
+And $K=1000$:
+{{< includeImage path="/projects/cuda-kmeans/speedupV3k1000.png">}}
+
+As promised, we got the +100x speedup! 🚀
+
+I would have liked to test it for more points and centroids but my CPU explicitely said to me that i can't 😅.
+You can also see the output from the visual profiling tool:
+{{< includeImage path="/projects/cuda-kmeans/profiler_1mlnpt_k100.png" class="no-invert">}}
+This time, the initial allocation of data points on the GPU memory is more noticeable, also we see that most of the time is taken by the kernel, as expected.
+
+
+
+# Can we achieve more speed? - kernel V4
+
+One thing i did not talk about is what happens after the kernel finishes.
+In every kernel so far, centroids are copied back to the host memory and their coordinates is divided by their cardinality.
+
+```cpp
+centroidAssignAndUpdate<<<gridSize, blockSize>>>(...);
+cudaMemcpy(newCentroids, newCentroids_dev, K*2*sizeof(float), cudaMemcpyDeviceToHost);
+cudaMemcpy(clusterCardinality, clusterCardinality_dev, K*sizeof(int), cudaMemcpyDeviceToHost);
+for (int i = 0; i < K; ++i) {
+	int cardinality = clusterCardinality[i];
+	if (cardinality <= 0) continue; 
+	centroids[i*2] = newCentroids[i*2] / cardinality;
+	centroids[i*2+1] = newCentroids[i*2+1] / cardinality;
+}
+cudaMemcpy(centroids_dev, centroids, K*2*sizeof(float), cudaMemcpyHostToDevice);
+```
+
+This operations is purely sequential, and if $K$ is big enough i would think that the overhead of launching another kernel is worth the effort.
+We can create another kernel `updateCentroids` that does that:
+```cpp
+centroidAssignAndUpdate<<<gridSize, blockSize>>>(...);
+cudaDeviceSynchronize();
+updateCentroids<<<(K+THREAD_PER_BLOCK-1)/THREAD_PER_BLOCK, THREAD_PER_BLOCK>>>(...);
+cudaDeviceSynchronize();
+```
+
+*Note: we now need a device synchronization because we are not doing a memcopy which has an implicit synchronization*.
+
+
+We can imagine that now we will have a speedup when the overhead of launching a new kernel is less than the cost of sequentially doing $K$ updates i.e with a large $K$.
+The speedup i got was similar to the previous version, but again it would have been nice to test it with more points:
+
+{{< includeImage path="/projects/cuda-kmeans/V4K1000.png">}}
 
 
 
@@ -713,10 +835,16 @@ void centroidAssignAndUpdate(
 }
 ```
 
-Again, we can play with some parameters but with this version i was able to produce a **speedup of maximum $\approx 2.5$**.
+I didn't really play much with this implementation. The only thing i saw is that my poor (4) cores where full during the execution:
 
 
-Note that my CPU is not really *capable* (i3-4005U **4 cores** 1.600GHz).
+{{< includeImage path="/projects/cuda-kmeans/omp.png" class="no-invert">}}
+
+I was able to produce a **speedup of $\approx 3$**.
+
+It can be worth investigating cache utilization with tools like [perf stat](https://man7.org/linux/man-pages/man1/perf-stat.1.html), maybe in a follow up post (?)
+
+
 
 
 # Conclusion
@@ -728,10 +856,10 @@ While the implementation i presented works for points in 2 dimension, it can be 
 
 When working with data points in higher dimensional spaces, the shared memory requirements increase. 
 In our kernel, the memory needed for storing centroids in shared memory scales with both the number of centroids (K) and the dimensionality (dim) of the data. 
-The general formula for shared memory allocation becomes:
+The general formula for shared memory allocation becomes (using kernel V3/4):
 
-$$(\text{dim} *K\times 4) + (K\times 4) \leq 49152$$
-$$ K \leq \frac{4096}{1 + \text{dim}}$$
+$$2 \times (\text{dim} \times K\times 4) + (K\times 4) \leq 49152$$
+$$ K \leq \frac{4096}{1 + 2 \times \text{dim}}$$
 
 
 Increasing the dimensionality of your data will reduce the maximum number of centroids you can store in shared memory. 
@@ -739,7 +867,7 @@ This insight is crucial for scaling the algorithm to more complex, higher dimens
 
 
 All in all, I truly enjoyed diving into CUDA programming. 
-Although the indexing was initially challenging, witnessing the dramatic speedup made the effort incredibly rewarding 🚀. I look forward to working more with CUDA in the future!
+Although the indexing was initially challenging, witnessing the dramatic speedup made the effort incredibly rewarding.
 
 {{< rawhtml >}}
 

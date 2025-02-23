@@ -17,6 +17,14 @@
     <div class="row justify-content-center">
       <div class="col-sm-12 col-md-12 col-lg-9">
         <div class="pr-lg-4">
+		{{ if .Params.image }}
+          <div class="featured-image">
+            <img class="img-fluid" src="{{ .Params.image }}" alt="{{ .Title }}">
+          </div>
+         {{ end }}
+		
+		
+		
           <div class="title mb-5">
             <h1 class="text-center mb-4">{{ .Title }}</h1>
             <div class="text-center">
@@ -31,11 +39,7 @@
               {{ end }}
             </div>
           </div>
-          {{ if .Params.image }}
-          <div class="featured-image">
-            <img class="img-fluid" src="{{ .Params.image }}" alt="{{ .Title }}">
-          </div>
-          {{ end }}
+          
           <article class="page-content  p-2">
           {{ .Content | emojify }}
           </article>

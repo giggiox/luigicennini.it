@@ -1,5 +1,5 @@
 ---
-title: "Java Strings"
+title: "Why Java Strings are special"
 date: 2025-02-14T19:53:33+05:30
 draft: false
 author: "Luigi"
