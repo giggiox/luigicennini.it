@@ -24,7 +24,7 @@
     <nav class="pt-3 navbar navbar-expand-lg {{ if .Site.Params.animate }}animate{{ end }}">
         <div class="container-fluid mx-xs-2 mx-sm-5 mx-md-5 mx-lg-5">
             <!-- navbar brand -->
-			<a class="navbar-brand primary-font text-wrap" href="{{ .Site.Language.Lang | relURL }}">
+			<a class="navbar-brand primary-font text-wrap" href="{{ .Site.BaseURL }}">
                 {{ if and (or (.Site.Params.favicon) (.Site.Params.navbar.brandLogo)) .Site.Params.navbar.showBrandLogo | default true }}
                 <img src="{{ .Site.Params.navbar.brandLogo | default .Site.Params.favicon }}" width="30" height="30" style="border-radius: 50%"
                     class="d-inline-block align-top">
@@ -66,7 +66,7 @@
                     </li>
                     {{ end }}
 					
-					<li class="nav-item navbar-text">
+					<!--<li class="nav-item navbar-text">
 						<a class="nav-link" href="{{ .Site.BaseURL | relURL }}en" aria-label="ita" style="{{ if eq .Site.Language.Lang "en"}} text-decoration: underline {{ end }}"> 
 							eng
 						</a>
@@ -75,7 +75,7 @@
 						<a class="nav-link" href="{{ .Site.BaseURL | relURL }}it" aria-label="ita" style="{{ if eq .Site.Language.Lang "it"}} text-decoration: underline {{ end }}"> 
 							ita
 						</a>
-					</li>
+					</li>-->
 
                     {{ if and (.Site.Params.projects.enable | default false) (not (.Site.Params.navbar.menus.disableProjects | default false)) }}
                     <li class="nav-item navbar-text">

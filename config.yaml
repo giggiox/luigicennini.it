@@ -2,22 +2,18 @@ baseURL: ""
 title: "luigi cennini"
 theme: hugo-profile
 defaultContentLanguage: en
-defaultContentLanguageInSubdir: true
+defaultContentLanguageInSubdir: false
 
 languages:
-  it:
-    languageName: "Italian"
-    contentDir: content/it
-    weight: 1
   en:
     languageName: "English"
     contentDir: content/en
     
     params:            
       hero:
-        intro: "Hi! I'm Luigi"
-        title: "I love building stuff!"
-        content: "I am a graduate student in Computer Science & master student in Data Science. In my spare time I like to write about my projects and I have put some of the best ones below."
+        intro: ""
+        title: "👋 Hi! I'm Luigi"
+        content: "I am a graduate student in Computer Science & master Data Science student in Florence, Italy. In my spare time I like to write about my projects and I have put some of the best ones below. You will also find some post about stuff i find interesting."
     
         
       projects:
@@ -33,9 +29,9 @@ languages:
         - identifier: progetti
           name: projects
           title: projects
-          url: /en/projects
+          url: /projects
           weight: 1
-    weight: 2
+    weight: 1
   
 
 outputs:
