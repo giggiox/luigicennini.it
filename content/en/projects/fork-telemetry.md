@@ -33,9 +33,11 @@ The main reason for this choice is that rotary encoders are less expensive than 
 
 {{< includeImage path="/projects/forktelemetry/comparison.png">}}
 
+*In the image above I have foreshadowed the entire sensor 😆, which I will explain in the following sections, detailing how I came up with it.*
 
 
-### how a rotative encoder works
+
+### How a rotary encoder works
 
 Encoders can sense movement in either direction, detecting holes or marks as they move through 2 positions. When the blue disc in the diagram below rotates clockwise, changes are first detected by pin 1 and then pin 2. When it rotates counterclockwise, pin 2 is the first to detect changes. This scheme is called 'quadrature coding' because the waveforms detected by the 2 pins are offset by 90 degrees.
 
@@ -81,24 +83,15 @@ document.getElementById('quad').src = img[position].src;
 </script>
 {{< /rawhtml >}}
 
-(animation taken from [here](https://www.pjrc.com/teensy/td_libs_Encoder.html))
+The interactive animation above was taken from [here](https://www.pjrc.com/teensy/td_libs_Encoder.html).
 
 
 
-# pre - prototyping
+# Pre-prototyping
 
 Before proceeding with the prototyping of the fork sensor, I carried out a feasibility analysis to assess the feasibility of this project.
 
 As a starting point, I selected a reliable rotary encoder: the LPD3806. This type of encoder offers a resolution of 600 PPR (pulses per revolution). Using a pulley with a diameter of 9.4 mm, a density of approximately 30 detections per millimetre of fork movement is achieved. This is because the encoder generates a quadrature signal that can be read on both the rising and falling edges. By exploiting both edges, we obtain a quadrupled resolution of the encoder, i.e. 24000 PPR (600 PPR * 4).
-
-
-
-
-
-
-
-
-
 
 Calculating the number of possible observations per millimetre of fork movement, we obtain the following result:
 
@@ -120,9 +113,9 @@ With this initial information, I therefore started the prototyping process.
 
 
 
-# prototyping
+# Prototyping
 
-For the prototyping of the fork sensor, I used the [fusion 360](https://www.autodesk.it/products/fusion-360/overview) software. After several iterations, I arrived at the following result:
+For the prototyping of the fork sensor, I used the [fusion 360](https://www.autodesk.it/products/fusion-360/overview) software. After several iterations, this was the result:
 
 
 {{< rawhtml >}} 
@@ -192,10 +185,10 @@ The box, which is designed so that it can be fixed with 2 clamps to the top tube
 
 
 
-# stampa e codice
+# 3D printing and coding
 
 
-Once printed (and assembled) the sensor and acquisition box by soldering the components on a millefori
+Once printed (and assembled) the sensor and acquisition box by soldering the components on a matrix board
 
 {{< rawhtml >}} 
 <center>
@@ -215,7 +208,7 @@ the whole thing looks like this:
 
 
 
-Operation once mounted on the MTB is as follows:
+Once mounted on the MTB, it works really good 😄
 
 {{< rawhtml >}} 
 <center>
@@ -228,10 +221,7 @@ Operation once mounted on the MTB is as follows:
 
 
 
-The code instead is as follows.
-Note that the port manipulation technique was used to obtain a maximum speed in reading the encoder.
-
-
+The code used is the following:
 
 ```cpp
 #include <SPI.h>
@@ -318,11 +308,12 @@ void handleEncoderInterrupt(){
 }
 ```
 
+*Note: port manipulation is used to obtain maximum encoder reading speed.*
 
 # first tests and results
 When the switch is activated, the code starts recording the encoder position and saves it in a log file in its folder. The log file contains the encoder position values separated by commas.
 
-I have created a website in javascript that uses the [Plotly JS](https://plotly.com/javascript/) library to display this data ([GitHub link to site code](https://github.com/giggiox/fork-telemetry/tree/main/web)). For example, the video I showed earlier produces a log file that can be opened in the site and generates this output:
+I have created a website in javascript that uses the [Plotly JS](https://plotly.com/javascript/) library to display this data ([see this public GitHub repository](https://github.com/giggiox/fork-telemetry/tree/main/web)). For example, the video I showed earlier produces a log file that can be opened in the site and generates this output:
 
 
 {{< rawhtml >}} 
@@ -332,13 +323,13 @@ I have created a website in javascript that uses the [Plotly JS](https://plotly.
 {{< /rawhtml >}}
 
 
-The scatter plot shows the sampling number on the abscissas and the fork compression in millimetres on the ordinates.
+The scatter plot shows the sampling number on the X coordinate and the fork compression in millimetres on the Y coordinate.
 
-Below the graph there are also tabular data indicating the number of bottom-outs recorded (none here), the most frequent value of fork compression and the percentage of fork used (here over 26 mm on a 150 mm fork, i.e. around 18%).
+Below the graph there are also tabular datas indicating the number of bottom-outs recorded (none here), the most frequent value of fork compression and the percentage of fork used (here over 26 mm on a 150 mm fork, i.e. around 18%).
 
-###  telemetry display on screen
+### Telemetry display on screen
 
-I have also created a python script ([GitHub link to script](https://github.com/giggiox/fork-telemetry/blob/main/videoEdit.ipynb)) which is based on [Pillow](https://pypi.org/project/Pillow/) and [cv2](https://pypi.org/project/opencv-python/). 
+I have also created a python script ([link](https://github.com/giggiox/fork-telemetry/blob/main/videoEdit.ipynb)) which is based on [Pillow](https://pypi.org/project/Pillow/) and [cv2](https://pypi.org/project/opencv-python/). 
 This script allows you to insert the telemetry detected on a video, which for the video I showed earlier, produces an effect similar to this:
 
 {{< rawhtml >}} 
@@ -353,9 +344,10 @@ This script allows you to insert the telemetry detected on a video, which for th
 
 This script first creates 101 images of the rectangle with the percentage written inside (0% to 100%). It then puts these images together in a video where each image represents a value measured by the sensor.
 
-# field tests
+# Field testing
 
-When I tested the system on a real enduro descent, I encountered the first difficulties and restrictions of the hardware I used (especially the arduino). In fact, if the shocks are too fast, the pulse count coming from the encoder starts to 'drift' and become increasingly negative.
+When I tested the system on a real enduro descent, I encountered the first difficulties and restrictions of the hardware I used (especially the arduino). 
+In fact, if the fork movements are too fast, the pulse count coming from the encoder starts to 'drift' and become increasingly negative.
 
 {{< rawhtml >}} 
 <center>
@@ -370,7 +362,7 @@ In fact it should
 - do a `digitalRead()` on the signal pin B
 - write the position on the SD
 
-In the next 2 I try to examine the code and explain why the arduino is not the correct hardware to proceed.
+In the next 2 section I will try to examine the code and explain why the arduino is not the correct hardware to proceed.
 
 ## digitalRead
 
@@ -427,7 +419,7 @@ So being a 16Mhz microcontroller (1 clock cycle takes 1/16,000,000th of a second
 From this analysis, it can be deduced that digitalRead() is not the bottleneck in the code.
 
 
-## write to SD
+## Write to SD
 
 Instead, let's look at how long a write to the SD takes. To get a more or less approximate number, we can for example print out the number of milliseconds before and after the position is written to memory.
 
@@ -443,7 +435,7 @@ And we can see that indeed the bottleneck is in this call, which can take up to 
 
 
 
-# future developments
+# Future developments
 
 - use a microcontroller with several cores, e.g. an esp32 where one core takes care of reading the encoder signal and another takes care of sampling (which can then be done constantly e.g. 1000 times per second) and writing the encoder position to the SD.
 - use a Bluetooth module to communicate data to an android application, also in real time.
@@ -456,8 +448,3 @@ And we can see that indeed the bottleneck is in this call, which can take up to 
 </center>
 {{< /rawhtml >}}
 The fusion360 file for this version is available on GitHub at [this link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v2) .
-
-
-
-
-
