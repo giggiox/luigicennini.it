@@ -21,7 +21,7 @@ The project is active on GitHub pages and a demo can be accessed from this link:
 {{< rawhtml >}}
 <center>
 {{</ rawhtml >}}
-👉https://giggiox.github.io/graphTheory-Visualizer/👈
+👉[https://giggiox.github.io/graphTheory-Visualizer/](https://giggiox.github.io/graphTheory-Visualizer/)👈
 {{< rawhtml >}}
 </center>
 {{</ rawhtml >}}
