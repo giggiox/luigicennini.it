@@ -4,9 +4,7 @@ date: 2022-01-01T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
-  - Rich content
-  - Sample
-  - example
+  - projects
 image: /projects/graphtheoryvisualizer/graph.png
 description: ""
 toc: true

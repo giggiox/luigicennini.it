@@ -4,9 +4,7 @@ date: 2025-02-14T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
-  - Rich content
-  - Sample
-  - example
+  - blog
 description: ""
 toc: true
 mathjax: true

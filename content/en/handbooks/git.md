@@ -4,9 +4,7 @@ date: 2025-01-10T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
-  - Rich content
-  - Sample
-  - example
+  - handbooks
 image: /projects/git/gitcopertina1.png
 description: ""
 toc: true

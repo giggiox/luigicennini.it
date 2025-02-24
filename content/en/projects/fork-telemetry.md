@@ -4,9 +4,7 @@ date: 2023-04-03T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
-  - Rich content
-  - Sample
-  - example
+  - projects
 image: /projects/forktelemetry/renders/render.png
 description: ""
 toc: true

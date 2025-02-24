@@ -4,9 +4,7 @@ date: 2024-11-05T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
-  - Rich content
-  - Sample
-  - example
+  - handbooks
 image: /projects/design-patterns/copertina.png
 description: ""
 toc: true

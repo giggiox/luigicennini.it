@@ -1,4 +1,4 @@
-baseURL: ""
+baseURL: "https://luigicennini.it/"
 title: "luigi cennini"
 theme: hugo-profile
 defaultContentLanguage: en

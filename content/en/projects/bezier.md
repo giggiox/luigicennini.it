@@ -4,9 +4,7 @@ date: 2023-10-01T19:53:33+05:30
 draft: false
 author: "Luigi"
 tags:
-  - Rich content
-  - Sample
-  - example
+  - projects
 image: /projects/bezier/copertina10.png
 description: ""
 toc: true
