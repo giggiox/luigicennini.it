@@ -12,12 +12,16 @@ while list1 != None and list2 != None:
         tail.next = list2
         list2 = list2.next
         tail = tail.next
-    if list1 != None:
-        tail.next = list1
-    elif list2 != None:
-        tail.next = list2 
+if list1 != None:
+	tail.next = list1
+elif list2 != None:
+	tail.next = list2 
 return newList.next
 ```
+
+{{< rawdetails title="visualization" >}}
+	{{< carousel path="projects/leetcode-solutions/linked-list/21/images/" >}}
+{{< endrawdetails >}}
 
 
 {{< endrawdetails >}}

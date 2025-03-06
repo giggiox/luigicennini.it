@@ -1,5 +1,5 @@
 ---
-title: "CUDA k-means"
+title: "Accelerating K-means with CUDA"
 date: 2025-02-16T19:53:33+05:30
 draft: false
 author: "Luigi"
