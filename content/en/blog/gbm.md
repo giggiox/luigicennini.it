@@ -1,5 +1,5 @@
 ---
-title: "Interactive Gradient Boosting Machine"
+title: "Gradient Boosting Machine & Noisy Datasets"
 date: 2025-02-27T19:53:33+05:30
 draft: true
 author: "Luigi"
@@ -163,12 +163,21 @@ body.d-mode img{
     display: block;
     max-width: 100%;
     text-align: center;
+
+}
+
+.math-container-inline {
+    overflow-x: auto;
+    display: block;
+    max-width: 100%;
+    text-align: left;
 }
 
 
 
 </style>
 <script>
+
 MathJax = {
 	tex: {
 		inlineMath: [["$", "$"]]
@@ -177,20 +186,12 @@ MathJax = {
 
 
 
+
+
 var isDarkMode = document.body.className.includes("dark");
 document.body.classList.toggle('d-mode', isDarkMode);
 document.body.classList.toggle('l-mode', !isDarkMode);
 
-document.getElementById("theme-toggle").addEventListener("click", () => {
-		if (document.body.className.includes("dark")) {
-			isDarkMode = false;
-		} else {
-			isDarkMode = true;
-		}
-		document.body.classList.toggle('d-mode', isDarkMode);
-		document.body.classList.toggle('l-mode', !isDarkMode);
-		drawSim(sim1, canvas1, "Sequential");
-	})
 </script>
 {{< /rawhtml >}}
 
@@ -202,14 +203,26 @@ This incremental approach builds a powerful predictive model.
 Here's a quick visual reminder of the algorithm (from [Friedman paper in 2001](https://jerryfriedman.su.domains/ftp/trebst.pdf)):
 
 Given a dataset ${(x_i,y_i)}_{i=1}^{n}$
-{{< includeImage path="/blog/gbm/algo.PNG" >}}
+{{< rawhtml >}}
+<div class="math-container-inline">
+{{< /rawhtml >}}
+1. $F^0(x) = \underset{\gamma}{argmin} \sum_{i=1}^n L(y_i, \gamma)$
+2. $\text{for } m = 1,...,M:$
+	1. $r_{i,m} = - \Big[\frac{\partial L(y_i, F(x_i))}{\partial F(x_i)} \Big]_{F(x) = F^{m-1}(x)} \text{ for } i = 1,...,n$
+	2. $\text{fit a regression tree to } r_{i,m} \text{ and create terminal regions for } R_{jm} \text{ for } j = 1,...,J_m$
+	3. $\forall j = 1...J_m \text{ compute } \gamma_{j,m} = \underset{\gamma}{argmin} \sum_{x_i \in R_{i,j}} L(y_i, F^{m-1}(x_i) + \gamma)$
+	4. $\text{update } F^m(x) = F^{m-1}(x) + \nu \sum_{j=1}^{J_m} \gamma_{j,m} I(x \in R_{j,m})$
+3. $\text{output } F^M(x)$
+{{< rawhtml >}}
+</div>
+{{< /rawhtml >}}
+
 
 There are many resources online explaining the algorithm, like this one so I won't rehash it. 
 Instead, let's get hands-on and see GBM in action.
 
 ## Visualizing Shallow Trees (Depth 1)
-First, let's visualize GBM building 50 trees, each with a depth of 1.
-
+First, let's visualize GBM building $M=50$ trees, each with a depth of 1.
 {{< rawhtml >}}
 <center>
 <div class="container">
@@ -218,10 +231,10 @@ First, let's visualize GBM building 50 trees, each with a depth of 1.
             <div id="details"></div>
         </div>
         <canvas id="plotCanvas" width="1000" height="700"></canvas>
+		<br>
         <div class="controls">
-            <button id="prevBtn" disabled>Previous Step</button>
-            <button id="nextBtn">Next Step</button>
-            <button id="resetBtn">Reset</button>
+            <button id="prevBtn" class="btn btn-primary" disabled>Previous Step</button>
+            <button id="nextBtn" class="btn btn-primary">Next Step</button>
         </div>
 		<input type="range" min="0" max="50" value="0" class="slider" id="myRange">
 
@@ -231,7 +244,7 @@ First, let's visualize GBM building 50 trees, each with a depth of 1.
 
 **What you are seeing**: 
 - $\gamma_i$: This represents the individual tree built on the residuals (errors) from the previous prediction.
-- $F_i$: This is the updated prediction, where each new tree's contribution is added to the previous prediction, scaled by the learning rate (0.1 in this case).
+- $F^i$: This is the updated prediction, where each new tree's contribution is added to the previous prediction, scaled by the learning rate (0.1 in this case).
 
 ## Visualizing Deeper Trees (Depth 4)
 Now, let's see how GBM performs with deeper trees, each having a depth of 4.
@@ -245,10 +258,10 @@ Now, let's see how GBM performs with deeper trees, each having a depth of 4.
             <div id="details"></div>
         </div>
         <canvas id="plotCanvas2" width="1000" height="700"></canvas>
+		<br>
         <div class="controls">
-            <button id="prevBtn2" disabled>Previous Step</button>
-            <button id="nextBtn2">Next Step</button>
-            <button id="resetBtn2">Reset</button>
+            <button id="prevBtn2" class="btn btn-primary" disabled>Previous Step</button>
+            <button id="nextBtn2" class="btn btn-primary">Next Step</button>
         </div>
 		<input type="range" min="0" max="50" value="0" class="slider" id="myRange2">
 
@@ -261,6 +274,270 @@ Now, let's see how GBM performs with deeper trees, each having a depth of 4.
 By comparing the two visualizations, you'll notice a significant difference. 
 With trees of depth 4, the model captures the underlying pattern much more effectively, resulting in a smaller loss. 
 This demonstrates how increasing tree depth allows GBM to model more complex relationships in the data.
+
+
+# Why this project
+
+And this is why i did this project:
+
+```R
+model <- gbm_fit(X4, y4, ls_objective, M = 100, learning_rate = 0.1, max_depth = 3)
+predictions <- gbm_predict(model, X4)
+loss <- ls_objective$loss(y4, predictions)
+ggplot(data.frame(x = X4, y = y4, pred = predictions), aes(x = x)) +
+  geom_point(aes(y = y), alpha = 0.5, color = "black") +
+  geom_line(aes(y = pred), color = "red", size = 1) +
+  labs(title = paste("noise_fractioN = 0.5, LS loss = " ,sprintf(loss, fmt = '%#.4f')), x = "X", y = "Y") +
+  ylim(-6, 6) +
+  theme_minimal()
+```
+
+
+{{< includeImage path="/blog/gbm/bad.png" >}}
+You can see, it's pretty bad with noisy datasets. The default loss function (LS) does a pretty bad job.
+
+
+# The role of Loss functions and noisy datasets
+
+While playing with GBM R library i discovered that it is not possible to change the Loss function $L$.
+By default it uses least squares.
+
+The algorithm only requires the loss function do be differentiable.
+
+
+
+## Least Squares
+
+$$L(y,pred) = \frac{1}{2} (y-pred)^2$$
+
+This function simplify most of the algorithm complexity, just by unwrapping the math we can see that 
+
+$$F^0(x) = \underset{\gamma}{argmin} \sum_{i=1}^n L(y_i, \gamma) = \hat{y}$$
+
+so we don't have to do line search.
+
+Also for pseudo residuals
+
+$$r_{i,m} = - \Big[\frac{\partial L(y_i, F(x_i)}{\partial F(x_i)} \Big]_{F(x) = F^{m-1}(x)}=y_i-F^{m-1}(x_i)$$
+
+
+
+## LAD
+$$L(y,pred) = |y-pred|$$
+$$r_{i,m} = - \Big[\frac{\partial L(y_i, F(x_i)}{\partial F(x_i)} \Big]_{F(x) = F^{m-1}(x)}=sign(y_i-F^{m-1}(x_i))$$
+
+
+## Huber loss
+
+
+$$L_\delta(y,pred)=\begin{cases}
+\frac{1}{2}(y-pred)^2 \text{ if } |y-pred| \leq \delta \cr
+\delta(|y-pred|-\frac{1}{2}\delta) \text{ otherwise}
+\end{cases}
+$$
+
+$$r_{i,m} = - \Big[\frac{\partial L(y_i, F(x_i)}{\partial F(x_i)} \Big]_{F(x) = F^{m-1}(x)} =\begin{cases}
+y_i - F^{m-1}(x_i) \text{ if } |y_i-F^{m-1}(x_i)| \leq \delta \cr
+\delta(sign(y_i-F^{m-1}(x_i)) \text{ otherwise}
+\end{cases}$$
+
+
+
+
+
+
+
+
+
+
+
+
+## Let's code it up
+
+I coded the algorithm from scratch in R. You can see the algorithm at the end of this article
+
+For now, just know that you can use the algorithm like this:
+
+```R
+model <- gbm_fit(X, y, loss, M = 100, learning_rate = 0.1, max_depth = 3)
+predictions <- gbm_predict(model, X)
+```
+
+Where `loss` is a custom loss function.
+
+So we can define:
+
+1. Least Squares loss function
+
+```R
+ls_objective <- list(
+  loss = function(y, pred) mean(0.5*(y - pred)^2),
+  negative_gradient = function(y, pred) y - pred
+)
+```
+
+
+2. LAD loss function
+```R
+abs_objective <- list(
+  loss = function(y, pred) mean(abs(y - pred)),
+  negative_gradient = function(y, pred) sign(y - pred)
+)
+```
+
+3. Huber loss function
+```R
+create_huber_loss <- function(delta) {
+  list(
+    loss = function(y, pred) {
+      error <- y - pred
+      loss <- ifelse(
+        abs(error) <= delta,
+        0.5 * error^2,
+        delta * (abs(error) - 0.5 * delta)
+      )
+      mean(loss)
+    },
+    negative_gradient = function(y, pred) {
+      error <- y - pred
+      grad <- ifelse(
+        abs(error) <= delta,
+        error,
+        delta * sign(error)
+      )
+      grad
+    }
+  )
+}
+```
+
+So we just need to pass those custom functions to our algorithm!
+
+# Setting up some experiments
+
+First off, the seed for reproducibility:
+
+```R
+set.seed(18)
+```
+
+I created 4 datasets this way:
+
+```R
+n <- 500
+data <- make_test_data(n, 0.5,points_fraction)
+X <- data$x
+y <- data$y
+```
+
+Where `make_test_data` is a custom function (you can see this as well at the end of this article).
+With `points_fraction = 0,0.1,0.3,0.5`
+
+
+
+{{< includeImage path="/blog/gbm/datasets.png" >}}
+
+
+
+
+Pretty bad right?
+
+So i run the follwing experiments, for each loss function and datasets i tried to see what yelds to the lowest loss value possible:
+For the huber loss i tried the following $\delta$ values: $0.1, 0.5, 1$.
+
+
+
+| noise_fraction | LS    | LAD  | Huber $\delta=0.1$ | Huber $\delta=0.5$ | Huber $\delta=1$ |
+|-------|-------|------|-----------------|-----------------|---------------|
+|0| 0.004 | 0.07 | 0.006           | 0.004           | 0.004         |
+|0.1| 0.27  | 0.24 | 0.024           | 0.08            | 0.14          |
+|0.3| 1.01  | 0.69 | 0.07            | 0.29            | 0.5           |
+|0.5| 1.58  | 1.01 | 0.1             | 0.43            | 0.7           |
+
+
+
+
+
+# Notes
+
+```R
+library(rpart)
+gbm_fit <- function(X, y, objective, M = 100, learning_rate = 0.1, max_depth = 1) {
+  get_optimal_base_value <- function(y, loss) {
+    c_values <- seq(min(y), max(y), length.out = 100)
+    losses <- sapply(c_values, function(c) loss(y, rep(c, length(y))))
+    c_values[which.min(losses)]
+  }
+  
+  get_optimal_leaf_value <- function(y, current_predictions, loss) {
+    if (length(y) == 0) {
+      stop("No samples in this leaf. Cannot compute optimal leaf value.")
+    }
+    c_values <- seq(-1, 1, length.out = 100)
+    losses <- sapply(c_values, function(c) loss(y, current_predictions + c))
+    optimal_value <- c_values[which.min(losses)]
+    return(optimal_value)
+  }
+  
+  update_terminal_nodes <- function(tree, X, y, current_predictions, loss) {
+    leaf_nodes <- which(tree$frame$var == "<leaf>")
+    leaf_node_for_each_sample <- as.numeric(predict(tree, data.frame(X), type = "matrix"))
+    
+    for (leaf in leaf_nodes) {
+      samples_in_this_leaf <- which(leaf_node_for_each_sample == leaf)
+      if (length(samples_in_this_leaf) == 0) {
+        next
+      }
+      y_in_leaf <- y[samples_in_this_leaf]
+      preds_in_leaf <- current_predictions[samples_in_this_leaf]
+      val <- get_optimal_leaf_value(y_in_leaf, preds_in_leaf, loss)
+      tree$frame$yval[leaf] <- val
+    }
+    tree
+  }
+  
+  base_prediction <- get_optimal_base_value(y, objective$loss)
+  current_predictions <- rep(base_prediction, length(y))
+  trees <- list()
+  
+  for (i in 1:M) {
+    pseudo_residuals <- objective$negative_gradient(y, current_predictions)
+    tree <- rpart(pseudo_residuals ~ ., data = data.frame(X, pseudo_residuals), 
+                  method = "anova", maxdepth = max_depth)
+    tree <- update_terminal_nodes(tree, X, y, current_predictions, objective$loss)
+    current_predictions <- current_predictions + learning_rate * predict(tree, data.frame(X))
+    trees[[i]] <- tree
+  }
+  
+  list(trees = trees, base_prediction = base_prediction, learning_rate = learning_rate)
+}
+
+gbm_predict <- function(model, X) {
+  predictions <- model$base_prediction + model$learning_rate * Reduce(
+    `+`, lapply(model$trees, function(tree) predict(tree, data.frame(X)))
+  )
+  predictions
+}
+```
+
+
+
+```R
+make_test_data <- function(n, noise_scale, points_fraction = 0.2) {
+  x <- matrix(seq(0, 10, length.out = n), ncol = 1)
+  y <- sin(x) + rnorm(n, 0, 0.1)
+  
+  # Introduce noise
+  n_points <- ceiling(n * points_fraction)
+  if (n_points > 0) {
+    points_indices <- sample(seq_len(n), n_points)
+    y[points_indices] <- y[points_indices] + rnorm(n_points, 0, 5 * noise_scale)
+  }
+  
+  data.frame(x = x, y = y)
+}
+```
+
 
 Luigi
 
@@ -345,8 +622,15 @@ function initializePlot(canvas, ctx, modelData, step) {
 function drawAxes(ctx, canvas) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.lineWidth = 2;
-    ctx.strokeStyle = '#000';
-
+	
+	
+	let pointsColor = 'black';
+	if (isDarkMode){
+		pointsColor = 'white';
+	}
+	
+    ctx.strokeStyle = pointsColor;
+	ctx.fillStyle = pointsColor;
     // X-axis
     ctx.beginPath();
     ctx.moveTo(padding, canvas.height - padding);
@@ -414,7 +698,11 @@ function plotData(ctx, canvas, modelData, step) {
 
     drawAxes(ctx, canvas);
 
-    plotPoints(ctx, modelData.X1, modelData.y1, 'black', 3);
+	let pointsColor = 'black';
+	if (isDarkMode){
+		pointsColor = 'white';
+	}
+    plotPoints(ctx, modelData.X1, modelData.y1, pointsColor, 3);
     plotTrueFunction(ctx);
 
     ctx.font = "bold 24px Arial";
@@ -506,10 +794,51 @@ range2.value = 0;
 loadData1();
 loadData2();
 
+	document.getElementById("theme-toggle").addEventListener("click", () => {
+		if (document.body.className.includes("dark")) {
+			isDarkMode = false;
+		} else {
+			isDarkMode = true;
+		}
+		document.body.classList.toggle('d-mode', isDarkMode);
+		document.body.classList.toggle('l-mode', !isDarkMode);
+		loadData1();
+		loadData2();
+	})
+
 
 
 
   </script>
+{{< /rawhtml >}}
+
+
+
+
+{{< rawhtml >}} 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    if (window.MathJax) {
+        MathJax.startup.promise.then(() => {
+            document.querySelectorAll("mjx-container.MathJax").forEach(function (el) {
+                // Controlla se è un'equazione a blocco (display math)
+                if (el.getAttribute("display") === "true") {
+                    // Controlla se non è già avvolto in un math-container
+                    if (!el.parentElement.classList.contains("math-container")) {
+                        let wrapper = document.createElement("div");
+                        wrapper.classList.add("math-container");
+
+                        el.parentNode.insertBefore(wrapper, el);
+                        wrapper.appendChild(el);
+                    }
+                }
+            });
+        }).catch((err) => console.error("Errore MathJax:", err));
+    } else {
+        console.warn("MathJax non è stato caricato.");
+    }
+});
+</script>
 {{< /rawhtml >}}
 
 
