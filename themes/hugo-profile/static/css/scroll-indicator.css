@@ -1,0 +1,35 @@
+.scroll-indicator {
+    position: absolute; /* O 'relative' se il contenitore hero è 'relative' */
+    bottom: 30px;      /* Distanza dal fondo della sezione hero */
+    left: 50%;         /* Centrato orizzontalmente */
+    transform: translateX(-50%); /* Centratura precisa */
+    z-index: 10;       /* Assicurati sia sopra altri elementi se necessario */
+    // cursor: pointer;   /* Indica che è cliccabile (opzionale) */
+    /* Stile per l'icona/testo */
+    /* Animazione opzionale */
+    animation: bounce 2s infinite;
+	transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out; /* Definisce la transizione */
+}
+
+/* Puoi stilare l'SVG o l'icona font direttamente se necessario */
+.scroll-indicator svg {
+    width: 30px;  /* Dimensione desiderata */
+    height: 30px;
+}
+.scroll-indicator i {
+   font-size: 2rem; /* Dimensione per Font Awesome */
+}
+
+
+/* Keyframes per l'animazione bounce (opzionale) */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-10px); /* Sposta su */
+    }
+    60% {
+        transform: translateX(-50%) translateY(-5px); /* Sposta leggermente su */
+    }
+}
