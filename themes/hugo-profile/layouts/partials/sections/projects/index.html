@@ -1,3 +1,27 @@
+<style>
+.post-entry .entry-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-indent: -9999px;
+}
+
+.post-entry {
+  background: var(--secondary-background-color); /* PaperMod usa variabili CSS */
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.post-entry:hover {
+  box-shadow: var(--shadow-hover);
+}
+a {
+    text-decoration: none;
+}
+</style>
+
 <footer>
 <div class="container py-3" id="recent-posts">
     {{ if .Site.Params.projects.recentPosts.enable | default false }}
@@ -8,32 +32,33 @@
         {{ .Site.Params.projects.recentPosts.title | default "Recent Posts" }}
     </div>
     <div class="row justify-content-center">
-        {{ range $recentPosts }}
-        <div class="col-lg-4 col-md-6 pt-2">
-            <div class="card h-100">
-                {{ if and (not (.Site.Params.projects.recentPosts.disableFeaturedImage | default false)) (.Params.image) }}
-                <div class="card-header">
-                    <a href="{{ .RelPermalink }}">
-                        <img src="{{ .Params.image }}" class="card-img-top" alt="{{ .Title }}">
-                    </a>
-                </div>
-                {{ end }}
-                <div class="card-body bg-transparent p-3 shadow-sm">
-                    <a href="{{ .RelPermalink }}" class="primary-font card-title">
-                        <h5 class="card-title bg-transparent" title="{{ .Title }}">{{ .Title | truncate 25 }}</h5>
-                    </a>
-                    <div class="card-text secondary-font">
-                        <p>{{ .Summary | truncate 300}}</p>
-                    </div>
-                </div>
-                <div class="mt-auto card-footer">
-                    <span class="float-start">{{ .Date.Format (.Site.Params.datesFormat.articleRecent | default "January 2, 2006") }}</span>
-                    <a href="{{ .RelPermalink }}" class="float-end btn btn-outline-info btn-sm">{{ .Site.Params.terms.read | default "Read" }}</a>
-                </div>
-            </div>
-        </div>
-        {{ end }}
-    </div>
+	{{ range $recentPosts }}
+	<div class="col-12 d-flex justify-content-center mb-4">
+		<article class="post-entry shadow-sm p-4 rounded" style="max-width: 720px; width: 100%;">
+			{{- $isHidden := default (.Param "hideCover") | default true }}
+			{{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+
+			<div class="entry-header">
+				<h2 class="entry-hint-parent">
+				<a href="{{ .Permalink }}">{{ .Title }}</a>
+			</h2>
+			</div>
+
+			{{ if not (.Param "hideSummary") }}
+				<div class="entry-content">
+					<p>{{ .Summary | truncate 150 }}</p>
+				</div>
+			{{ end }}
+
+			{{ if not (.Param "hideMeta") }}
+				<footer class="entry-footer">
+					<span title='%s'>{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</span>
+				</footer>
+			{{ end }}
+    </article>
+  </div>
+  {{ end }}
+</div>
     {{ end }}
 </div>
 </footer>

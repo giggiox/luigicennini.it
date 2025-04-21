@@ -5,6 +5,8 @@ draft: false
 author: "Luigi"
 tags:
   - projects
+  
+hideCover: true
 image: /projects/graphtheoryvisualizer/graph.png
 description: ""
 toc: true

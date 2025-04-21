@@ -11,22 +11,30 @@
     </div>
     <div class="row">
         {{ range $recentPosts }}
-        <div class="col-12 my-3">
-            <div class="card shadow-sm border-0">
-                <div class="card-body d-flex flex-column flex-md-row justify-content-between">
-                    <div class="flex-grow-1">
-                        <a href="{{ .RelPermalink }}" class="text-decoration-none">
-                            <h5 class="card-title mb-2 text-primary">{{ .Title }}</h5>
-                        </a>
-                        <p class="card-text text-muted mb-0">{{ .Summary | truncate 250 }}</p>
-                    </div>
-                    <div class="text-end ms-md-4 mt-3 mt-md-0">
-                        <span class="text-secondary small">{{ .Date.Format (.Site.Params.datesFormat.articleRecent | default "January 2, 2006") }}</span>
-                        <a href="{{ .RelPermalink }}" class="btn btn-sm btn-outline-info ms-3">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div class="col-12 d-flex justify-content-center mb-4">
+		<article class="post-entry shadow-sm p-4 rounded" style="max-width: 720px; width: 100%;">
+			{{- $isHidden := default (.Param "hideCover") | default true }}
+			{{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+
+			<div class="entry-header">
+				<h2 class="entry-hint-parent">
+				<a href="{{ .Permalink }}">{{ .Title }}</a>
+			</h2>
+			</div>
+
+			{{ if not (.Param "hideSummary") }}
+				<div class="entry-content">
+					<p>{{ .Summary | truncate 150 }}</p>
+				</div>
+			{{ end }}
+
+			{{ if not (.Param "hideMeta") }}
+				<footer class="entry-footer">
+					<span title='%s'>{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</span>
+				</footer>
+			{{ end }}
+    </article>
+  </div>
         {{ end }}
     </div>
     {{ end }}

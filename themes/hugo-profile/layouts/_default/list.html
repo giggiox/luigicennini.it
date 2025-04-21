@@ -1,48 +1,84 @@
 {{ define "head" }}
 <meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
 <link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/list.css" media="all">
+<style>
+
+
+.post-entry .entry-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  text-indent: -9999px;
+}
+
+.post-entry {
+  background: var(--secondary-background-color); /* PaperMod usa variabili CSS */
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow);
+}
+
+.post-entry:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+a {
+    text-decoration: none;
+}
+
+
+
+</style>
+
+
 {{ end }}
 
 {{ define "title" }}
 {{.Title }} | {{ .Site.Title }}
 {{ end }}
 
+
+
+
+
 {{ define "main" }}
 <div class="container pt-5" id="list-page">
+		
+	{{ $recentPostsPath := .Site.Params.projects.recentPosts.path | default "blogs" }}	
+	{{ $recentPostsCount := .Site.Params.projects.recentPosts.count | default 3 }}
+	{{ $recentPosts := where .Site.RegularPages "Section" $recentPostsPath | first $recentPostsCount }}
+
+
     <h2 class="text-center pb-2">{{.Title}}</h2>
     <div class="row">
-        {{ range .Paginator.Pages }}
-        <div class="col-lg-4 col-md-6 my-3">
-            <div class="card-columns">
-                <div class="card h-100">
-                    {{ if and (not (.Site.Params.listPages.disableFeaturedImage | default false)) (.Params.image) }}
-                    <div class="card-header">
-                        <a href="{{ .RelPermalink }}">
-                            <img src="{{ .Params.image }}" class="card-img-top" alt="{{ .Title }}" style="object-fit: cover; width: 100%; height: 200px;">
-                        </a>
+        {{ range $recentPosts }}
+        <div class="col-12 d-flex justify-content-center mb-4">
+            <article class="post-entry shadow-sm p-4 rounded" style="max-width: 720px; width: 100%;">
+                {{- $isHidden := default (.Param "hideCover") | default true }}
+                {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+
+                <header class="entry-header">
+				
+                    <h2 class="entry-hint-parent">
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                </h2>
+                </header>
+
+                {{ if not (.Param "hideSummary") }}
+                    <div class="entry-content">
+                        <p>{{ .Summary | truncate 150 }}</p>
                     </div>
-                    {{ end }}
-                    <div class="card-body bg-transparent p-4 shadow-sm">
-                        <a href="{{ .RelPermalink }}" class="primary-font card-title">
-                            <h5 class="card-title bg-transparent" title="{{ .Title }}">{{ .Title | truncate 25 }}</h5>
-                        </a>
-                        <div class="card-text secondary-font">
-                            <p>{{ .Summary | truncate 300}}</p>
-                        </div>
-                    </div>
-                    <div class="mt-auto post-footer bg-transparent py-3">
-                        <span class="float-start bg-transparent">{{ .Date.Format (.Site.Params.datesFormat.articleList | default "January 2, 2006") }}</span>
-                        <a href="{{ .RelPermalink }}" class="float-end btn btn-outline-info btn-sm">{{ .Site.Params.terms.read | default "Read" }}</a>
-                    </div>
-                </div>
-            </div>
+                {{ end }}
+
+                {{ if not (.Param "hideMeta") }}
+                    <footer class="entry-footer">
+                        <span title='%s'>{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</span>
+                    </footer>
+                {{ end }}
+                </article>
         </div>
         {{ end }}
-        <div class="row justify-content-center">
-            <div class="col-auto m-3">
-                {{template "_internal/pagination.html" . }}
-            </div>
-        </div>
     </div>
 </div>
 {{ end }}

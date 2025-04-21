@@ -71,11 +71,6 @@ header .navbar.animate {
 
 /* hero */
 
-#hero {
-    min-height: 100vh;
-    line-height: 2rem;
-    max-width: 100%;
-}
 #hero .content.animate {
     animation: fade-left 1s ease-out;
 }

@@ -5,6 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
+hideCover: true
 image: /projects/forktelemetry/renders/render.png
 description: ""
 toc: true
