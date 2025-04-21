@@ -12,7 +12,7 @@ languages:
     params:            
       hero:
         intro: ""
-        title: "👋 Hi! I'm Luigi"
+        title: "Hi! I'm Luigi"
         content: "I am a graduate student in Computer Science & master Data Science student in Florence, Italy. In my spare time I like to write about my projects and I have put some of the best ones below. You will also find some post about stuff i find interesting."
     
         
@@ -135,7 +135,7 @@ params:
       enable: false
     # roundImage: true # Make hero image circular | default false
     button:
-      enable: true
+      enable: false
       name: "CV"
       url: "https://drive.google.com/file/d/1ND4i3p8ysdkQPaZt5h0IZB4sSRsO_PM6/view?usp=sharing"
       download: true
