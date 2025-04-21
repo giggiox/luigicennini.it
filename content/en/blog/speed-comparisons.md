@@ -70,19 +70,6 @@ document.body.classList.toggle('l-mode', !isDarkMode);
     
 {{< /rawhtml >}}
 
-Everybody knows what a CPU looks like on the inside
-
-
-*...no?*
-
-Well, for those of you that don't know, here is a picture of it's insides:
-
-{{< includeImage path="/blog/cache/4.png" class="no-invert">}}
-
-From this picture you can notice something interesting about caches and caches placements.
-In fact you can see that L1 caches are the closest to the cores and L3 caches are the furthest.
-This is why L1 are also the fastest and L3 the slowest among the three levels shown in the picture.
-
 I recently found a speed comparison visualiazation between caches by [Benj Dicken](https://benjdd.com/) in [this X post](https://x.com/BenjDicken/status/1847310000735330344), and since i couldn't find anywhere to play with his visualization, I recreated it here (which is mostly why I am writing this post 😅 ):
 
 

@@ -195,12 +195,15 @@ document.body.classList.toggle('l-mode', !isDarkMode);
 </script>
 {{< /rawhtml >}}
 
-Curious about how Gradient Boosting Machines (GBMs) really work? I've built an interactive visualization to demystify the process!
+
+Ever wanted to peek under the hood of a Gradient Boosting Machine? In this post, we'll do just that by building a GBM from scratch in R! While fantastic R packages like gbm and xgboost get the job done efficiently, rolling our own gives us ultimate control and understanding.
+
+Specifically, I wanted the freedom to easily plug in and test various loss functions. This hands-on approach lets us directly see how choosing the right loss function can make a big difference, for example, when tackling noisy datasets, something that isn't always the most straightforward aspect of pre-built tools.
 
 ## GBM basics
-GBMs learn iteratively, focusing on the errors of previous trees. 
+GBMs learn iteratively, they fit a tree and then focus on the errors of previous trees. 
 This incremental approach builds a powerful predictive model. 
-Here's a quick visual reminder of the algorithm (from [Friedman paper in 2001](https://jerryfriedman.su.domains/ftp/trebst.pdf)):
+Here's a quick reminder of the algorithm from [Friedman paper in 2001](https://jerryfriedman.su.domains/ftp/trebst.pdf):
 
 Given a dataset ${(x_i,y_i)}_{i=1}^{n}$
 {{< rawhtml >}}
@@ -217,9 +220,6 @@ Given a dataset ${(x_i,y_i)}_{i=1}^{n}$
 </div>
 {{< /rawhtml >}}
 
-
-There are many resources online explaining the algorithm, like this one so I won't rehash it. 
-Instead, let's get hands-on and see GBM in action.
 
 ## Visualizing Shallow Trees (Depth 1)
 First, let's visualize GBM building $M=50$ trees, each with a depth of 1.
@@ -270,41 +270,12 @@ Now, let's see how GBM performs with deeper trees, each having a depth of 4.
 {{< /rawhtml >}}
 
 
-### Observations and Considerations
-By comparing the two visualizations, you'll notice a significant difference. 
-With trees of depth 4, the model captures the underlying pattern much more effectively, resulting in a smaller loss. 
-This demonstrates how increasing tree depth allows GBM to model more complex relationships in the data.
 
-
-# Why this project
-
-And this is why i did this project:
-
-```R
-model <- gbm_fit(X4, y4, ls_objective, M = 100, learning_rate = 0.1, max_depth = 3)
-predictions <- gbm_predict(model, X4)
-loss <- ls_objective$loss(y4, predictions)
-ggplot(data.frame(x = X4, y = y4, pred = predictions), aes(x = x)) +
-  geom_point(aes(y = y), alpha = 0.5, color = "black") +
-  geom_line(aes(y = pred), color = "red", size = 1) +
-  labs(title = paste("noise_fractioN = 0.5, LS loss = " ,sprintf(loss, fmt = '%#.4f')), x = "X", y = "Y") +
-  ylim(-6, 6) +
-  theme_minimal()
-```
-
-
-{{< includeImage path="/blog/gbm/bad.png" >}}
-You can see, it's pretty bad with noisy datasets. The default loss function (LS) does a pretty bad job.
 
 
 # The role of Loss functions and noisy datasets
 
-While playing with GBM R library i discovered that it is not possible to change the Loss function $L$.
-By default it uses least squares.
-
-The algorithm only requires the loss function do be differentiable.
-
-
+The visualization you have seen above uses Least Squares as a loss function.
 
 ## Least Squares
 
@@ -319,6 +290,18 @@ so we don't have to do line search.
 Also for pseudo residuals
 
 $$r_{i,m} = - \Big[\frac{\partial L(y_i, F(x_i)}{\partial F(x_i)} \Big]_{F(x) = F^{m-1}(x)}=y_i-F^{m-1}(x_i)$$
+
+
+
+
+This function works really well on such datasets, but if we start to increare the noise ratio:
+{{< includeImage path="/blog/gbm/bad.png" >}}
+
+
+It gets pretty bad.
+
+Notice how the paper above gives as requirement for the loss function to only be differentiable.
+So we can play with loss functions in order to make it works better for such datasets.
 
 
 
@@ -343,6 +326,8 @@ y_i - F^{m-1}(x_i) \text{ if } |y_i-F^{m-1}(x_i)| \leq \delta \cr
 
 
 
+What we will find at the end of this post is that huber loss is the best for noisy datasets:
+{{< includeImage path="/blog/gbm/best.png" >}}
 
 
 
@@ -352,107 +337,12 @@ y_i - F^{m-1}(x_i) \text{ if } |y_i-F^{m-1}(x_i)| \leq \delta \cr
 
 
 
-## Let's code it up
-
-I coded the algorithm from scratch in R. You can see the algorithm at the end of this article
-
-For now, just know that you can use the algorithm like this:
-
-```R
-model <- gbm_fit(X, y, loss, M = 100, learning_rate = 0.1, max_depth = 3)
-predictions <- gbm_predict(model, X)
-```
-
-Where `loss` is a custom loss function.
-
-So we can define:
-
-1. Least Squares loss function
-
-```R
-ls_objective <- list(
-  loss = function(y, pred) mean(0.5*(y - pred)^2),
-  negative_gradient = function(y, pred) y - pred
-)
-```
-
-
-2. LAD loss function
-```R
-abs_objective <- list(
-  loss = function(y, pred) mean(abs(y - pred)),
-  negative_gradient = function(y, pred) sign(y - pred)
-)
-```
-
-3. Huber loss function
-```R
-create_huber_loss <- function(delta) {
-  list(
-    loss = function(y, pred) {
-      error <- y - pred
-      loss <- ifelse(
-        abs(error) <= delta,
-        0.5 * error^2,
-        delta * (abs(error) - 0.5 * delta)
-      )
-      mean(loss)
-    },
-    negative_gradient = function(y, pred) {
-      error <- y - pred
-      grad <- ifelse(
-        abs(error) <= delta,
-        error,
-        delta * sign(error)
-      )
-      grad
-    }
-  )
-}
-```
-
-So we just need to pass those custom functions to our algorithm!
-
-# Setting up some experiments
-
-First off, the seed for reproducibility:
-
-```R
-set.seed(18)
-```
-
-I created 4 datasets this way:
-
-```R
-n <- 500
-data <- make_test_data(n, 0.5,points_fraction)
-X <- data$x
-y <- data$y
-```
-
-Where `make_test_data` is a custom function (you can see this as well at the end of this article).
-With `points_fraction = 0,0.1,0.3,0.5`
-
-
-
-{{< includeImage path="/blog/gbm/datasets.png" >}}
 
 
 
 
-Pretty bad right?
-
-So i run the follwing experiments, for each loss function and datasets i tried to see what yelds to the lowest loss value possible:
-For the huber loss i tried the following $\delta$ values: $0.1, 0.5, 1$.
 
 
-
-| noise_fraction | LS    | LAD  | Huber $\delta=0.1$ | Huber $\delta=0.5$ | Huber $\delta=1$ |
-|-------|-------|------|-----------------|-----------------|---------------|
-|0| 0.004 | 0.07 | 0.006           | 0.004           | 0.004         |
-|0.1| 0.27  | 0.24 | 0.024           | 0.08            | 0.14          |
-|0.3| 1.01  | 0.69 | 0.07            | 0.29            | 0.5           |
-|0.5| 1.58  | 1.01 | 0.1             | 0.43            | 0.7           |
 
 
 
@@ -460,6 +350,8 @@ For the huber loss i tried the following $\delta$ values: $0.1, 0.5, 1$.
 
 # Notes
 
+
+Let's write the code for the GBM, directly correlated to the paper algorithm.
 ```R
 library(rpart)
 gbm_fit <- function(X, y, objective, M = 100, learning_rate = 0.1, max_depth = 1) {
@@ -522,6 +414,64 @@ gbm_predict <- function(model, X) {
 
 
 
+I made the GBM  algorithm so it can be used like this:
+
+```R
+model <- gbm_fit(X, y, loss, M = 100, learning_rate = 0.1, max_depth = 3)
+predictions <- gbm_predict(model, X)
+```
+
+Where `loss` is a custom loss function, defined below:
+
+1. Least Squares loss function
+
+```R
+ls_objective <- list(
+  loss = function(y, pred) mean(0.5*(y - pred)^2),
+  negative_gradient = function(y, pred) y - pred
+
+)
+```
+
+
+2. LAD loss function
+```R
+abs_objective <- list(
+  loss = function(y, pred) mean(abs(y - pred)),
+  negative_gradient = function(y, pred) sign(y - pred)
+)
+```
+
+3. Huber loss function
+```R
+create_huber_loss <- function(delta) {
+  list(
+    loss = function(y, pred) {
+      error <- y - pred
+      loss <- ifelse(
+        abs(error) <= delta,
+        0.5 * error^2,
+        delta * (abs(error) - 0.5 * delta)
+      )
+      mean(loss)
+    },
+    negative_gradient = function(y, pred) {
+      error <- y - pred
+      grad <- ifelse(
+        abs(error) <= delta,
+        error,
+        delta * sign(error)
+      )
+      grad
+    }
+  )
+}
+```
+
+
+
+Let's also write a function to make test datasets:
+
 ```R
 make_test_data <- function(n, noise_scale, points_fraction = 0.2) {
   x <- matrix(seq(0, 10, length.out = n), ncol = 1)
@@ -537,6 +487,43 @@ make_test_data <- function(n, noise_scale, points_fraction = 0.2) {
   data.frame(x = x, y = y)
 }
 ```
+
+
+It's now time to set up some experiments:
+
+```R
+set.seed(18)
+```
+
+I created 4 datasets this way:
+
+```R
+n <- 500
+data <- make_test_data(n, 0.5,points_fraction)
+X <- data$x
+y <- data$y
+```
+
+Where `make_test_data` is a custom function (you can see this as well at the end of this article).
+With `points_fraction = 0,0.1,0.3,0.5`
+
+
+
+{{< includeImage path="/blog/gbm/datasets.png" >}}
+
+
+
+So i run the follwing experiments, for each loss function and datasets i tried to see what yelds to the lowest loss value possible, and this is the result:
+
+| noise_fraction | LS    | LAD  | Huber $\delta=0.1$ | Huber $\delta=0.5$ | Huber $\delta=1$ |
+|-------|-------|------|-----------------|-----------------|---------------|
+|0| 0.004 | 0.07 | 0.006           | 0.004           | 0.004         |
+|0.1| 0.27  | 0.24 | 0.024           | 0.08            | 0.14          |
+|0.3| 1.01  | 0.69 | 0.07            | 0.29            | 0.5           |
+|0.5| 1.58  | 1.01 | 0.1             | 0.43            | 0.7           |
+
+
+
 
 
 Luigi
