@@ -5,7 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: true
+hideCover: false
 image: /projects/bezier/copertina10.png
 description: ""
 toc: true

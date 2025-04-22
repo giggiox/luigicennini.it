@@ -5,7 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: true
+hideCover: false
 image: /projects/cuda-kmeans/back.png
 description: ""
 toc: true

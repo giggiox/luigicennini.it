@@ -6,7 +6,7 @@ author: "Luigi"
 tags:
   - projects
   
-hideCover: true
+hideCover: false
 image: /projects/graphtheoryvisualizer/graph.png
 description: ""
 toc: true
