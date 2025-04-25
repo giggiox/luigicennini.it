@@ -1,8 +1,8 @@
 {{ define "head" }}
 <meta name="description" content={{ .Site.Params.description }}>
-<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/index.css" media="all">
-<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/projects.css" media="all">
-<link rel="stylesheet" href="{{ .Site.Params.staticPath }}/css/scroll-indicator.css" media="all">
+<link rel="stylesheet" href="/css/index.css" media="all">
+<link rel="stylesheet" href="/css/projects.css" media="all">
+<link rel="stylesheet" href="/css/scroll-indicator.css" media="all">
 
 <!-- fontawesome -->
 <script defer src="{{ .Site.Params.staticPath }}/fontawesome-5/all-5.15.4.js"></script>
@@ -13,9 +13,9 @@
 {{ end }}
 
 {{ define "main" }}
+
+
 {{- partial "sections/hero/index.html" . -}}
-{{- partial "sections/projects/index.html" . -}}
-{{- partial "sections/handbooks/index.html" . -}}
-{{- partial "sections/blog/index.html" . -}}
+{{- partial "sections/index.html" . -}}
 
 {{ end }}

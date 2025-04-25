@@ -7,7 +7,7 @@ tags:
   - projects
 hideCover: false
 image: /projects/bezier/copertina10.png
-description: ""
+summary: "Interactive Bézier Curves and Patches with p5js."
 toc: true
 mathjax: true
 ---

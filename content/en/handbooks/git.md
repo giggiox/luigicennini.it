@@ -6,7 +6,7 @@ author: "Luigi"
 tags:
   - handbooks
 image: /projects/git/gitcopertina1.png
-description: ""
+summary: "Visual representation of Git commands."
 toc: true
 mathjax: true
 ---

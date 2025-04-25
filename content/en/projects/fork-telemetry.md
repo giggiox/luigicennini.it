@@ -7,8 +7,7 @@ tags:
   - projects
 hideCover: false
 image: /projects/forktelemetry/renders/render.png
-description: ""
-toc: true
+summary: "Introducing an innovative sensor system for MTB suspension telemetry that reduces costs by 90% while maintaining the same level of precision."
 mathjax: true
 italian: false
 ---

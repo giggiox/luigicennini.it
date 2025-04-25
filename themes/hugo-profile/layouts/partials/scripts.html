@@ -49,11 +49,6 @@
 </script>
 {{- end }}
 
-{{ if not (.Site.Params.navbar.disableSearch | default false) }}
-    <script src="{{ .Site.Params.staticPath }}/js/search.js"></script>
-{{ end }}
-
-
 {{ if (.Params.mathjax | default false) }}
 
 {{ "<!-- MathJax -->" | safeHTML }}

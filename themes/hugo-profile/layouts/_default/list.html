@@ -35,43 +35,34 @@ a {
 
 
 
-
-
 {{ define "main" }}
 <div class="container pt-5" id="list-page">
-		
-	{{ $recentPostsPath := .Site.Params.projects.recentPosts.path | default "blogs" }}	
-	{{ $recentPostsCount := .Site.Params.projects.recentPosts.count | default 3 }}
-	{{ $recentPosts := where .Site.RegularPages "Section" $recentPostsPath | first $recentPostsCount }}
-
-
     <h2 class="text-center pb-2">{{.Title}}</h2>
     <div class="row">
-        {{ range $recentPosts }}
+        {{ range .Paginator.Pages }}
         <div class="col-12 d-flex justify-content-center mb-4">
             <article class="post-entry shadow-sm p-4 rounded" style="max-width: 720px; width: 100%;">
                 {{- $isHidden := default (.Param "hideCover") | default true }}
                 {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
 
                 <header class="entry-header">
-				
                     <h2 class="entry-hint-parent">
                     <a href="{{ .Permalink }}">{{ .Title }}</a>
                 </h2>
                 </header>
 
-                {{ if not (.Param "hideSummary") }}
-                    <div class="entry-content">
-                        <p>{{ .Summary | truncate 150 }}</p>
-                    </div>
-                {{ end }}
+               
+                <div class="entry-content">
+					<p>{{ .Summary }}</p>
+				</div>
+               
 
-                {{ if not (.Param "hideMeta") }}
-                    <footer class="entry-footer">
-                        <span title='%s'>{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</span>
-                    </footer>
-                {{ end }}
-                </article>
+               
+                <footer class="entry-footer">
+                    <span title='%s'>{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</span>
+                </footer>
+                
+            </article>
         </div>
         {{ end }}
     </div>

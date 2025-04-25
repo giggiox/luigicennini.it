@@ -6,7 +6,7 @@ author: "Luigi"
 tags:
   - handbooks
 image: /projects/leetcode-solutions/back.png
-description: ""
+summary: "A curated list of leetcode solutions, with a visual explanation."
 toc: true
 mathjax: true
 ---

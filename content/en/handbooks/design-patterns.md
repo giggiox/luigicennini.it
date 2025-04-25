@@ -6,7 +6,7 @@ author: "Luigi"
 tags:
   - handbooks
 image: /projects/design-patterns/copertina.png
-description: ""
+summary: "A list of design patterns."
 toc: true
 mathjax: true
 ---

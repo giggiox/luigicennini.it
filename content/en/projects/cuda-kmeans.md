@@ -7,8 +7,7 @@ tags:
   - projects
 hideCover: false
 image: /projects/cuda-kmeans/back.png
-description: ""
-toc: true
+summary: "Native CUDA implementation of K-Means clustering algorithm. Achieving 100x speedup."
 mathjax: true
 ---
 
