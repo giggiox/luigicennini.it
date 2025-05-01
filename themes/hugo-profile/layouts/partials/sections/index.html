@@ -15,9 +15,7 @@
   box-shadow: var(--shadow-hover);
 }
 
-a {
-    text-decoration: none;
-}
+
 </style>
 
 {{ range .Site.Params.sections }}
@@ -30,12 +28,14 @@ a {
 		<div class="row justify-content-center">
 			{{ range $recentPosts }}
 			<div class="col-12 d-flex justify-content-center mb-4">
-				<article class="post-entry shadow-sm p-4 rounded" style="max-width: 720px; width: 100%;">
+			
+				
+				<article class="post-entry shadow-sm p-4 rounded clickable-article" style="max-width: 720px; width: 100%; cursor: pointer;" data-url="{{ .Permalink }}">
 					{{- $isHidden := default (.Param "hideCover") | default true }}
 					{{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
 
 					<div class="entry-header">
-						<h2 class="entry-hint-parent"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+						<h2 class="entry-hint-parent">{{ .Title }}</h2>
 					</div>
 
 					<div class="entry-content">
@@ -46,8 +46,24 @@ a {
 						<span title='%s'>{{ .Date | time.Format (default "January 2, 2006" site.Params.DateFormat) }}</span>
 					</footer>
 				</article>
+				
 			</div>
 			{{ end }}
 		</div>		
 	</div>
 {{ end }}
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const clickableArticles = document.querySelectorAll('.clickable-article');
+    clickableArticles.forEach(article => {
+      article.addEventListener('click', function() {
+        const url = this.getAttribute('data-url');
+        if (url) {
+          window.location.href = url;
+        }
+      });
+    });
+  });
+</script>

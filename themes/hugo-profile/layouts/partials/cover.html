@@ -1,4 +1,4 @@
-{{- with .cxt}} {{/* Apply proper context from dict */}}
+{{- with .cxt}}
 {{- if (and .Params.image (not $.isHidden)) }}
 <figure class="entry-cover">
     {{- $loading := cond $.IsSingle "eager" "lazy" }}
@@ -15,23 +15,10 @@
     {{- $imgdl := (.Params.image) | absURL }}
  
 
-    {{- if $addLink }}
-        <a href="{{ $imgdl }}" target="_blank" rel="noopener noreferrer">
-    {{- end }}
    
     <img loading="{{ $loading }}" src="{{ $imgdl }}" alt="{{ $alt }}" class="img-fluid">
     
 
-    {{- if $addLink }}
-        </a>
-    {{- end -}}
-
-    {{- /*  Display Caption  */}}
-    {{- if $.IsSingle }}
-        {{ with .Params.cover.caption -}}
-            <figcaption>{{ . | markdownify }}</figcaption>
-        {{- end }}
-    {{- end }}
 </figure>
-{{- end }}{{/* End image */}}
+{{- end }}
 {{- end -}}{{/* End context */ -}}
