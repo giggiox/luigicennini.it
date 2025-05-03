@@ -1,24 +1,10 @@
 {{- with .cxt}}
-{{- if (and .Params.image (not $.isHidden)) }}
-<figure class="entry-cover">
-    {{- $loading := cond $.IsSingle "eager" "lazy" }}
-    {{- $addLink := (and site.Params.cover.linkFullImages $.IsSingle) }}
-    {{- $alt := (.Params.cover.alt | default .Params.cover.caption | plainify) }}
-
- 
-    {{- $sizes := (slice "360" "480" "720" "1080" "1500") }}
-    {{- $processableFormats := (slice "jpg" "jpeg" "png" "tif" "bmp" "gif") -}}
-    {{- if hugo.IsExtended -}}
-        {{- $processableFormats = $processableFormats | append "webp" -}}
-    {{- end -}}
-
-    {{- $imgdl := (.Params.image) | absURL }}
- 
-
-   
-    <img loading="{{ $loading }}" src="{{ $imgdl }}" alt="{{ $alt }}" class="img-fluid">
-    
-
-</figure>
-{{- end }}
-{{- end -}}{{/* End context */ -}}
+	{{- if not $.isHidden }}
+	<figure class="entry-cover">
+		{{- $loading := cond $.IsSingle "eager" "lazy" }}
+		{{- $imgdl := (.Params.image) | absURL }}
+		
+		<img loading="{{ $loading }}" src="{{ $imgdl }}" class="img-fluid">
+	</figure>
+	{{- end }}
+{{- end -}}

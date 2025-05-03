@@ -5,7 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: false
+hideCover: true
 image: /projects/forktelemetry/renders/render.png
 summary: "Introducing an innovative sensor system for MTB suspension telemetry that reduces costs by 90% while maintaining the same level of precision."
 mathjax: true

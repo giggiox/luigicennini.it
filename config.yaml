@@ -19,7 +19,7 @@ enableRobotsTXT: true
 
 params:
   title: "Luigi Cennini"
-  description: Text about my cool site
+  description: Luigi personal website
   # staticPath: ""  # The path to serve the static files from
   favicon: "https://avatars.githubusercontent.com/u/29329312?v=4"
 
@@ -27,8 +27,7 @@ params:
   animate: true
 
   theme:
-    # disableThemeToggle: true
-    # defaultTheme: "light" # dark
+    defaultTheme: "dark" 
 
   font:
     fontSize: 1rem # default: 1rem
@@ -68,12 +67,15 @@ params:
     - template: projects
       title: "recent projects"
       path: projects
+      maxShowNum: 4
     - template: handbooks
       title: "handbooks"
       path: handbooks
+      maxShowNum: 3
     - template: blog
       title: "blog posts"
-      path: blog    
+      path: blog   
+      maxShowNum: 3
     
   contact:
     enable: false

@@ -1,25 +1,6 @@
 {{ define "head" }}
 <meta name="description" content="{{ .Title }} of {{ .Site.Title }}">
-<link rel="stylesheet" href="/css/list.css" media="all">
-<style>
-.post-entry {
-  background: var(--secondary-background-color);
-  border-radius: 8px !important;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow);
-}
-
-.post-entry img {
-	border-radius: 8px;
-}
-
-.post-entry:hover {
-  box-shadow: var(--shadow-hover);
-}
-</style>
-
-
+<link rel="stylesheet" href="/css/projects.css" media="all">
 {{ end }}
 
 {{ define "title" }}
@@ -29,7 +10,7 @@
 
 
 {{ define "main" }}
-<div class="container pt-5" id="list-page">
+<div class="container pt-5">
     <h2 class="text-center pb-2">{{.Title}}</h2>
     <div class="row">
         {{ range .Paginator.Pages }}
@@ -39,7 +20,7 @@
 					{{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
 
 					<div class="entry-header">
-						<h2 class="entry-hint-parent">{{ .Title }}</h2>
+						<h2 class="entry-hint-parent"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
 					</div>
 
 					<div class="entry-content">
@@ -55,17 +36,4 @@
         {{ end }}
     </div>
 </div>
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const clickableArticles = document.querySelectorAll('.clickable-article');
-    clickableArticles.forEach(article => {
-      article.addEventListener('click', function() {
-        const url = this.getAttribute('data-url');
-        if (url) {
-          window.location.href = url;
-        }
-      });
-    });
-  });
-</script>
 {{ end }}

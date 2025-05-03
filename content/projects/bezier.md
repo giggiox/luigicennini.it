@@ -5,7 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: false
+hideCover: True
 image: /projects/bezier/copertina10.png
 summary: "Interactive Bézier Curves and Patches with p5js."
 toc: true

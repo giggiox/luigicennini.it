@@ -6,7 +6,7 @@ author: "Luigi"
 tags:
   - projects
   
-hideCover: false
+hideCover: true
 image: /projects/graphtheoryvisualizer/graph.png
 summary: "Online graph algorithm interactive visualization."
 toc: true

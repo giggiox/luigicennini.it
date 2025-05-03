@@ -5,7 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: false
+hideCover: true
 image: /projects/cuda-kmeans/back.png
 summary: "Native CUDA implementation of K-Means clustering algorithm. Achieving 100x speedup."
 mathjax: true

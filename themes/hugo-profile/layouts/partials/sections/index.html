@@ -1,32 +1,14 @@
-<style>
-.post-entry {
-  background: var(--secondary-background-color);
-  border-radius: 8px !important;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: var(--shadow);
-}
-
-.post-entry img {
-	border-radius: 8px;
-}
-
-.post-entry:hover {
-  box-shadow: var(--shadow-hover);
-}
-
-
-</style>
-
 {{ range .Site.Params.sections }}
 	{{ $recentPosts := where $.Site.RegularPages "Section"  .path }}
-
-	<div class="container py-3">
+	{{ $numRecentPosts := len $recentPosts }}
+	{{ $postToShow := first .maxShowNum $recentPosts }}
+	
+	<div class="container py-3" id="projects">
 		<div class="h3 text-center text-secondary py-3">
 			{{ .title }}
 		</div>
 		<div class="row justify-content-center">
-			{{ range $recentPosts }}
+			{{ range $postToShow }}
 			<div class="col-12 d-flex justify-content-center mb-4">
 			
 				
@@ -35,7 +17,7 @@
 					{{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
 
 					<div class="entry-header">
-						<h2 class="entry-hint-parent">{{ .Title }}</h2>
+						<h2 class="entry-hint-parent"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
 					</div>
 
 					<div class="entry-content">
@@ -49,21 +31,15 @@
 				
 			</div>
 			{{ end }}
-		</div>		
+		</div>	
+		{{ if gt $numRecentPosts .maxShowNum }}
+		<div class="row justify-content-center">
+			<div class="col-12 d-flex justify-content-end" style="max-width: 720px; margin-top: 1rem;">
+				<a href="{{ .path }}" class="btn btn-outline-secondary rounded">
+					See All
+				</a>
+			</div>
+		</div>
+		{{ end }}
 	</div>
 {{ end }}
-
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const clickableArticles = document.querySelectorAll('.clickable-article');
-    clickableArticles.forEach(article => {
-      article.addEventListener('click', function() {
-        const url = this.getAttribute('data-url');
-        if (url) {
-          window.location.href = url;
-        }
-      });
-    });
-  });
-</script>
