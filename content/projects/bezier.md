@@ -20,6 +20,31 @@ mathjax: true
         }
     };
 </script>
+
+
+<style>
+pre.language-callout-warning {
+  background-color: #fffbe5 !important; /* Stesso colore di sfondo */
+  border-left: 5px solid #f9a825 !important; /* Stesso bordo */
+  padding: 1em !important;
+  margin-bottom: 1em !important;
+  border-radius: 0.25em !important;
+  color: #795548 !important; /* Stesso colore del testo */
+  white-space: pre-wrap !important; /* Fondamentale per il wrapping */
+  overflow-wrap: break-word !important; /* Per spezzare parole lunghe */
+  max-width: 100% !important; /* Assicurati che non superi il contenitore */
+}
+
+pre.language-callout-warning code {
+  display: block !important; /* Forza il blocco per il wrapping */
+  padding: 0 !important; /* Rimuovi padding aggiuntivo dal code */
+  background-color: transparent !important; /* Rendi lo sfondo del code trasparente */
+  color: inherit !important; /* Eredita il colore dal pre */
+  font-size: inherit !important; /* Eredita la dimensione del font */
+  line-height: inherit !important; /* Eredita l'altezza della linea */
+}
+
+</style>
     
 {{< /rawhtml >}}
 
@@ -40,7 +65,7 @@ $$B_i^n(t) = {n \choose i}t^i(1-t)^{n-i}, i= 0,...,n$$
 are the $n+1$ basic Bernstein polynomials.
 
 
-NIn the editor below, I have implemented an interactive version of these curves.
+In the editor below, I have implemented an interactive version of these curves.
 The algorithms I have implemented are the curve computation algorithm or the **de Casteljau algorithm** and the degree elevation algorithm.
 
 
@@ -49,7 +74,10 @@ Editor instructions:
 - move control points by dragging while holding down the left mouse button
 
 
-**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/nyiLHZ80x). Or [this link](https://editor.p5js.org/giggiox/sketches/nyiLHZ80x) to see and edit the source code.
+{{< callout level="warning" >}}
+If you are not correctly seeing (or not seeing at all) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/nyiLHZ80x). Or [this link](https://editor.p5js.org/giggiox/sketches/nyiLHZ80x) to see and edit the source code.
+{{< /callout >}}
+
 
 {{< rawhtml >}} 
 <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js"></script>
@@ -585,7 +613,10 @@ $$\underline{b}_i = { b_x \choose b_y}$$
 However, all the algorithms seen above also work for three-dimensional curves, where the control points will also have a $z$ component. All the algorithms therefore remain unchanged,
 
 
-**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Or [this link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) to see and edit the source code.
+{{< callout level="warning" >}}
+If you are not correctly seeing (or not seeing at all) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/-UfZh9jUd). Or [this link](https://editor.p5js.org/giggiox/sketches/-UfZh9jUd) to see and edit the source code.
+{{< /callout >}}
+ 
 
 {{< rawhtml >}} 
 <div id ="fourthCanvas" class="canvas-container"></div>
@@ -1178,8 +1209,10 @@ $$(u,v)\in[0,1]^2$$
 
 The skatch below shows a bicubic Bézier patch, i.e. with $m=n=3$.
 
+{{< callout level="warning" >}}
+If you are not correctly seeing (or not seeing at all) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Or [this link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) to see and edit the source code.
+{{< /callout >}}
 
-**Warning**: If you are not correctly seeing (or not seeing) the sketch below correctly, visit [this link](https://editor.p5js.org/giggiox/full/ePuLYaR4t). Or [this link](https://editor.p5js.org/giggiox/sketches/ePuLYaR4t) to see and edit the source code.
 {{< rawhtml >}}
 
 

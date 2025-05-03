@@ -1,0 +1,87 @@
+{{ $level := .Get "level" }}
+{{ $iconClass := "" }}
+{{ $borderColor := "" }}
+{{ $backgroundColor := "" }}
+
+{{ if eq $level "warning" }}
+    {{ $iconClass = "fas fa-exclamation-triangle" }}
+{{ else if eq $level "info" }}
+    {{ $iconClass = "fas fa-info-circle" }}
+{{ else if eq $level "success" }}
+    {{ $iconClass = "fas fa-check-circle" }}
+{{ else if eq $level "danger" }}
+    {{ $iconClass = "fas fa-times-circle" }}
+{{ end }}
+
+<div class="callout {{ $level }}">
+    <div class="callout-title">
+        {{ if $iconClass }}
+			<i class="{{ $iconClass }}"></i> {{ humanize $level }}
+		{{ end }}
+    </div>
+    <div class="callout-content">
+        {{ .Inner | markdownify }}
+    </div>
+</div>
+
+<style>
+.callout {
+    margin-bottom: 1em;
+    padding: 1em;
+    border-left: 0.5em solid;
+    border-radius: 0.25em;
+}
+
+.callout-title {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+.callout-title i {
+    margin-right: 0.5em;
+}
+
+
+
+.callout.warning {
+  border-left-color: var(--border-color-warning);
+  background-color: var(--background-color-warning);
+  color: var(--text-color-warning);
+}
+
+.callout.warning .callout-title {
+  color: var(--title-color-warning);
+}
+
+.callout.info {
+  border-left-color: var(--border-color-info);
+  background-color: var(--background-color-info);
+  color: var(--text-color-info);
+}
+
+.callout.info .callout-title {
+    color: var(--title-color-info);
+}
+
+.callout.success {
+    border-left-color: var(--border-color-success);
+    background-color: var(--background-color-success);
+    color: var(--text-color-success);
+}
+
+.callout.success .callout-title {
+    color: var(--title-color-success);
+}
+
+.callout.danger {
+    border-left-color: var(--border-color-danger);
+    background-color: var(--background-color-danger);
+    color: var(--text-color-danger);
+}
+
+.callout.danger .callout-title {
+    color: var(--title-color-danger);
+}
+
+
+</style>

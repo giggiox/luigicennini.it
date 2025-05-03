@@ -38,6 +38,30 @@
         --secondary-background-color: {{ .Site.Params.color.secondaryBackgroundColor | default "#ffffff" }};
         --primary-color: {{ .Site.Params.color.primaryColor | default "#007bff" }};
         --secondary-color: {{ .Site.Params.color.secondaryColor | default "#f8f9fa" }};
+		
+		
+		/* callout colors */
+		--border-color-warning: #f9a825;
+		--background-color-warning: #fffbe5;
+		--text-color-warning: #795548;
+		--title-color-warning: #f9a825;
+		
+		--border-color-info: #29b6f6;
+		--background-color-info: #e3f2fd;
+		--text-color-info: #1a237e;
+		--title-color-info: #29b6f6;
+
+		--border-color-success: #66bb6a;
+		--background-color-success: #e8f5e9;
+		--text-color-success: #1b5e20;
+		--title-color-success: #66bb6a;
+
+		--border-color-danger: #e53935;
+		--background-color-danger: #ffebee;
+		--text-color-danger: #b71c1c;
+		--title-color-danger: #e53935;
+		
+		
 
         /* dark mode colors */
         --text-color-dark: {{ .Site.Params.color.darkmode.textColor | default "#e4e6eb" }};
@@ -46,6 +70,28 @@
         --secondary-background-color-dark: {{ .Site.Params.color.darkmode.secondaryBackgroundColor | default "#212529" }};
         --primary-color-dark: {{ .Site.Params.color.darkmode.primaryColor | default "#ffffff" }};
         --secondary-color-dark: {{ .Site.Params.color.darkmode.secondaryColor | default "#212529" }};
+		
+		--border-color-warning-dark: #f0a700;
+		--background-color-warning-dark: #424242;
+		--text-color-warning-dark: #e0e0e0;
+		--title-color-warning-dark: #f0a700;
+
+		--border-color-info-dark: #4fc3f7;
+		--background-color-info-dark: #424242;
+		--text-color-info-dark: #e0e0e0;
+		--title-color-info-dark: #4fc3f7;
+
+		--border-color-success-dark: #81c784;
+		--background-color-success-dark: #424242;
+		--text-color-success-dark: #e0e0e0;
+		--title-color-success-dark: #81c784;
+
+		--border-color-danger-dark: #ef5350;
+		--background-color-danger-dark: #424242;
+		--text-color-danger-dark: #e0e0e0;
+		--title-color-danger-dark: #ef5350;
+		
+		
     }
     body {
         font-size: {{ .Site.Params.font.fontSize | default "1rem" }};

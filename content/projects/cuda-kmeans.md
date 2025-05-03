@@ -236,7 +236,13 @@ If you did not had the opportunity to look at how K-means works, i think the vis
   </center>
 {{< /rawhtml >}}
 
-*Note: Although the centroids are initialized randomly here, this isn't the optimal approach. If the starting centroids are poorly chosen, the final clusters may be incorrect. A better method is [kmeans++](https://en.wikipedia.org/wiki/K-means%2B%2B).*
+
+
+{{< callout level="info" >}}
+Although the centroids are initialized randomly here, this isn't the optimal approach. If the starting centroids are poorly chosen, the final clusters may be incorrect. A better method is [kmeans++](https://en.wikipedia.org/wiki/K-means%2B%2B).
+{{< /callout >}}
+
+
 
 # Parallelizing K-Means with CUDA
 
@@ -550,10 +556,9 @@ The increased computational load per data point (due to more centroid comparison
 Here, the speedup reaches around $35$x with $10^7$ points. 
 
 ## Effects of Threads per Block (TPB)
-It is also possibl to experiment varying the number of threads per block:
+It is also possible to experiment varying the number of threads per block:
 
 {{< includeImage path="/projects/cuda-kmeans/speedup_tpb.png" >}}
-
 1. For $K=5$: Using 1024 threads per block turned out to be the slowest configuration. With a small number of centroids, having too many threads may lead to underutilization and increased synchronization overhead.
 
 2. For $K=100$: The performance was roughly the same for different thread block sizes (128, 256, 512, and 1024 TPB). With a moderate workload per data point, the choice of thread block size has a less pronounced effect.

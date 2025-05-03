@@ -12,6 +12,26 @@
     --text-secondary-color: var(--text-secondary-color-dark) !important;
     --primary-color: var(--primary-color-dark);
     --secondary-color: var(--secondary-color-dark);
+   
+    --border-color-warning: var(--border-color-warning-dark) !important;
+    --background-color-warning: var(--background-color-warning-dark) !important;
+    --text-color-warning: var(--text-color-warning-dark) !important;   
+    --title-color-warning: var(--title-color-warning-dark) !important;
+		
+     --border-color-info: var(--border-color-info-dark) !important;
+     --background-color-info: var(--background-color-info-dark) !important;  
+     --text-color-info: var(--text-color-info-dark) !important;
+     --title-color-info: var(--title-color-info-dark) !important;
+
+     --border-color-success: var(--border-color-success-dark) !important;
+     --background-color-success: var(--background-color-success-dark) !important;
+     --text-color-success: var(--text-color-success-dark) !important;
+     --title-color-success: var(--title-color-success-dark) !important;
+
+     --border-color-danger: var(--border-color-danger-dark) !important;
+     --background-color-danger: var(--background-color-danger-dark) !important;
+     --text-color-danger: var(--text-color-danger-dark) !important;
+     --title-color-danger: var(--title-color-danger-dark) !important;
 }
 
 .text-secondary {
