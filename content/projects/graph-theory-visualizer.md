@@ -9,7 +9,6 @@ tags:
 hideCover: true
 image: /projects/graphtheoryvisualizer/graph.png
 summary: "Online graph algorithm interactive visualization."
-toc: true
 mathjax: true
 ---
 

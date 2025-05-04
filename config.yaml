@@ -23,9 +23,6 @@ params:
   # staticPath: ""  # The path to serve the static files from
   favicon: "https://avatars.githubusercontent.com/u/29329312?v=4"
 
-  # Whether the fade animations on the home page will be enabled
-  animate: true
-
   theme:
     #defaultTheme: "dark" 
 
@@ -54,7 +51,6 @@ params:
 
   # If you want to customize the menu, you can change it here
   navbar:
-    align: mx-auto # Left: ms-auto | center: mx-auto | right: me-auto | Default: ms-auto
     sections:
       - template: projects
         title: "projects"

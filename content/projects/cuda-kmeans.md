@@ -138,26 +138,7 @@ body.d-mode img{
 
 
 
-.custom-toc {
-  border-left: 3px solid #007bff;
-  padding-left: 10px;
-  font-size: 14px;
-}
 
-.custom-toc h3 {
-  margin-bottom: 5px;
-  font-size: 16px;
-  color: #333;
-}
-
-.custom-toc a {
-  text-decoration: none;
-  color: #007bff;
-}
-
-.custom-toc a:hover {
-  text-decoration: underline;
-}
 
 .math-container {
     overflow-x: auto;
@@ -193,7 +174,10 @@ Below is a overview of my approach and some insights into the CUDA implementatio
 *Note: every time you will read the term speedup in this post, it will be measured against to the sequential version*.
 
 You can find the source code of everyhting that is going to be discussed at this [public GitHub repository](https://github.com/giggiox/CUDA-kmeans).
+
 {{< custom-toc >}}
+
+
 
 # K-Means Algorithm
 K-Means is an unsupervised classification algorithm that groups objects into k clusters based on their features. The algorithm consists of two main steps repeated until convergence:
@@ -219,7 +203,6 @@ $$\frac{\partial SSE}{\partial \mu_i} = 0 \implies \mu_i^{(t+1)} = \frac{1}{|S_i
 
 So the solution is to take each group element average as a new centroid (as per step (**b**)).
 The relationship holds because in the SSE formula we used **euclidean distance** as a distance function, different centroid updates can be found by changing the distance metric.
-
 
 
 

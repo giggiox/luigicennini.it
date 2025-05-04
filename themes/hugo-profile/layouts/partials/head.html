@@ -99,6 +99,13 @@
         line-height: {{ .Site.Params.font.lineHeight | default "1.5" }};
         text-align: {{ .Site.Params.font.textAlign | default "left" }};
     }
+	
+	body a {
+		color: var(--text-color);
+	}
+	body a:hover {
+		color: var(--text-secondary-color);
+	}
 
     html {
         background-color: var(--background-color) !important;

@@ -1,0 +1,25 @@
+<div class="toc">
+    
+	<details>
+	<summary>
+	Table Of Contents
+	</summary>
+    <div class="toc-content">
+        {{ .Page.TableOfContents | markdownify }}
+    </div>
+	</details>
+</div>
+
+
+<style>
+.toc {
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 0.25em;
+	background-color: var(--background-color-info);
+}
+
+.toc summary {
+	margin-left: 1.5em;
+}
+</style>
