@@ -6,7 +6,7 @@ author: "Luigi"
 tags:
   - projects
   
-hideCover: true
+hideImageHomePage: true
 image: /projects/graphtheoryvisualizer/graph.png
 summary: "Online graph algorithm interactive visualization."
 mathjax: true
@@ -17,13 +17,13 @@ The project was done to visualize the operations that can be done on a graph, su
 The goal is to have a real time update of the various operations, so that if the graph changes while an 'operation is being performed on it, the result of the operation also changes.
 
 The project is active on GitHub pages and a demo can be accessed from this link: 
-{{< rawhtml >}}
+
 <center>
-{{</ rawhtml >}}
+
 👉[https://giggiox.github.io/graphTheory-Visualizer/](https://giggiox.github.io/graphTheory-Visualizer/)👈
-{{< rawhtml >}}
+
 </center>
-{{</ rawhtml >}}
+
 The GUI looks like this:
 ![](/projects/graphtheoryvisualizer/interface.gif)
 

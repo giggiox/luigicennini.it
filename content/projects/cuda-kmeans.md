@@ -5,14 +5,12 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: true
+hideImageHomePage: true
 image: /projects/cuda-kmeans/back.png
 summary: "Native CUDA implementation of K-Means clustering algorithm. Achieving 100x speedup."
 mathjax: true
 ---
 
-
-{{< rawhtml >}}
 
 <style>
 .tooltip-inner {
@@ -165,7 +163,6 @@ document.body.classList.toggle('d-mode', isDarkMode);
 document.body.classList.toggle('l-mode', !isDarkMode);
 </script>
 
-{{< /rawhtml >}}
 
 
 Lately, I've been exploring GPU programming with CUDA by implementing the K-Means clustering algorithm. 
@@ -208,18 +205,17 @@ The relationship holds because in the SSE formula we used **euclidean distance**
 
 If you did not had the opportunity to look at how K-means works, i think the visualization below will give you a good grasp:
 
-{{< rawhtml >}}
-  <center>
+<center>
 	  <div class="section">
 		<button id="initBtn1">Initialize Centroids</button>
 		<button id="updateSeqBtn1">Sequential Iteration</button>
 		<br><br>
 		<canvas id="canvas1" width="500" height="500"></canvas>
 	  </div>
-  </center>
-{{< /rawhtml >}}
+</center>
 
 
+<br>
 
 {{< callout level="info" >}}
 Although the centroids are initialized randomly here, this isn't the optimal approach. If the starting centroids are poorly chosen, the final clusters may be incorrect. A better method is [kmeans++](https://en.wikipedia.org/wiki/K-means%2B%2B).
@@ -856,7 +852,6 @@ This insight is crucial for scaling the algorithm to more complex, higher dimens
 All in all, I truly enjoyed diving into CUDA programming. 
 Although the indexing was initially challenging, witnessing the dramatic speedup made the effort incredibly rewarding.
 
-{{< rawhtml >}}
 
  <script>
     // Simulation parameters
@@ -1049,13 +1044,8 @@ Although the indexing was initially challenging, witnessing the dramatic speedup
 	})
 
 
-  </script>
-{{< /rawhtml >}}
+</script>
 
-
-
-
-{{< rawhtml >}} 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     if (window.MathJax) {
@@ -1079,4 +1069,3 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
-{{< /rawhtml >}}

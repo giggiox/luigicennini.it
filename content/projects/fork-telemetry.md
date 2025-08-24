@@ -5,7 +5,7 @@ draft: false
 author: "Luigi"
 tags:
   - projects
-hideCover: true
+hideImageHomePage: true
 image: /projects/forktelemetry/renders/render.png
 summary: "Introducing an innovative sensor system for MTB suspension telemetry that reduces costs by 90% while maintaining the same level of precision."
 mathjax: true
@@ -39,7 +39,7 @@ The main reason for this choice is that rotary encoders are less expensive than 
 
 Encoders can sense movement in either direction, detecting holes or marks as they move through 2 positions. When the blue disc in the diagram below rotates clockwise, changes are first detected by pin 1 and then pin 2. When it rotates counterclockwise, pin 2 is the first to detect changes. This scheme is called 'quadrature coding' because the waveforms detected by the 2 pins are offset by 90 degrees.
 
-{{< rawhtml >}} 
+
 <center>
 <table class="d-flex justify-content-center">
 	<tr>
@@ -79,7 +79,7 @@ if (position < 0) position = 3;
 document.getElementById('quad').src = img[position].src;
 }
 </script>
-{{< /rawhtml >}}
+
 
 The interactive animation above was taken from [here](https://www.pjrc.com/teensy/td_libs_Encoder.html).
 
@@ -116,14 +116,14 @@ With this initial information, I therefore started the prototyping process.
 For the prototyping of the fork sensor, I used the [fusion 360](https://www.autodesk.it/products/fusion-360/overview) software. After several iterations, this was the result:
 
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/forkSensor.jpg"  width="80%" >
 </center>
-{{< /rawhtml >}}
 
 
-{{< rawhtml >}} 
+
+
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 <center>
 <model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensor3d.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensor3dPoster.webp" shadow-intensity="1" autoplay camera-orbit="-38.89deg 61.4deg 644.1m" field-of-view="30deg">
@@ -132,12 +132,12 @@ For the prototyping of the fork sensor, I used the [fusion 360](https://www.auto
     </div>
 </model-viewer>
 </center>
-{{< /rawhtml >}}
+
 
 The fusion360 file is available on GitHub at [this link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v1).
 Using [blender](https://www.blender.org/) we can also show a concept of how it works once mounted on a fork.
 
-{{< rawhtml >}} 
+
 <center>
 <model-viewer style="width: 80; height: 80vh" src="/projects/forktelemetry/forksensorAnimation.glb" ar ar-modes="webxr scene-viewer quick-look" camera-controls poster="/projects/forktelemetry/forkSensorAnimationPoster.webp" shadow-intensity="1" autoplay camera-orbit="-216.6deg 65.99deg 1356m" field-of-view="30deg">
     <div class="progress-bar hide" slot="progress-bar">
@@ -145,7 +145,7 @@ Using [blender](https://www.blender.org/) we can also show a concept of how it w
     </div>
 </model-viewer>
 </center>
-{{< /rawhtml >}}
+
 
 
 
@@ -157,25 +157,25 @@ Where:
 - a switch is used to turn the system on
 - The other switch enables the writing of the encoder position with the chosen encoding ([encoder_position,]) to the SD card. This switch must be activated before the start of the descent and switched off immediately afterwards.
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/forktelemetry-schematics.png"  width="60%" >
 </center>
-{{< /rawhtml >}}
+
 
 
 At this point, I also designed a capture box using Fusion 360.
-{{< rawhtml >}} 
+ 
 <center>
 <img src="/projects/forktelemetry/openbox_fusion.PNG"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 The box, which is designed so that it can be fixed with 2 clamps to the top tube of the bike, contains all components (except the encoder) and makes the 2 switches accessible from the outside.
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/box_fusion.PNG"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 
 
 
@@ -188,34 +188,34 @@ The box, which is designed so that it can be fixed with 2 clamps to the top tube
 
 Once printed (and assembled) the sensor and acquisition box by soldering the components on a matrix board
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/collage.png"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 
 
 
 the whole thing looks like this:
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/laydown.jpg"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 
 
 
 Once mounted on the MTB, it works really good 😄
 
-{{< rawhtml >}} 
+
 <center>
 <video width=35% controls>
     <source src="/projects/forktelemetry/video.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
 </center>
-{{< /rawhtml >}}
+
 
 
 
@@ -314,11 +314,11 @@ When the switch is activated, the code starts recording the encoder position and
 I have created a website in javascript that uses the [Plotly JS](https://plotly.com/javascript/) library to display this data ([see this public GitHub repository](https://github.com/giggiox/fork-telemetry/tree/main/web)). For example, the video I showed earlier produces a log file that can be opened in the site and generates this output:
 
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/plot.png"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 
 
 The scatter plot shows the sampling number on the X coordinate and the fork compression in millimetres on the Y coordinate.
@@ -330,14 +330,14 @@ Below the graph there are also tabular datas indicating the number of bottom-out
 I have also created a python script ([link](https://github.com/giggiox/fork-telemetry/blob/main/videoEdit.ipynb)) which is based on [Pillow](https://pypi.org/project/Pillow/) and [cv2](https://pypi.org/project/opencv-python/). 
 This script allows you to insert the telemetry detected on a video, which for the video I showed earlier, produces an effect similar to this:
 
-{{< rawhtml >}} 
+
 <center>
 <video width=35% controls>
     <source src="/projects/forktelemetry/videoTelemetry.mp4" type="video/mp4" >
     Your browser does not support the video tag.  
 </video>
 </center>
-{{< /rawhtml >}}
+
 
 
 This script first creates 101 images of the rectangle with the percentage written inside (0% to 100%). It then puts these images together in a video where each image represents a value measured by the sensor.
@@ -347,11 +347,11 @@ This script first creates 101 images of the rectangle with the percentage writte
 When I tested the system on a real enduro descent, I encountered the first difficulties and restrictions of the hardware I used (especially the arduino). 
 In fact, if the fork movements are too fast, the pulse count coming from the encoder starts to 'drift' and become increasingly negative.
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/testSulCampo.PNG"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 
 This is because the encoder frequency ranges from 0 to 20KHz. 
 This implies that there is at least a 50 microsecond interval between one rising edge and another. 
@@ -406,11 +406,11 @@ In particular, the instructions that do the digital readout of encoderPinB are t
 From the [ATmega328 datasheet (page 283)](https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf) we can see that these instructions take exactly 2 clock cycles.
 
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/datasheet.PNG"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 
 So being a 16Mhz microcontroller (1 clock cycle takes 1/16,000,000th of a second, or 62.5 nanoseconds), then those 4 instructions take 8 cycles * 62.5 ns/cycle = 500 ns.
 
@@ -440,9 +440,9 @@ And we can see that indeed the bottleneck is in this call, which can take up to 
 - add a GPS module so that you can have in the analysis panel not only the position of the fork metre by metre but also the position of the rider along the descent.
 - sensor redesign. The first design I did was top-down (also because it was the first time I had used fusion360 and also the first time I had really created something functional) and with box shapes (not structurally strong) and a lot can be improved. For example, using a linear guide can reduce the complexity of the sensor (and also the weight) but also the degrees of freedom of the system. Below is a possible v2 design using a 6mm linear guide.
 
-{{< rawhtml >}} 
+
 <center>
 <img src="/projects/forktelemetry/rev2.PNG"  width="80%" >
 </center>
-{{< /rawhtml >}}
+
 The fusion360 file for this version is available on GitHub at [this link](https://github.com/giggiox/fork-telemetry/tree/main/fusio360files/v2) .

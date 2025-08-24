@@ -2,9 +2,5 @@
 {{ $class := .Get "class" }}
 
 <center>
-	{{ if $class }}
-		<img src="{{ $filePath }}" class="{{ $class }}">
-	{{ else }}
-		<img src="{{ $filePath }}">
-	{{ end }}
+	<img src="{{ $filePath }}" {{ if $class }} class="{{ $class }}" {{ end }}>
 </center>

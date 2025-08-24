@@ -16,7 +16,7 @@
         {{ range .Paginator.Pages }}
 			<div class="col-12 d-flex justify-content-center mb-4">
 				<article class="post-entry shadow-sm p-4 rounded clickable-article" style="max-width: 720px; width: 100%; cursor: pointer;" data-url="{{ .Permalink }}">
-					{{- $isHidden := default (.Param "hideCover") | default true }}
+					{{- $isHidden := default (.Param "hideImageHomePage") | default true }}
 					{{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
 
 					<div class="entry-header">

@@ -104,6 +104,9 @@ params:
     articleRecent: "Jan 2, 2006"
     
 markup:
-   tableOfContents:
-      startLevel: 1
-      endLevel: 6
+  goldmark:
+    renderer:
+      unsafe: true
+  tableOfContents:
+    startLevel: 1
+    endLevel: 6

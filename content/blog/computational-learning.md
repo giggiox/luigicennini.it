@@ -223,9 +223,7 @@ document.getElementById("theme-toggle").addEventListener("click", () => {
 
 
 
-{{< rawdetails title="open Table of Content">}}
 {{< custom-toc >}}
-{{< endrawdetails >}}
 
 
 # Introduction
