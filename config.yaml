@@ -83,7 +83,7 @@ params:
   hero:
     enable: true
     title: "Hi! I'm Luigi"
-    content: "I am a graduate student in Computer Science & master Data Science student in Florence, Italy. In my spare time I like to write about my projects and I have put some of the best ones below. You will also find some post about stuff i find interesting."
+    content: "I am a Computer Science graduate student with a master's degree in Data Science. In my spare time I like to write about my projects and I have put some of the best ones below. You will also find some post about stuff i find interesting."
     button:
       enable: false
       name: "CV"
